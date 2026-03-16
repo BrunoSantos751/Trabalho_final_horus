@@ -10,7 +10,6 @@ spl_autoload_register(function ($class) {
 
 });
 
-
 $classe = $_GET['class'] ?? Null;
 $method = $_GET['method'] ?? null;
 
