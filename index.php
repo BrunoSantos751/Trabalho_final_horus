@@ -12,32 +12,7 @@ spl_autoload_register(function ($class) {
 
 
 $classe = $_GET['class'] ?? Null;
-$utils  = $_GET['utils'] ?? null;
-if (empty($utils) && empty($classe)) {
-    header("Location: index.php?class=Home");
-    exit;
-}
-
 $method = $_GET['method'] ?? null;
-
-
-/*
-|--------------------------------------------------------------------------
-| ROUTE: UTILS (AJAX endpoints)
-|--------------------------------------------------------------------------
-*/
-
-if ($utils) {
-    $file = __DIR__ . "/utils/" . basename($utils) . ".php";
-
-    if (!file_exists($file)) {
-        http_response_code(404);
-        exit("Endpoint não encontrado");
-    }
-
-    require_once $file;
-    exit;
-}
 
 
 /*
