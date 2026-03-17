@@ -33,7 +33,14 @@ CREATE TABLE IF NOT EXISTS Preferencias (
 
    public static function save($data) {
     $conn = Connect::getConnection();
-    $sql = "INSERT INTO preferencias (titulo_landing, favicon, logo_cabecalho, facebook, twitter, instagram, titulo_secaoHome, subtitulo_secaoHome, imagem_secaoHome, titulo_caracticasHome, titulo_secaoLojaApp, subtitulo_secaoLojaApp, imagem_secaoLojaApp, image_AppStore, image_GooglePlay, telefone_contato, logo_rodape, mesagem_rodape, url_rodape, mensagem_powered) VALUES (:titulo_landing, :favicon, :logo_cabecalho, :facebook, :twitter, :instagram, :titulo_secaoHome, :subtitulo_secaoHome, :imagem_secaoHome, :titulo_caracticasHome, :titulo_secaoLojaApp, :subtitulo_secaoLojaApp, :imagem_secaoLojaApp, :image_AppStore, :image_GooglePlay, :telefone_contato, :logo_rodape, :mesagem_rodape, :url_rodape, :mensagem_powered)";
+    $result = $conn->query("SELECT max(id) as next FROM preferencias");
+    if ($result){ 
+      $sql = "UPDATE preferencias SET titulo_landing = :titulo_landing, favicon = :favicon, logo_cabecalho = :logo_cabecalho, facebook = :facebook, twitter = :twitter, instagram = :instagram, titulo_secaoHome = :titulo_secaoHome, subtitulo_secaoHome = :subtitulo_secaoHome, imagem_secaoHome = :imagem_secaoHome, titulo_caracticasHome = :titulo_caracticasHome, titulo_secaoLojaApp = :titulo_secaoLojaApp, subtitulo_secaoLojaApp = :subtitulo_secaoLojaApp, imagem_secaoLojaApp = :imagem_secaoLojaApp, image_AppStore = :image_AppStore, image_GooglePlay = :image_GooglePlay, telefone_contato = :telefone_contato, logo_rodape = :logo_rodape, mesagem_rodape = :mesagem_rodape, url_rodape = :url_rodape, mensagem_powered = :mensagem_powered WHERE id = :id";
+    }
+    else {
+      $sql = "INSERT INTO preferencias (titulo_landing, favicon, logo_cabecalho, facebook, twitter, instagram, titulo_secaoHome, subtitulo_secaoHome, imagem_secaoHome, titulo_caracticasHome, titulo_secaoLojaApp, subtitulo_secaoLojaApp, imagem_secaoLojaApp, image_AppStore, image_GooglePlay, telefone_contato, logo_rodape, mesagem_rodape, url_rodape, mensagem_powered) VALUES (:titulo_landing, :favicon, :logo_cabecalho, :facebook, :twitter, :instagram, :titulo_secaoHome, :subtitulo_secaoHome, :imagem_secaoHome, :titulo_caracticasHome, :titulo_secaoLojaApp, :subtitulo_secaoLojaApp, :imagem_secaoLojaApp, :image_AppStore, :image_GooglePlay, :telefone_contato, :logo_rodape, :mesagem_rodape, :url_rodape, :mensagem_powered)";
+    }
+
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':titulo_landing', $data['titulo_landing']);
     $stmt->bindParam(':favicon', $data['favicon']);
