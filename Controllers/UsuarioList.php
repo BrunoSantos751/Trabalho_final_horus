@@ -24,7 +24,7 @@ class UsuarioList {
             $usuarios = Usuarios::all();
             $items = '';
         foreach ($usuarios as $usuario) {
-            $item = file_get_contents('Layout/html/item.html');
+            $item = file_get_contents('Layout/html/usuarios/item.html');
             $item = str_replace('{id}', $usuario['id'], $item);
             $item = str_replace('{email}', $usuario['email'], $item);
             $item = str_replace('{criado_em}', $usuario['created_at'], $item);
