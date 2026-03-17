@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './model/Modelbase.php';
+require_once 'Modelbase.php';
 class Login extends ModelBase {
     private $request;
 
