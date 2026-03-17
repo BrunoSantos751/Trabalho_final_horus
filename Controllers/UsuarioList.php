@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../model/Usuarios.php';
+require_once './model/Usuarios.php';
+require_once './Controllers/ApplicationController.php';
 
-class UsuarioList {
-    private $html;
-
+class UsuarioList extends ApplicationController {
+    
     public function __construct() {
-        $this->html = file_get_contents('Layout/html/usuarios/list_usuarios.html');
+        $this->setHtml('Layout/html/usuarios/list_usuarios.html');
     }
 
     public function delete($request) {

@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . './../model/Usuarios.php';
-require_once __DIR__ . '/ApplicationController.php';
+require_once  './model/Usuarios.php';
+require_once './Controllers/ApplicationController.php';
 
 class UsuarioForm extends ApplicationController {
     
