@@ -1,7 +1,7 @@
 <?php
 abstract class ModelBase {
 
-    protected static $conn;
+    protected static $pdo;
     
     public static function getConnection()
     {
@@ -10,9 +10,9 @@ abstract class ModelBase {
         $name = $conexao['name'];
         $user = $conexao['user'];
         $pass = $conexao['pass'];
-        self::$conn = new PDO("mysql:dbname={$name};user={$user};host={$host};password={$pass}");
-        self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return self::$conn;
+        self::$pdo = new PDO("mysql:dbname={$name};user={$user};host={$host};password={$pass}");
+        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return self::$pdo;
     }
 
 }

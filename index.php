@@ -2,7 +2,7 @@
 
 spl_autoload_register(function ($class) {
 
-    $path = __DIR__ . "/classes/{$class}.php";
+    $path = __DIR__ . "/Controllers/{$class}.php";
 
     if (file_exists($path)) {
         require_once $path;
@@ -11,8 +11,13 @@ spl_autoload_register(function ($class) {
 });
 
 $classe = $_GET['class'] ?? Null;
-$method = $_GET['method'] ?? null;
 
+if (empty($classe)) {
+    header("Location: index.php?class=LoginForm");
+    exit;
+}   
+
+$method = $_GET['method'] ?? null;
 
 /*
 |--------------------------------------------------------------------------
