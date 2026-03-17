@@ -1,16 +1,18 @@
 <?php
 require_once __DIR__ . './../model/Usuarios.php';
+require_once __DIR__ . '/ApplicationController.php';
 
-class UsuarioForm {
-    private $html;
-    private $data;
+class UsuarioForm extends ApplicationController {
+    
+    private array|string|null $data;
+
     public function __construct()
     {
-        $this->html = file_get_contents('Layout/html/usuarios/cadastro.html');
-            $this->data = [
-                'email' => null,
-                'senha' => null
-            ];
+        $this->setHtml('Layout/html/usuarios/cadastro.html');
+        $this->data = [
+            'email' => null,
+            'senha' => null
+        ];
     }
 
     public function cadastro($request) {
