@@ -4,7 +4,7 @@ class LoginForm {
     private $html;
     public function __construct()
     {
-        $this->html = file_get_contents('Layout/html/login/login.html');   
+        $this->html = file_get_contents('Layout/html/usuarios/cadastro.html');   
     }
 
     function login($request){

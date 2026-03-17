@@ -1,5 +1,5 @@
 <?php
-require_once 'Modelbase.php';
+require_once __DIR__ . '/../model/Modelbase.php';
 class Usuarios extends ModelBase{
 
     /*
@@ -10,12 +10,12 @@ class Usuarios extends ModelBase{
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     */
 
-    public static function save($data) {
+    public static function save() {
         $conn = self::getConnection();
         $sql = "INSERT INTO usuarios (email, password) VALUES (:email, :password)";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':email', $data['email']);
-        $stmt->bindParam(':password', password_hash($data['password'], PASSWORD_DEFAULT));
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_DEFAULT));
         $stmt->execute();
     }
 
@@ -34,6 +34,13 @@ class Usuarios extends ModelBase{
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+    }
+
+    public static function all() {
+        $conn = self::getConnection();
+        $sql = "SELECT * FROM usuarios";
+        $stmt = $conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
