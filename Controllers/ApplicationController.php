@@ -3,6 +3,9 @@ require_once './model/Login.php';
 
 abstract class ApplicationController {
     protected $html;
+    protected array|string|null $data;
+
+
 
     public static function return_home() {
         if (!Login::isLoggedIn()) {

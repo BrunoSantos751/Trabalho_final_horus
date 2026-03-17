@@ -3,8 +3,6 @@ require_once  './model/Usuarios.php';
 require_once './Controllers/ApplicationController.php';
 
 class UsuarioForm extends ApplicationController {
-    
-    private array|string|null $data;
 
     public function __construct()
     {
@@ -17,7 +15,6 @@ class UsuarioForm extends ApplicationController {
 
     public function cadastro($request) {
         $usuario = new Usuarios($request);
-        var_dump($usuario);
         $usuario->save();
     }
 

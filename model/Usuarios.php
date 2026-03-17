@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../model/Modelbase.php';
+require_once './Modelbase.php';
 class Usuarios extends ModelBase{
 
     /*
