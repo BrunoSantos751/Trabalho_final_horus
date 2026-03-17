@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../model/Modelbase.php';
 class Login extends ModelBase {
     
@@ -16,16 +17,14 @@ class Login extends ModelBase {
             exit("Email e senha são obrigatórios");
         }
 
+        $conn = self::getConnection();
         $sql = "SELECT * FROM usuarios WHERE email = :email AND password = :password";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $conn->prepare($sql);
         $stmt->execute(['email' => $email, 'password' => $password]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        var_dump($user);
-
         if ($user) {
-            var_dump($user);
-            //$_SESSION['user'] = $user;
+            $_SESSION['user_id'] = $user['id'];
         } else {
             echo "Email ou senha incorretos.";
         }
@@ -33,6 +32,10 @@ class Login extends ModelBase {
 
     function logout() {
         session_destroy();
+    }
+
+    function isLoggedIn() {
+        return isset($_SESSION['user_id']);
     }
 
 }

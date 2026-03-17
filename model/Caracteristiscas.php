@@ -1,5 +1,6 @@
 <?php
-class Caracteristicas {
+require_once 'Modelbase.php';
+class Caracteristicas extends ModelBase {
 
     /*
     CREATE TABLE IF NOT EXISTS caracteristicas (
@@ -10,7 +11,7 @@ class Caracteristicas {
     */
 
     public static function save($data) {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         if (empty($testemunho['id'])) {
             $result = $conn->query("SELECT max(id) as next FROM testemunhos");
             $row = $result->fetch();
@@ -34,7 +35,7 @@ class Caracteristicas {
     }
 
     public static function find($id) {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         $sql = "SELECT * FROM caracteristicas WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -43,7 +44,7 @@ class Caracteristicas {
     }
 
      public static function delete($id) {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         $sql = "DELETE FROM caracteristicas WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -51,7 +52,7 @@ class Caracteristicas {
     }
 
     public static function all() {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         $sql = "SELECT * FROM caracteristicas";
         $stmt = $conn->prepare($sql);
         $stmt->execute();

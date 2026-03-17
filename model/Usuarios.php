@@ -1,5 +1,6 @@
 <?php
-class Usuarios{
+require_once 'Modelbase.php';
+class Usuarios extends ModelBase{
 
     /*
     CREATE TABLE IF NOT EXISTS usuarios (
@@ -10,7 +11,7 @@ class Usuarios{
     */
 
     public static function save($data) {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         $sql = "INSERT INTO usuarios (email, password) VALUES (:email, :password)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':email', $data['email']);
@@ -18,21 +19,8 @@ class Usuarios{
         $stmt->execute();
     }
 
-    public static function authenticate($email, $password) {
-        $conn = Connect::getConnection();
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($password, $user['password'])) {
-            return true;
-        }
-        return false;
-    }
-
     public static function find($id) {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         $sql = "SELECT * FROM usuarios WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -41,7 +29,7 @@ class Usuarios{
     }
 
     public static function delete($id) {
-        $conn = Connect::getConnection();
+        $conn = self::getConnection();
         $sql = "DELETE FROM usuarios WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
