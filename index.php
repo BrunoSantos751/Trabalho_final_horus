@@ -13,7 +13,7 @@ spl_autoload_register(function ($class) {
 $classe = $_GET['class'] ?? Null;
 
 if (empty($classe)) {
-    header("Location: index.php?class=LoginForm");
+    header("Location: index.php?class=LoginController");
     exit;
 }   
 

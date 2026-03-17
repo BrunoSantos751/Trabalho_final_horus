@@ -25,16 +25,19 @@ class Login extends ModelBase {
 
         if ($user) {
             $_SESSION['user_id'] = $user['id'];
-        } else {
-            echo "Email ou senha incorretos.";
-        }
+            return true;
+        } 
+        
+        echo "Email ou senha incorretos.";
+        return false;
+
     }
 
     function logout() {
         session_destroy();
     }
 
-    function isLoggedIn() {
+    public static function isLoggedIn() {
         return isset($_SESSION['user_id']);
     }
 
