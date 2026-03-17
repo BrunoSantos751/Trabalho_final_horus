@@ -68,3 +68,6 @@ CREATE TABLE IF NOT EXISTS contactos (
 ) ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_0900_ai_ci;
+
+
+INSERT INTO usuarios (email, password) VALUES ('test@gmail','123456789');
