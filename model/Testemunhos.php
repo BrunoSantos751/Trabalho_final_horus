@@ -4,11 +4,16 @@ class Testemunhos extends ModelBase {
 
     /*
     CREATE TABLE IF NOT EXISTS testemunhos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    cargo VARCHAR(255) NOT NULL,
-    depoimento TEXT NOT NULL,
-    imagem VARCHAR(255) NOT NULL
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(255) NOT NULL,
+        funcao VARCHAR(255) NOT NULL,
+        titulo VARCHAR(255) NOT NULL,
+        descricao TEXT NOT NULL,
+        foto VARCHAR(255) NOT NULL,
+        imagem_fundo VARCHAR(255) NOT NULL
+    ) ENGINE=InnoDB 
+    DEFAULT CHARSET=utf8mb4 
+    COLLATE=utf8mb4_unicode_ci;
     */
 
     public static function save($data) {
@@ -22,10 +27,9 @@ class Testemunhos extends ModelBase {
             $sql = "UPDATE testemunhos SET nome = :nome,
             funcao = :funcao,
             titulo = :titulo,
-            descricao = :descricao,
-            foto = :foto,
-            imagem_fundo = :imagem_fundo
-            WHERE id = :id";
+            descricao = :descricao" . (!empty($data['foto']) ? ", foto = :foto" : "") .
+            (!empty($data['imagem_fundo']) ? ", imagem_fundo = :imagem_fundo" : "") .
+             " WHERE id = :id";         
         }
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $data['id']);
@@ -33,9 +37,27 @@ class Testemunhos extends ModelBase {
         $stmt->bindParam(':funcao', $data['funcao']);
         $stmt->bindParam(':titulo', $data['titulo']);
         $stmt->bindParam(':descricao', $data['descricao']);
-        $stmt->bindParam(':foto', $data['foto']);
-        $stmt->bindParam(':imagem_fundo', $data['imagem_fundo']);
+        if (!empty($data['foto'])) {
+            $stmt->bindParam(':foto', $data['foto']);
+            Testemunhos::deleteImage($data['id'], 'foto');
+        }
+        if (!empty($data['imagem_fundo'])) {
+            $stmt->bindParam(':imagem_fundo', $data['imagem_fundo']);
+            Testemunhos::deleteImage($data['id'], 'imagem_fundo');
+        }
         $stmt->execute();
+    }
+
+    public static function deleteImage($id, $field) {
+        $testemunho = self::find($id);
+        if ($testemunho) {
+            if ($field === 'foto' && !empty($testemunho['foto']) && file_exists($testemunho['foto'])) {
+                unlink($testemunho['foto']);
+            }
+            if ($field === 'imagem_fundo' && !empty($testemunho['imagem_fundo']) && file_exists($testemunho['imagem_fundo'])) {
+                unlink($testemunho['imagem_fundo']);
+            }
+        }
     }
 
     public static function find($id) {
@@ -50,6 +72,8 @@ class Testemunhos extends ModelBase {
      public static function delete($id) {
         $conn = self::getConnection();
         $sql = "DELETE FROM testemunhos WHERE id = :id";
+        Testemunhos::deleteImage($id, 'foto');
+        Testemunhos::deleteImage($id, 'imagem_fundo');
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

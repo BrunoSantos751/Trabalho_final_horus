@@ -1,4 +1,4 @@
-<form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" id="formlogin" name="formlogin">
+<form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" id="formlogin" name="formlogin" enctype="multipart/form-data">
   <fieldset id="fie">
     <legend>Cadastro de Testemunho</legend>
     <br />
@@ -13,7 +13,7 @@
     <label>Descrição: </label>
     <input type="text" name="descricao" id="descricao" value="{descricao}" /><br />
     <label> Foto:</label>
-    <input type="file" name="foto" id="foto" value="{foto}" /><br />
+    <input type="file" name="foto" id="foto" value="{foto}" accept="image/png, image/jpeg" /><br />
     <label>Imagem de fundo: </label>
     <input type="file" name="imagem_fundo" id="imagem_fundo" value="{imagem_fundo}" /><br />
 

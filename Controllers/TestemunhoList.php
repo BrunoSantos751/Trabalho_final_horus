@@ -29,6 +29,8 @@ class TestemunhoList extends ApplicationController {
             $item = str_replace('{funcao}', $testemunho['funcao'], $item);
             $item = str_replace('{titulo}', $testemunho['titulo'], $item);
             $item = str_replace('{descricao}', $testemunho['descricao'], $item);
+            $item = str_replace('{foto}', $testemunho['foto'], $item);
+            $item = str_replace('{imagem_fundo}', $testemunho['imagem_fundo'], $item);
             $items.= $item;
         }
         $this->html = str_replace('{items}', $items, $this->html);

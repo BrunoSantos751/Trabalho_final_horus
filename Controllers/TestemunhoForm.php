@@ -1,5 +1,6 @@
 <?php
 require_once './model/Testemunhos.php';
+require_once './utils/UploadImagem.php';
 require_once './Controllers/ApplicationController.php';
 
 class TestemunhoForm extends ApplicationController {
