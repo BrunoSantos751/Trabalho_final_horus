@@ -11,29 +11,30 @@ class Testemunhos extends ModelBase {
     imagem VARCHAR(255) NOT NULL
     */
 
-    public static function save($testemunho) {
+    public static function save($data) {
         $conn = self::getConnection();
-        if (empty($testemunho['id'])) {
+        if (empty($data['id'])) {
             $result = $conn->query("SELECT max(id) as next FROM testemunhos");
             $row = $result->fetch();
-            $testemunho['id'] = (int) $row['next'] + 1;
-            $sql = "INSERT INTO testemunhos (id, nome, cargo, depoimento, imagem)
-            VALUES ( '{$testemunho['id']}', '{$testemunho['nome']}',
-            '{$testemunho['cargo']}', '{$testemunho['depoimento']}',
-            '{$testemunho['imagem']}')";
+            $data['id'] = (int) $row['next'] + 1;
+            $sql = "INSERT INTO testemunhos (id, nome, funcao, titulo, descricao, foto, imagem_fundo ) VALUES (:id, :nome, :funcao, :titulo, :descricao, :foto, :imagem_fundo)";
         } else {
-            $sql = "UPDATE testemunhos SET nome = '{$testemunho['nome']}',
-            cargo = '{$testemunho['cargo']}',
-            depoimento = '{$testemunho['depoimento']}',
-            imagem = '{$testemunho['imagem']}'
-            WHERE id = '{$testemunho['id']}'";
+            $sql = "UPDATE testemunhos SET nome = :nome,
+            funcao = :funcao,
+            titulo = :titulo,
+            descricao = :descricao,
+            foto = :foto,
+            imagem_fundo = :imagem_fundo
+            WHERE id = :id";
         }
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $stmt->bindParam(':nome', $testemunho['nome']);
-        $stmt->bindParam(':cargo', $testemunho['cargo']);
-        $stmt->bindParam(':depoimento', $testemunho['depoimento']);
-        $stmt->bindParam(':imagem', $testemunho['imagem']);
+        $stmt->bindParam(':id', $data['id']);
+        $stmt->bindParam(':nome', $data['nome']);
+        $stmt->bindParam(':funcao', $data['funcao']);
+        $stmt->bindParam(':titulo', $data['titulo']);
+        $stmt->bindParam(':descricao', $data['descricao']);
+        $stmt->bindParam(':foto', $data['foto']);
+        $stmt->bindParam(':imagem_fundo', $data['imagem_fundo']);
         $stmt->execute();
     }
 
