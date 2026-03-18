@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS Preferencias (
     mesagem_rodape TEXT NOT NULL,
     url_rodape VARCHAR(255) NOT NULL,
     mensagem_powered TEXT NOT NULL
-
 ) ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;

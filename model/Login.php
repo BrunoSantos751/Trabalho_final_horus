@@ -2,8 +2,8 @@
 session_start();
 require_once __DIR__ . '/../model/Modelbase.php';
 class Login extends ModelBase {
-    
     private $request;
+
     public function __construct($request)
     {
         $this->request = $request;
@@ -30,7 +30,6 @@ class Login extends ModelBase {
         
         echo "Email ou senha incorretos.";
         return false;
-
     }
 
     function logout() {

@@ -2,11 +2,9 @@
 require_once __DIR__ . '/../model/Usuarios.php';
 
 class UsuarioList {
-    private $usuarios;
     private $html;
 
     public function __construct() {
-        $this->usuarios = Usuarios::all();
         $this->html = file_get_contents('Layout/html/usuarios/list_usuarios.html');
     }
 
