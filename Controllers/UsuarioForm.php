@@ -9,7 +9,8 @@ class UsuarioForm {
         $this->html = file_get_contents('Layout/html/usuarios/cadastro.html');
             $this->data = [
                 'email' => null,
-                'senha' => null
+                'senha' => null,
+                'id' => null
             ];
     }
 
@@ -19,7 +20,19 @@ class UsuarioForm {
         $usuario->save();
     }
 
+    public function edit($param) {
+        try {
+            $id = (int) $param['id'];
+            $usuario = Usuarios::find($id);
+            $this->data = $usuario;
+        }
+        catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function show() {
+        $this->html = str_replace('{id}', $this->data['id'] ?? '', $this->html);
         $this->html = str_replace('{email}', $this->data['email'], $this->html);
         $this->html = str_replace('{senha}', $this->data['senha'], $this->html);
         print $this->html;

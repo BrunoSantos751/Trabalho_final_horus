@@ -18,6 +18,13 @@ class UsuarioList {
             exit;
         }
     }
+    public function edit($request) {
+        $id = $request['id'] ?? null;
+        if ($id) {
+            header("Location: index.php?class=UsuarioEdit&id=$id");
+            exit;
+        }
+    }
 
     public function load() {
         try {

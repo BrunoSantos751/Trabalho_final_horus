@@ -12,10 +12,19 @@ class Usuarios extends ModelBase{
 
     public static function save() {
         $conn = self::getConnection();
+        if (isset($_POST['id']) && !empty($_POST['id'])) {
+            $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':email', $_POST['email']);
+            $stmt->bindParam(':password', $_POST['password']);
+            $stmt->bindParam(':id', $_POST['id']);
+            $stmt->execute();
+            return;
+        }   
         $sql = "INSERT INTO usuarios (email, password) VALUES (:email, :password)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':email', $_POST['email']);
-        $stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_DEFAULT));
+        $stmt->bindParam(':password', $_POST['password']);
         $stmt->execute();
     }
 
