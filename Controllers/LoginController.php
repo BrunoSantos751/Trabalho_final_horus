@@ -1,8 +1,10 @@
 <?php
-require_once './model/Login.php';
-require_once './Controllers/ApplicationController.php';
+require_once __DIR__ . '/../model/Login.php';
+require_once __DIR__ . '/ApplicationController.php';
 
 class LoginController extends ApplicationController {
+
+    protected $html;
 
     public function __construct()
     {

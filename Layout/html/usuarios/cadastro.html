@@ -1,11 +1,13 @@
 <form method="post" action="/index.php?class=UsuarioForm&method=cadastro" id="formlogin" name="formlogin">
   <fieldset id="fie">
-    <legend>Cadastro de usuario</legend>
+    <legend>{titulo}</legend>
     <br />
+    <label>{code_label}</label>
+    <input name="id" readonly="1" type="text" value="{id}" aria-readonly="true" {hidden_id}> <br />
     <label>EMAIL : </label>
     <input type="email" name="email" id="email" value="{email}" /><br />
-    <label>SENHA :</label>
+    <label>{SENHA}</label>
     <input type="password" name="password" id="password" value="{senha}" /><br />
-    <input type="submit" value="CADASTRAR" />
+    <input type="submit" value="{acao}" />
   </fieldset>
 </form>
