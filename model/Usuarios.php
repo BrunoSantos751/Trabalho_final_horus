@@ -13,10 +13,18 @@ class Usuarios extends ModelBase{
     public static function save() {
         $conn = self::getConnection();
         if (isset($_POST['id']) && !empty($_POST['id'])) {
-            $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
+            if ( $_POST['password']) {
+                $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':email', $_POST['email']);
+                $stmt->bindParam(':password', $_POST['password']);
+                $stmt->bindParam(':id', $_POST['id']);
+                $stmt->execute();
+                return;
+            }
+            $sql = "UPDATE usuarios SET email = :email WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':email', $_POST['email']);
-            $stmt->bindParam(':password', $_POST['password']);
             $stmt->bindParam(':id', $_POST['id']);
             $stmt->execute();
             return;
@@ -38,11 +46,15 @@ class Usuarios extends ModelBase{
     }
 
     public static function delete($id) {
+        if ($id == 1) {
+            return "Não é permitido deletar o usuário admin.";
+        }
         $conn = self::getConnection();
         $sql = "DELETE FROM usuarios WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+        return "Usuário deletado com sucesso.";
     }
 
     public static function all() {

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . './../model/Login.php';
+require_once __DIR__ . '/../model/Login.php';
 
 abstract class ApplicationController {
     protected $html;

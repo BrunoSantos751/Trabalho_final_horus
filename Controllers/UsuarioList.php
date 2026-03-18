@@ -11,7 +11,7 @@ class UsuarioList {
     public function delete($request) {
         $id = $request['id'] ?? null;
         if ($id) {
-            Usuarios::delete($id);
+            $result = Usuarios::delete($id);
             header("Location: index.php?class=UsuarioList");
             exit;
         }
@@ -19,7 +19,7 @@ class UsuarioList {
     public function edit($request) {
         $id = $request['id'] ?? null;
         if ($id) {
-            header("Location: index.php?class=UsuarioEdit&id=$id");
+            header("Location: index.php?class=UsuarioForm&method=edit&id=$id");
             exit;
         }
     }
