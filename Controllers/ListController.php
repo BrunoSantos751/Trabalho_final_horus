@@ -1,12 +1,9 @@
 <?php
-require_once __DIR__ . '/ApplicationController.php';
+require_once './Controllers/ApplicationController.php';
 class ListController extends ApplicationController {
-    private $html;
 
-    public function list_usarios() {
-        $usuarioList = new UsuarioList();
-        $usuarioList->show();
-        return;
+    function __construct() {
+        $this->setHtml('Layout/html/list/index.html');
     }
 
     public function show() {
