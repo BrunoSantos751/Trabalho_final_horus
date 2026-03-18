@@ -5,15 +5,18 @@
     <link href="css/list.css" rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
-    <table border=1>
     <header>
         {{header}}
     </header>
+    <table border=1>
     <thead>
     <tr>
     <th> </th>
     <th> Id </th>
-    <th> Email </th>
+    <th> Nome </th>
+    <th> Email</th>
+    <th> Telefone</th>
+    <th> Mensagem</th>
     <th> Criado em</th>
     </tr>
     </thead>
@@ -21,7 +24,7 @@
     {items}
     </tbody>
     </table>
-    <button onclick="window.location='index.php?class=UsuarioForm'">
+    <button onclick="window.location='index.php?class=CaracteristicaForm'">
     <img src='img/insert.png' style='width:24px; vertical-align: middle;'> Inserir
     </button>
 </body>

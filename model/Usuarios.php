@@ -1,5 +1,5 @@
 <?php
-require_once './Modelbase.php';
+require_once 'Modelbase.php';
 class Usuarios extends ModelBase{
 
     /*
