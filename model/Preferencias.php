@@ -7,11 +7,11 @@ class Preferencias extends Modelbase {
    public static function save() {
       $conn = self::getConnection();
       if (isset($_POST['id']) && !empty($_POST['id'])){
-         $sql = "UPDATE Preferencias SET titulo_landing = :titulo_landing, favicon = :favicon, logo_cabecalho = :logo_cabecalho, facebook = :facebook, twitter = :twitter, instagram = :instagram, titulo_secaoHome = :titulo_secaoHome, subtitulo_secaoHome = :subtitulo_secaoHome, imagem_secaoHome = :imagem_secaoHome, titulo_caracticasHome = :titulo_caracticasHome, titulo_secaoLojaApp = :titulo_secaoLojaApp, subtitulo_secaoLojaApp = :subtitulo_secaoLojaApp, imagem_secaoLojaApp = :imagem_secaoLojaApp, image_AppStore = :image_AppStore, image_GooglePlay = :image_GooglePlay, telefone_contato = :telefone_contato, logo_rodape = :logo_rodape, mesagem_rodape = :mesagem_rodape, url_rodape = :url_rodape, mensagem_powered = :mensagem_powered WHERE id = :id";
+         $sql = "UPDATE Preferencias SET titulo_landing = :titulo_landing, favicon = :favicon, logo_cabecalho = :logo_cabecalho, facebook = :facebook, twitter = :twitter, instagram = :instagram, titulo_secaoHome = :titulo_secaoHome, subtitulo_secaoHome = :subtitulo_secaoHome, imagem_secaoHome = :imagem_secaoHome, titulo_caracticasHome = :titulo_caracticasHome, titulo_secaoLojaApp = :titulo_secaoLojaApp, subtitulo_secaoLojaApp = :subtitulo_secaoLojaApp, imagem_secaoLojaApp = :imagem_secaoLojaApp, imagem_AppStore = :imagem_AppStore, imagem_GooglePlay = :imagem_GooglePlay, telefone_contato = :telefone_contato, logo_rodape = :logo_rodape, mensagem_rodape = :mensagem_rodape, url_rodape = :url_rodape, mensagem_powered = :mensagem_powered WHERE id = :id";
 
       } 
       else {
-            $sql = "INSERT INTO Preferencias (titulo_landing, favicon, logo_cabecalho, facebook, twitter, instagram, titulo_secaoHome, subtitulo_secaoHome, imagem_secaoHome, titulo_caracticasHome, titulo_secaoLojaApp, subtitulo_secaoLojaApp, imagem_secaoLojaApp, image_AppStore, image_GooglePlay, telefone_contato, logo_rodape, mesagem_rodape, url_rodape, mensagem_powered) VALUES (:titulo_landing, :favicon, :logo_cabecalho, :facebook, :twitter, :instagram, :titulo_secaoHome, :subtitulo_secaoHome, :imagem_secaoHome, :titulo_caracticasHome, :titulo_secaoLojaApp, :subtitulo_secaoLojaApp, :imagem_secaoLojaApp, :image_AppStore, :image_GooglePlay, :telefone_contato, :logo_rodape, :mesagem_rodape, :url_rodape, :mensagem_powered)";
+            $sql = "INSERT INTO Preferencias (titulo_landing, favicon, logo_cabecalho, facebook, twitter, instagram, titulo_secaoHome, subtitulo_secaoHome, imagem_secaoHome, titulo_caracticasHome, titulo_secaoLojaApp, subtitulo_secaoLojaApp, imagem_secaoLojaApp, imagem_AppStore, imagem_GooglePlay, telefone_contato, logo_rodape, mensagem_rodape, url_rodape, mensagem_powered) VALUES (:titulo_landing, :favicon, :logo_cabecalho, :facebook, :twitter, :instagram, :titulo_secaoHome, :subtitulo_secaoHome, :imagem_secaoHome, :titulo_caracticasHome, :titulo_secaoLojaApp, :subtitulo_secaoLojaApp, :imagem_secaoLojaApp, :imagem_AppStore, :imagem_GooglePlay, :telefone_contato, :logo_rodape, :mensagem_rodape, :url_rodape, :mensagem_powered)";
       }
 
       $stmt = $conn->prepare($sql);
@@ -31,11 +31,11 @@ class Preferencias extends Modelbase {
       $stmt->bindParam(':titulo_secaoLojaApp', $_POST['titulo_secaoLojaApp']);
       $stmt->bindParam(':subtitulo_secaoLojaApp', $_POST['subtitulo_secaoLojaApp']);
       $stmt->bindParam(':imagem_secaoLojaApp', $_POST['imagem_secaoLojaApp']);
-      $stmt->bindParam(':image_AppStore', $_POST['image_AppStore']);
-      $stmt->bindParam(':image_GooglePlay', $_POST['image_GooglePlay']);
+      $stmt->bindParam(':imagem_AppStore', $_POST['imagem_AppStore']);
+      $stmt->bindParam(':imagem_GooglePlay', $_POST['imagem_GooglePlay']);
       $stmt->bindParam(':telefone_contato', $_POST['telefone_contato']);
       $stmt->bindParam(':logo_rodape', $_POST['logo_rodape']);
-      $stmt->bindParam(':mesagem_rodape', $_POST['mesagem_rodape']);
+      $stmt->bindParam(':mensagem_rodape', $_POST['mensagem_rodape']);
       $stmt->bindParam(':url_rodape', $_POST['url_rodape']);
       $stmt->bindParam(':mensagem_powered', $_POST['mensagem_powered']);
       $stmt->execute();

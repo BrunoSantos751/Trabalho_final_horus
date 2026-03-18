@@ -17,11 +17,13 @@ CREATE TABLE IF NOT EXISTS Preferencias (
     titulo_secaoLojaApp VARCHAR(255) NOT NULL,
     subtitulo_secaoLojaApp TEXT NOT NULL,
     imagem_secaoLojaApp VARCHAR(255) NOT NULL,
-    image_AppStore VARCHAR(255) NOT NULL,
-    image_GooglePlay VARCHAR(255) NOT NULL,
+    link_AppStore VARCHAR(255) NOT NULL,
+    imagem_AppStore VARCHAR(255) NOT NULL,
+    link_GooglePlay VARCHAR(255) NOT NULL,
+    imagem_GooglePlay VARCHAR(255) NOT NULL,
     telefone_contato VARCHAR(25) NOT NULL,
     logo_rodape VARCHAR(255) NOT NULL,
-    mesagem_rodape TEXT NOT NULL,
+    mensagem_rodape TEXT NOT NULL,
     url_rodape VARCHAR(255) NOT NULL,
     mensagem_powered TEXT NOT NULL
 ) ENGINE=InnoDB 

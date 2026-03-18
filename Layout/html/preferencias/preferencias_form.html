@@ -1,4 +1,4 @@
-<form method="post" action="/index.php?class=PreferenciaForm&method=save" id="formlogin" name="formlogin">
+<form method="post" action="/index.php?class=PreferenciaForm&method=save" id="formlogin" name="formlogin" enctype="multipart/form-data">
   <fieldset id="fie">
     <legend> {titulo} </legend>
     <br />
@@ -21,25 +21,32 @@
     <label >subtitulo_secaoHome </label>
     <input type="text" name="subtitulo_secaoHome" id="subtitulo_secaoHome" value="{subtitulo_secaoHome}" /><br />
     <label >imagem_secaoHome </label>
-    <input type="text" name="imagem_secaoHome" id="imagem_secaoHome" value="{imagem_secaoHome}" /><br />
+    <input type="file" name="imagem_secaoHome" id="imagem_secaoHome" value="{imagem_secaoHome}" /><br />
     <label >titulo_caracticasHome </label>
     <input type="text" name="titulo_caracticasHome" id="titulo_caracticasHome" value="{titulo_caracticasHome}" /><br />
     <label >titulo_secaoLojaApp </label>
     <input type="text" name="titulo_secaoLojaApp" id="titulo_secaoLojaApp" value="{titulo_secaoLojaApp}" /><br />
     <label >subtitulo_secaoLojaApp </label>
     <input type="text" name="subtitulo_secaoLojaApp" id="subtitulo_secaoLojaApp" value="{subtitulo_secaoLojaApp}" /><br />
-    <label >imagem_secaoLojaApp </label>
-    <input type="text" name="imagem_secaoLojaApp" id="imagem_secaoLojaApp" value="{imagem_secaoLojaApp}" /><br />
-    <label >image_AppStore </label>
-    <input type="text" name="image_AppStore" id="image_AppStore" value="{image_AppStore}" /><br />
-    <label >image_GooglePlay </label>
-    <input type="text" name="image_GooglePlay" id="image_GooglePlay" value="{image_GooglePlay}" /><br />
+    <label> imagem_secaoLojaApp </label>
+    <input type="file" name="imagem_secaoLojaApp" id="imagem_secaoLojaApp" value="{imagem_secaoLojaApp}" /><br />
+    
+    <label> link_AppStore </label>
+    <input type="text" name="link_AppStore" id="link_AppStore" value="{link_AppStore}" /><br />
+    <label >imagem_AppStore </label>
+    <input type="file" name="imagem_AppStore" id="imagem_AppStore" value="{imagem_AppStore}" /><br />
+    
+    <label >link_GooglePlay </label>
+    <input type="text" name="link_GooglePlay" id="link_GooglePlay" value="{link_GooglePlay}" /><br />
+    <label >imagem_GooglePlay </label>
+    <input type="file" name="imagem_GooglePlay" id="imagem_GooglePlay" value="{imagem_GooglePlay}" /><br />
+
     <label >telefone_contato </label>
     <input type="text" name="telefone_contato" id="telefone_contato" value="{telefone_contato}" /><br />
     <label >logo_rodape </label>
     <input type="text" name="logo_rodape" id="logo_rodape" value="{logo_rodape}" /><br />
-    <label >mesagem_rodape </label>
-    <input type="text" name="mesagem_rodape" id="mesagem_rodape" value="{mesagem_rodape}" /><br />
+    <label >mensagem_rodape </label>
+    <input type="text" name="mensagem_rodape" id="mensagem_rodape" value="{mensagem_rodape}" /><br />
     <label >url_rodape </label>
     <input type="text" name="url_rodape" id="url_rodape" value="{url_rodape}" /><br />
     <label >mensagem_powered </label>

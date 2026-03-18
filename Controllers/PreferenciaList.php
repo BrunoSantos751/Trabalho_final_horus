@@ -44,11 +44,11 @@ class PreferenciaList {
             $item = str_replace('{titulo_secaoLojaApp}', $preferencia['titulo_secaoLojaApp'], $item);
             $item = str_replace('{subtitulo_secaoLojaApp}', $preferencia['subtitulo_secaoLojaApp'], $item);
             $item = str_replace('{imagem_secaoLojaApp}', $preferencia['imagem_secaoLojaApp'], $item);
-            $item = str_replace('{image_AppStore}', $preferencia['image_AppStore'], $item);
-            $item = str_replace('{image_GooglePlay}', $preferencia['image_GooglePlay'], $item);
+            $item = str_replace('{imagem_AppStore}', $preferencia['imagem_AppStore'], $item);
+            $item = str_replace('{imagem_GooglePlay}', $preferencia['imagem_GooglePlay'], $item);
             $item = str_replace('{telefone_contato}', $preferencia['telefone_contato'], $item);
             $item = str_replace('{logo_rodape}', $preferencia['logo_rodape'], $item);
-            $item = str_replace('{mesagem_rodape}', $preferencia['mesagem_rodape'], $item);
+            $item = str_replace('{mensagem_rodape}', $preferencia['mensagem_rodape'], $item);
             $item = str_replace('{url_rodape}', $preferencia['url_rodape'], $item);
             $item = str_replace('{mensagem_powered}', $preferencia['mensagem_powered'], $item);
             $items.= $item;

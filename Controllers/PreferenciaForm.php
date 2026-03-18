@@ -21,12 +21,14 @@ class PreferenciaForm extends ApplicationController {
             'titulo_caracticasHome' => null,
             'titulo_secaoLojaApp' => null,
             'subtitulo_secaoLojaApp' => null,
+            'link_AppStore' => null,
             'imagem_secaoLojaApp' => null,
-            'image_AppStore' => null,
-            'image_GooglePlay' => null,
+            'imagem_AppStore' => null,
+            'imagem_GooglePlay' => null,
+            'link_GooglePlay' => null,
             'telefone_contato' => null,
             'logo_rodape' => null,
-            'mesagem_rodape' => null,
+            'mensagem_rodape' => null,
             'url_rodape' => null,
             'mensagem_powered' => null
         ];
