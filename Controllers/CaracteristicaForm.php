@@ -1,5 +1,5 @@
 <?php
-require_once './model/Caracteristiscas.php';
+require_once './model/Caracteristicas.php';
 require_once './Controllers/ApplicationController.php';
 
 class CaracteristicaForm extends ApplicationController {

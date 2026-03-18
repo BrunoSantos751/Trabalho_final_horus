@@ -3,7 +3,7 @@ require_once './model/Login.php';
 
 abstract class ApplicationController {
     protected $html;
-    protected array|string|null $data;
+    protected array|string|null $data = [];
 
 
 
