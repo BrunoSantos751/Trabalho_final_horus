@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Landing Page Treinamento.</title>
+    <title>{titulo_landing}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<meta  http-equiv="Content-Security-Policy"  content="upgrade-insecure-requests" />	
@@ -15,7 +15,7 @@
    
     
 
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="{favicon}">
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" id="bootstrap-style">
@@ -46,7 +46,7 @@
 
             <!-- LOGO -->
             <a class="navbar-brand logo text-uppercase" href="../landpage">
-                <img src="images/logo.png" class="logo-dark" alt="" height="30">
+                <img src="{logo_cabecalho}" class="logo-dark" alt="" height="30">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -70,8 +70,16 @@
                     </li>
                 </ul>
                 <div class=" d-flex align-items-center" style="margin-left: 20px!important;">
-                     {facebook}
-                     {instagram}
+                     <a href="{facebook}" target="_blank"
+							class="me-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
+							data-bs-title="Facebook" title="Facebook">
+							<i class="mdi mdi-facebook f-24 align-middle text-primary"></i>
+                     </a>
+                     <a href="{instagram}" target="_blank"
+							class="mx-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Instagran" title="Instagram">
+                            <i class="mdi mdi-instagram f-24 align-middle text-primary"></i>
+					</a>
                 </div>				
                 <div class="ms-auto">
                     <a href="#" class="btn bg-gradiant" style="display: flex; align-items: center;"><i class="mdi mdi-account f-20 me-2"></i>Conecte-se</a>
@@ -105,7 +113,8 @@
                                         <div class="flex-shrink-0">
                                         </div>
                                         <div class="flex-grow-1 ms-3">
-                                            {titulo}
+                                            <h6 class="mb-0">{titulo_secaoHome}</h6>
+                                            <p class="fw-semibold mb-0 text-muted">{subtitulo_secaoHome}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -133,14 +142,16 @@
 
                                         <div class="row align-items-center">
                                             <div class="col-lg-6">
-                                                {img_home}
+                                                <img src="{imagem_secaoHome}" alt="" class="img-fluid"
+                                                    style="animation: ani-bg 3s infinite;">
                                             </div>
 
                                             <div class="col-lg-6">
-                                                <h2 class="mb-4"><i style="font-size: 40px;" class="mdi mdi-tablet-cellphone f-20 me-2"></i>{marketing}</h2>
-
+                                                <h2 class="mb-4"><i style="font-size: 40px;" class="mdi mdi-tablet-cellphone f-20 me-2"></i>{titulo_caracticasHome}</h2>
                                                 <div class="row">
-                                                    {features}
+                                                    <div class="col-lg-6">
+                                                        {caracteristicas_plataforma}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -258,130 +269,10 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="testi-slider" id="testi-slider">
-                        <div class="item">
-                            <div class="testi-box position-relative overflow-hidden">
-                                <div class="row align-items-center">
-                                    <div class="col-md-5">
-                                        <img src="images/img/img-1.png" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="p-4">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="avatar">
-                                                        <img src="images/user/img-1.jpg" alt=""
-                                                            class="img-fluid rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="f-14 mb-0 text-dark fw-bold"><span
-                                                            class="text-muted fw-normal"></span> Fabiana 
-                                                    </p>
-                                                    <div class="date">
-                                                        <p class="text-muted mb-0 f-14">Gerente</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="mt-3">
-                                                <h5 class="fw-bold">Satisfação</h5>
-                                                <p class="text-muted f-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed dictum odio. In consequat vulputate mollis. In euismod est urna. Morbi et sagittis risus.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="back-image position-absolute end-0 bottom-0">
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- slider item -->
-
-                        <div class="item">
-                            <div class="testi-box position-relative overflow-hidden">
-                                <div class="row align-items-center">
-                                    <div class="col-md-5">
-                                        <img src="images/img/img-2.png" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="p-4">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="avatar">
-                                                        <img src="images/user/img-2.jpg" alt=""
-                                                            class="img-fluid rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <p class="f-14 mb-0 text-dark fw-bold"><span
-                                                            class="text-muted fw-normal">Barbosa 
-                                                            <div class="date">
-                                                                Empresário 
-                                                        </span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <h5 class="fw-bold">Excelente plataforma</h5>
-                                            <p class="text-muted f-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed dictum odio. In consequat vulputate mollis. In euismod est urna. Morbi et sagittis risus.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back-image position-absolute end-0 bottom-0">
-
-                            </div>
-
-                        </div>
+                        {testemunhos}
                     </div>
-
-                    <!-- slider item -->
-                    <div class="item ">
-                        <div class="testi-box position-relative overflow-hidden">
-                            <div class="row align-items-center">
-                                <div class="col-md-5">
-                                    <img src="images/img/img-3.png" alt="" class="img-fluid">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="p-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar">
-                                                    <img src="images/user/img-3.jpg" alt=""
-                                                        class="img-fluid rounded-circle">
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <p class="f-14 mb-0 text-dark fw-bold"><span
-                                                        class="text-muted fw-normal"></span> Carlos
-                                                </p>
-                                                <div class="date">
-                                                    <p class="text-muted mb-0 f-14">Ceo </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <h5 class="fw-bold">Agilidade</h5>
-                                            <p class="text-muted f-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed dictum odio. In consequat vulputate mollis. In euismod est urna. Morbi et sagittis risus.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back-image position-absolute end-0 bottom-0">
-                            </div>
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </div>
         </div>
         <!-- end container -->
     </section>
@@ -401,21 +292,21 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="py-5">
-                        <h1 class="display-4 text-white">Baixar o APP</h1>
-                        <p class="text-white-50 mt-3 f-18">Baixe nas lojas.<br><br><br><br></p>
+                        <h1 class="display-4 text-white">{titulo_secaoLojaApp}</h1>
+                        <p class="text-white-50 mt-3 f-18">{subtitulo_secaoLojaAPP}<br><br><br><br></p>
                         <div class="d-flex mt-4 ">
                             <div class="app-store">
-                                <a target="_blank" href="https://apps.apple.com"><img src="images/img-appstore.png" alt="" class="img-fluid"></a>
+                                <a target="_blank" href="{link_AppStore}"><img src="{image_AppStore}" alt="" class="img-fluid"></a>
                             </div>
                             <div class="googleplay">
-                                <a target="_blank" href="https://play.google.com "><img src="images/img-googleplay.png" alt="" class="img-fluid ms-3"></a>
+                                <a target="_blank" href="{link_GooglePlay}"><img src="{image_GooglePlay}" alt="" class="img-fluid ms-3"></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="cta-phone-image">
-                        <img src="images/home-5.png" alt="" style="height:600px;" class=" img-fluid">
+                        <img src="{imagem_secaoLojaApp}" alt="" style="height:600px;" class=" img-fluid">
                     </div>
                 </div>
             </div>
@@ -510,7 +401,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h5 class="mb-1">Telefone</h5>
-                            <p class="f-14 mb-0 text-muted"> 99-99999-9999</p>
+                            <p class="f-14 mb-0 text-muted"> {telefone_contato}</p>
                         </div>
                     </div>
 
@@ -533,22 +424,22 @@
             <div class="row justify-content-center ">
                 <div class="col-lg-4">
                     <a class="navbar-brand logo text-uppercase" href="#">
-                        <img src="images/logo-footer.png" class="logo-light" alt="" height="30">
+                        <img src="{logo_rodape}" class="logo-light" alt="" height="30">
                     </a>
                     <p class="text-white-50 mt-2 mb-0">©
-                        <script>document.write(new Date().getFullYear())</script> Todos os direitos reservados.
+                        <script>document.write(new Date().getFullYear())</script> {mensagem_rodape}
                     </p>
                     <a href="#" target="_blank">
-                        <p>www.landpage.com.br</p>
+                        <p>{url_rodape}</p>
                     </a>
                     <div class="footer-icon mt-4">
                         <div class=" d-flex align-items-center">
-                            <a href="https://www.facebook.com" target="_blank"
+                            <a href="{facebook}" target="_blank"
                                 class="me-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Facebook" title="Facebook">
                                 <i class="mdi mdi-facebook f-24 align-middle text-primary"></i>
                             </a>
-                            <a href="https://instagram.com" target="_blank"
+                            <a href="{instagram}" target="_blank"
                                 class="mx-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Instagran" title="Instagram">
                                 <i class="mdi mdi-instagram f-24 align-middle text-primary"></i>
@@ -588,7 +479,7 @@
                 <div class="col-lg-6">
                     <p class="mb-0 text-center text-muted">Versão 1.0 ©
                         <script>document.write(new Date().getFullYear())</script> Powered by <a
-                            href="#" target="_blank" class="text-muted">Landing Page Treinamento.</a>
+                            href="#" target="_blank" class="text-muted">{mensagem_powered}</a>
                     </p>
                 </div>
             </div>
