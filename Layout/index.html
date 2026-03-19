@@ -149,9 +149,7 @@
                                             <div class="col-lg-6">
                                                 <h2 class="mb-4"><i style="font-size: 40px;" class="mdi mdi-tablet-cellphone f-20 me-2"></i>{titulo_caracticasHome}</h2>
                                                 <div class="row">
-                                                    <div class="col-lg-6">
-                                                        {caracteristicas_plataforma}
-                                                    </div>
+                                                    {caracteristicas_plataforma}
                                                 </div>
                                             </div>
                                         </div>
@@ -264,7 +262,7 @@
                         <p class=" text-primary fw-bold mb-0">Depoimento dos clientes <i
                                 class="mdi mdi-chat-processing"></i>
                         </p>
-                        <h3>O que eles pensam de nós!</h3>
+                        <h3>{titulo_testemunhos}</h3>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -338,11 +336,8 @@
                         </div>
 
                         <div class="custom-form mt-4 ">
-                            <form method="post" name="myForm" method="post" enctype="multipart/form-data">
-                                <p id="error-msg" style="opacity: 1;">
-									<p class='alert alert-success' id='msg_alert'> <strong>Obrigado !</strong> Sua Mensagem foi entregue.</p>									
-                                </p>
-
+                            <form method="post" action="index.php?class=ContatoController&method=salvar" name="myForm" method="post" enctype="multipart/form-data">
+                                {mensagem}
                                 <div id="simple-msg"></div>
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -370,8 +365,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group mt-2">
                                             <textarea name="mensagem" id="mensagem" rows="4" 
-                                                class="form-control contact-form h-auto"
-                                                placeholder="Mensagem"> </textarea>
+                                            class="form-control contact-form h-auto"
+                                            placeholder="Mensagem"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -488,17 +483,17 @@
     <!-- end footer -->
 
     <!--Bootstrap Js-->
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="/Layout/js/bootstrap.bundle.min.js"></script>
 
     <!-- Slider Js -->
-    <script src="js/tiny-slider.js"></script>
-    <script src="js/swiper.min.js"></script>
+    <script src="/Layout/js/tiny-slider.js"></script>
+    <script src="/Layout/js/swiper.min.js"></script>
     
 	<!-- jQuery 1.8+ -->
 	<script src="plugin/components/jQuery/jquery-1.11.3.min.js"></script>
 	
     <!-- App Js -->
-    <script src="js/app.js"></script> 
+    <script src="/Layout/js/app.js"></script> 
 
 </body>
 

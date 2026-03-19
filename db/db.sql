@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS Preferencias (
     subtitulo_secaoHome TEXT NOT NULL,
     imagem_secaoHome VARCHAR(255) NOT NULL,
     titulo_caracticasHome VARCHAR(255) NOT NULL,
+    titulo_testemunhos VARCHAR(255) NOT NULL,
     titulo_secaoLojaApp VARCHAR(255) NOT NULL,
     subtitulo_secaoLojaApp TEXT NOT NULL,
     imagem_secaoLojaApp VARCHAR(255) NOT NULL,
