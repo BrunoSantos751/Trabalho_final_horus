@@ -80,8 +80,7 @@ class PreferenciaForm extends ApplicationController {
 
         $preferencia->save($data);
 
-        header('location: /index.php?class=PreferenciaList');
-        exit;
+        echo "operação concluida";
     }
 
 

@@ -48,6 +48,13 @@ CREATE TABLE IF NOT EXISTS caracteristicas (
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS aplicativos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    icon VARCHAR(255) NOT NULL
+
+)
 
 CREATE TABLE IF NOT EXISTS testemunhos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,6 +78,5 @@ CREATE TABLE IF NOT EXISTS contatos (
 ) ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;
-
 
 INSERT INTO usuarios (email, password) VALUES ('test@gmail','123456789');
