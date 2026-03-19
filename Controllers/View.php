@@ -4,6 +4,7 @@ require_once './model/Caracteristicas.php';
 require_once './model/Contatos.php';
 require_once './model/Preferencias.php';
 require_once './model/Testemunhos.php';
+require_once './model/Aplicativo.php';
 
 class View extends ApplicationController {
     
@@ -69,6 +70,46 @@ class View extends ApplicationController {
         }
     }
 
+    public function loadAplicativos() {
+        try {
+            $aplicativos = Aplicativo::all();
+            $esquerda = '';
+            $direita = '';
+            $i = 0;
+            
+
+            foreach ($aplicativos as $app) {
+                $item = file_get_contents('Layout/item_app.html');
+                $item = str_replace('{icon}', $this->getValue($app, 'icon', 'mdi mdi-cellphone'), $item);
+                $item = str_replace('{titulo}', $this->getValue($app, 'titulo', '📱 Nome do recurso'), $item);
+                $item = str_replace('{descricao}', $this->getValue($app, 'descricao', 'Descreva a funcionalidade do aplicativo aqui.'), $item);
+
+                if ($i % 2 == 0) {
+                    $esquerda .= $item;
+                } else {
+                    $direita .= $item;
+                }
+
+                $i++;
+            }
+
+            // fallback se não tiver NENHUM aplicativo
+            if (empty($esquerda) && empty($direita)) {
+                $item = file_get_contents('Layout/item_app.html');
+                $item = str_replace('{icon}', 'mdi mdi-cellphone', $item);
+                $item = str_replace('{titulo}', '📱 Exemplo de funcionalidade', $item);
+                $item = str_replace('{descricao}', '👉 Cadastre funcionalidades do app para aparecer aqui.', $item);
+                $esquerda .= $item;
+            }
+
+            $this->html = str_replace('{aplicativos_esquerda}', $esquerda, $this->html);
+            $this->html = str_replace('{aplicativos_direita}', $direita, $this->html);
+
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function loadPreferencias() {
         $preferencias = Preferencias::all();
         $p = $preferencias[0] ?? [];
@@ -117,6 +158,7 @@ class View extends ApplicationController {
     public function show() {
         $this->loadTestemunhos();
         $this->loadCaracteristicas();
+        $this->loadAplicativos();
         $this->loadPreferencias();
         $this->loadMensagem();
         print $this->html;

@@ -54,7 +54,9 @@ CREATE TABLE IF NOT EXISTS aplicativos (
     descricao TEXT NOT NULL,
     icon VARCHAR(255) NOT NULL
 
-)
+) ENGINE=InnoDB 
+DEFAULT CHARSET=utf8mb4 
+COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS testemunhos (
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,0 +1,39 @@
+<?php
+require_once 'Modelbase.php';
+
+class Aplicativo extends ModelBase {
+
+    public static function save($data) {
+        $conn = self::getConnection();
+
+        if (empty($data['id'])) {
+            $sql = "INSERT INTO aplicativos (titulo, descricao, icon)
+                    VALUES (:titulo, :descricao, :icon)";
+        } else {
+            $sql = "UPDATE aplicativos SET 
+                    titulo = :titulo,
+                    descricao = :descricao,
+                    icon = :icon
+                    WHERE id = :id";
+        }
+
+        $stmt = $conn->prepare($sql);
+
+        if (!empty($data['id'])) {
+            $stmt->bindParam(':id', $data['id']);
+        }
+
+        $stmt->bindParam(':titulo', $data['titulo']);
+        $stmt->bindParam(':descricao', $data['descricao']);
+        $stmt->bindParam(':icon', $data['icon']);
+
+        $stmt->execute();
+    }
+
+    public static function all() {
+        $conn = self::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM aplicativos");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}

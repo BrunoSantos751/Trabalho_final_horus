@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Aplicativo</title>
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="Layout/css/materialdesignicons.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 300px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        /* Fake select */
+        .select-container {
+            width: 300px;
+            position: relative;
+        }
+
+        .select-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .options {
+            display: none;
+            position: absolute;
+            width: 100%;
+            border: 1px solid #ccc;
+            background: #fff;
+            max-height: 160px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .opt {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .opt:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Cadastro de Funcionalidade do Aplicativo</h2>
+
+<form method="post" action="index.php?class=AplicativoForm&method=save">
+
+    <input type="hidden" name="id" value="{id}">
+
+    <!-- TÍTULO -->
+    <div class="form-group">
+        <label>Título:</label><br>
+        <input type="text" name="titulo" value="{titulo}" placeholder="Ex: Gestão de Ativos">
+    </div>
+
+    <!-- DESCRIÇÃO -->
+    <div class="form-group">
+        <label>Descrição:</label><br>
+        <textarea name="descricao" placeholder="Descreva a funcionalidade...">{descricao}</textarea>
+    </div>
+
+    <!-- ÍCONE (FAKE SELECT) -->
+    <div class="form-group select-container">
+        <label>Ícone:</label>
+
+        <!-- selecionado -->
+        <div onclick="toggleOptions()" class="select-box" id="selectBox">
+            <span id="selectedIcon">
+                <i class="{icon}" style="margin-right:8px;"></i>
+                {icon_label}
+            </span>
+        </div>
+
+        <!-- opções -->
+        <div id="options" class="options">
+
+            <div onclick="selectIcon('mdi mdi-tools', 'Gestão de Ativos')" class="opt">
+                <i class="mdi mdi-tools"></i> Gestão de Ativos
+            </div>
+
+            <div onclick="selectIcon('mdi mdi-school', 'Treinamentos')" class="opt">
+                <i class="mdi mdi-school"></i> Treinamentos
+            </div>
+
+            <div onclick="selectIcon('mdi mdi-cogs', 'Execução de Tarefas')" class="opt">
+                <i class="mdi mdi-cogs"></i> Execução de Tarefas
+            </div>
+
+            <div onclick="selectIcon('mdi mdi-checkbox-marked', 'Checklists')" class="opt">
+                <i class="mdi mdi-checkbox-marked"></i> Checklists
+            </div>
+
+            <div onclick="selectIcon('mdi mdi-alert-circle', 'Ações Corretivas')" class="opt">
+                <i class="mdi mdi-alert-circle"></i> Ações Corretivas
+            </div>
+
+            <div onclick="selectIcon('mdi mdi-api', 'Integração via API')" class="opt">
+                <i class="mdi mdi-api"></i> Integração via API
+            </div>
+
+        </div>
+
+        <!-- valor real -->
+        <input type="hidden" name="icon" id="icon" value="{icon}">
+    </div>
+
+    <!-- BOTÃO -->
+    <div class="form-group">
+        <button type="submit">Salvar</button>
+    </div>
+
+</form>
+
+<script>
+function toggleOptions() {
+    const opt = document.getElementById("options");
+    opt.style.display = opt.style.display === "block" ? "none" : "block";
+}
+
+function selectIcon(value, label) {
+    document.getElementById("icon").value = value;
+
+    document.getElementById("selectedIcon").innerHTML =
+        '<i class="' + value + '" style="margin-right:8px;"></i>' + label;
+
+    document.getElementById("options").style.display = "none";
+}
+
+// fechar ao clicar fora
+document.addEventListener("click", function(event) {
+    const box = document.getElementById("selectBox");
+    const options = document.getElementById("options");
+
+    if (!box.contains(event.target) && !options.contains(event.target)) {
+        options.style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
