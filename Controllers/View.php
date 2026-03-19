@@ -32,6 +32,23 @@ class View extends ApplicationController {
 
         $preferencias = Preferencias::all();
 
+
+
+        try {
+            $caracteristicas = Caracteristicas::all();
+            $items = '';
+            foreach ($caracteristicas as $caracteristica) {
+                $item = file_get_contents('Layout/item_caracteristicas.html');
+                $item = str_replace('{titulo}', $caracteristica['titulo'], $item);
+                $item = str_replace('{descricao}', $caracteristica['descricao'], $item);
+                $items.= $item;
+            }
+            $this->html = str_replace('{caracteristicas_plataforma}', $items, $this->html);
+        }
+        catch (Exception $e) {
+            print $e->getMessage();
+        }
+
         $this->html = str_replace('{titulo_landing}', $preferencias[0]['titulo_landing'], $this->html);
         $this->html = str_replace('{favicon}', $preferencias[0]['favicon'], $this->html);
         $this->html = str_replace('{logo_cabecalho}', $preferencias[0]['logo_cabecalho'], $this->html);
@@ -40,6 +57,7 @@ class View extends ApplicationController {
         $this->html = str_replace('{imagem_secaoHome}', $preferencias[0]['imagem_secaoHome'], $this->html);
         $this->html = str_replace('{titulo_secaoHome}', $preferencias[0]['titulo_secaoHome'], $this->html);
         $this->html = str_replace('{subtitulo_secaoHome}', $preferencias[0]['subtitulo_secaoHome'], $this->html);
+        $this->html = str_replace('{titulo_caracticasHome}', $preferencias[0]['titulo_caracticasHome'], $this->html);
         $this->html = str_replace('{titulo_secaoLojaApp}', $preferencias[0]['titulo_secaoLojaApp'], $this->html);
         $this->html = str_replace('{subtitulo_secaoLojaAPP}', $preferencias[0]['subtitulo_secaoLojaAPP'], $this->html);
         $this->html = str_replace('{link_AppStore}', $preferencias[0]['link_AppStore'], $this->html);
@@ -53,7 +71,7 @@ class View extends ApplicationController {
         $this->html = str_replace('{url_rodape}', $preferencias[0]['url_rodape'], $this->html);
         $this->html = str_replace('{mensagem_powered}', $preferencias[0]['mensagem_powered'], $this->html);
 
-        $this->loadCaracteristicas();
+        //$this->loadCaracteristicas();
         print $this->html;
     }
 }
