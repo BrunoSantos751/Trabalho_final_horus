@@ -11,44 +11,8 @@ class View extends ApplicationController {
         $this->setHtml('Layout/index.html');
     }
 
+
     public function loadCaracteristicas() {
-        try {
-            $caracteristicas = Caracteristicas::all();
-            $items = '';
-            foreach ($caracteristicas as $caracteristica) {
-                $item = file_get_contents('Layout/item_caracteristica.html');
-                $item = str_replace('{titulo_caracticasHome}', $caracteristica['titulo'], $item);
-                $item = str_replace('{descricao_caracticasHome}', $caracteristica['descricao'], $item);
-                $items.= $item;
-            }
-            $this->html = str_replace('{caracteristicas}', $items, $this->html);
-        }
-        catch (Exception $e) {
-            print $e->getMessage();
-        }
-    }
-
-    public function show() {
-        
-        
-        if (isset($_GET['erro'])) {
-            $this->html = str_replace('{mensagem}', 
-                "<p class='alert alert-danger'><strong>Erro!</strong> Preencha todos os campos obrigatórios.</p>", 
-                $this->html
-            );
-        }
-        elseif (isset($_GET['sucesso'])) {
-            $this->html = str_replace('{mensagem}', 
-                "<p class='alert alert-success'><strong>Obrigado!</strong> Sua mensagem foi enviada.</p>", 
-                $this->html
-            );
-        } 
-        else {
-            $this->html = str_replace('{mensagem}', '', $this->html);
-        }
-
-        $preferencias = Preferencias::all();
-
         try {
             $caracteristicas = Caracteristicas::all();
             $items_caracteristica = '';
@@ -63,7 +27,9 @@ class View extends ApplicationController {
         catch (Exception $e) {
             print $e->getMessage();
         }
+    }
 
+    public function loadTestemunhos() {
         try {
             $testemunhos = Testemunhos::all();
             $items_testemunhos = '';
@@ -82,6 +48,10 @@ class View extends ApplicationController {
         catch (Exception $e) {
             print $e->getMessage();
         }
+    }
+
+    public function loadPreferencias() {
+        $preferencias = Preferencias::all();
 
         $this->html = str_replace('{titulo_landing}', $preferencias[0]['titulo_landing'], $this->html);
         $this->html = str_replace('{favicon}', $preferencias[0]['favicon'], $this->html);
@@ -105,8 +75,24 @@ class View extends ApplicationController {
         $this->html = str_replace('{mensagem_rodape}', $preferencias[0]['mensagem_rodape'], $this->html);
         $this->html = str_replace('{url_rodape}', $preferencias[0]['url_rodape'], $this->html);
         $this->html = str_replace('{mensagem_powered}', $preferencias[0]['mensagem_powered'], $this->html);
+    }
 
-        //$this->loadCaracteristicas();
+    private function loadMensagem() {
+        if (isset($_GET['erro']) && $_GET['erro'] == 1) {
+            $mensagem = "<p class='alert alert-danger' id='msg_alert'> <strong>Ops !</strong> Por favor, preencha os campos obrigatórios.</p>";
+        } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == 1) {
+            $mensagem = "<p class='alert alert-success' id='msg_alert'> <strong>Obrigado !</strong> Sua Mensagem foi entregue.</p>";
+        } else {
+            $mensagem = '';
+        }
+        $this->html = str_replace('{mensagem}', $mensagem, $this->html);
+    }
+
+    public function show() {
+        $this->loadTestemunhos();
+        $this->loadCaracteristicas();
+        $this->loadPreferencias();
+        $this->loadMensagem();
         print $this->html;
     }
 }
