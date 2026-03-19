@@ -8,7 +8,7 @@ class LoginController extends ApplicationController {
 
     public function __construct()
     {
-        $this->html = file_get_contents('Layout/html/login/login.html');   
+        $this->html = file_get_contents('Layout/html/login/login.html');
     }
 
     public function login($request){
@@ -24,8 +24,8 @@ class LoginController extends ApplicationController {
     public function logout() {
         $login = new Login([]);
         $login->logout();
-        
-        ApplicationController::return_home();
+        header('location: /index.php?class=LoginController');
+        exit;
     }
 
     public function show() {

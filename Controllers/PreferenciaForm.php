@@ -11,7 +11,6 @@ class PreferenciaForm extends ApplicationController {
         $this->data = [
             'id' => null,
             'titulo_landing' => null,
-            'favicon' => null,
             'logo_cabecalho' => null,
             'facebook' => null,
             'twitter' => null,
@@ -30,12 +29,17 @@ class PreferenciaForm extends ApplicationController {
             'url_rodape' => null,
             'mensagem_powered' => null
         ];
+
+        $pref = Preferencias::find();
+        if (!empty($pref)) {
+            header("location: /index.php?class=PreferenciaForm&method=edit&id={$pref['id']}");
+            exit;
+        }
     }
 
-    public function edit($param) {
+    public function edit() {
         try {
-            $id = (int) $param['id'];
-            $preferencia = Preferencias::find($id);
+            $preferencia = Preferencias::find();
             $this->data = $preferencia;
         }
         catch (Exception $e) {
@@ -44,13 +48,9 @@ class PreferenciaForm extends ApplicationController {
     }
 
     public function save($request) {
-        
-
         $data = [
             'id' => $request['id'] ?? null,
             'titulo_landing' => $request['titulo_landing'] ?? null,
-            'favicon' => $request['favicon'] ?? null,
-            'logo_cabecalho' => $request['logo_cabecalho'] ?? null,
             'facebook' => $request['facebook'] ?? null,
             'twitter' => $request['twitter'] ?? null,
             'instagram' => $request['instagram'] ?? null,
@@ -62,7 +62,6 @@ class PreferenciaForm extends ApplicationController {
             'link_AppStore' => $request['link_AppStore'] ?? null,
             'link_GooglePlay' => $request['link_GooglePlay'] ?? null,
             'telefone_contato' => $request['telefone_contato'] ?? null,
-            'logo_rodape' => $request['logo_rodape'] ?? null,
             'mensagem_rodape' => $request['mensagem_rodape'] ?? null,
             'url_rodape' => $request['url_rodape'] ?? null,
             'mensagem_powered' => $request['mensagem_powered'] ?? null
@@ -70,7 +69,7 @@ class PreferenciaForm extends ApplicationController {
 
         $upload = new UploadImagem();
 
-        foreach(['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'] as $img){
+        foreach(['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $img){
             if (!empty($_FILES[$img]['name'])){
                 $data[$img] = $upload->uploadImagem($_FILES[$img],'Preferencias');
             }
@@ -88,11 +87,10 @@ class PreferenciaForm extends ApplicationController {
         $isEdit = !empty($this->data['id']);
 
         $titulo = $isEdit ? 'Editar preferências' : 'Cadastro de preferências';
-        $hidden = $isEdit ? '' : 'hidden';
+
         $code_label = $isEdit ? 'Código :' : '';
 
         $this->html = str_replace('{titulo}', $titulo, $this->html);
-        $this->html = str_replace('{hidden_id}', $hidden, $this->html);
         $this->html = str_replace('{code_label}', $code_label, $this->html);
 
         // Substituir os campos específicos de preferências

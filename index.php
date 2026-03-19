@@ -1,5 +1,5 @@
 <?php
-
+require_once 'model/Usuarios.php';
 spl_autoload_register(function ($class) {
 
     $path = __DIR__ . "/Controllers/{$class}.php";
@@ -10,12 +10,15 @@ spl_autoload_register(function ($class) {
 
 });
 
+$authorizedClass = ['View', 'LoginController'];
+
 $classe = $_GET['class'] ?? Null;
 
 if (empty($classe)) {
-    header("Location: index.php?class=LoginController");
+    header("Location: index.php?class=View");
     exit;
-}   
+}
+
 
 $method = $_GET['method'] ?? null;
 
@@ -30,6 +33,25 @@ if ($classe) {
     if (!class_exists($classe)) {
         http_response_code(404);
         exit("Classe não encontrada");
+    }
+
+
+    if (!in_array($classe,$authorizedClass)) {
+        
+        $session = $_SESSION['user_id'] ?? null;
+
+            if (empty($session)) {
+                $msgError = "precisa esta logado";
+            } 
+            
+            if (empty(Usuarios::find($session))) {
+                unset($_SESSION['user_id']);
+                $msgError = "Falha na autenticação";
+            }
+            if (isset($msgError)){
+                header("location: /index.php?class=LoginController");
+                exit($msgError);
+            }
     }
 
     $pagina = new $classe($_REQUEST);
