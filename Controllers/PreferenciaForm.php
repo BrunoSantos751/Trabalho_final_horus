@@ -18,14 +18,10 @@ class PreferenciaForm extends ApplicationController {
             'instagram' => null,
             'titulo_secaoHome' => null,
             'subtitulo_secaoHome' => null,
-            'imagem_secaoHome' => null,
             'titulo_caracticasHome' => null,
             'titulo_secaoLojaApp' => null,
             'subtitulo_secaoLojaApp' => null,
             'link_AppStore' => null,
-            'imagem_secaoLojaApp' => null,
-            'imagem_AppStore' => null,
-            'imagem_GooglePlay' => null,
             'link_GooglePlay' => null,
             'telefone_contato' => null,
             'logo_rodape' => null,
@@ -73,7 +69,7 @@ class PreferenciaForm extends ApplicationController {
 
         $upload = new UploadImagem();
 
-        foreach(['imagem_secaoHome', 'imagem_secaoLojaApp', 'imagem_AppStore', 'imagem_GooglePlay'] as $img){
+        foreach(['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'] as $img){
             if (!empty($_FILES[$img]['name'])){
                 $data[$img] = $upload->uploadImagem($_FILES[$img],'Preferencias');
             }
@@ -83,7 +79,7 @@ class PreferenciaForm extends ApplicationController {
 
         $preferencia->save($data);
 
-        header('location: /index.php?class=PreferenciasList');
+        header('location: /index.php?class=PreferenciaList');
         exit;
     }
 

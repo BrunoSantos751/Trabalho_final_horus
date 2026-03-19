@@ -8,30 +8,28 @@ class Preferencias extends Modelbase {
    public static function save($data = null) {
       $conn = self::getConnection();
       $data = $data ?? $_POST;
+
       if (isset($data['id']) && !empty($data['id'])){
       
          $append_sql = "";
 
-         foreach (['imagem_secaoHome', 'secao_AppSore', 'imagem_Google', 'imagem_secaoLojaApp'] as $img) {
+         foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'] as $img) {
             if (!empty($data[$img]))
             $append_sql .= "$img = :$img,";
          }
 
          $sql = "UPDATE Preferencias SET titulo_landing = :titulo_landing, favicon = :favicon, logo_cabecalho = :logo_cabecalho, facebook = :facebook, twitter = :twitter, instagram = :instagram, titulo_secaoHome = :titulo_secaoHome, subtitulo_secaoHome = :subtitulo_secaoHome, titulo_caracticasHome = :titulo_caracticasHome, titulo_secaoLojaApp = :titulo_secaoLojaApp, subtitulo_secaoLojaApp = :subtitulo_secaoLojaApp" . ($append_sql ? ", $append_sql" : "") . " link_AppStore = :link_AppStore, link_GooglePlay = :link_GooglePlay, telefone_contato = :telefone_contato, logo_rodape = :logo_rodape, mensagem_rodape = :mensagem_rodape, url_rodape = :url_rodape, mensagem_powered = :mensagem_powered WHERE id = :id";
 
-         var_dump($sql);
-         var_dump($data);
-
-      }else {
-         }
+      }else{
          $sql = "INSERT INTO Preferencias (titulo_landing, favicon, logo_cabecalho, facebook, twitter, instagram, titulo_secaoHome, subtitulo_secaoHome, titulo_caracticasHome, titulo_secaoLojaApp, subtitulo_secaoLojaApp, imagem_secaoHome, imagem_secaoLojaApp, imagem_AppStore, imagem_GooglePlay, link_AppStore, link_GooglePlay, telefone_contato, logo_rodape, mensagem_rodape, url_rodape, mensagem_powered) VALUES (:titulo_landing, :favicon, :logo_cabecalho, :facebook, :twitter, :instagram, :titulo_secaoHome, :subtitulo_secaoHome,  :titulo_caracticasHome, :titulo_secaoLojaApp, :subtitulo_secaoLojaApp, :imagem_secaoHome, :imagem_secaoLojaApp, :imagem_AppStore, :imagem_GooglePlay, :link_AppStore, :link_GooglePlay, :telefone_contato, :logo_rodape, :mensagem_rodape, :url_rodape, :mensagem_powered)";
+      }
 
       $stmt = $conn->prepare($sql);
+
       if (isset($data['id']) && !empty($data['id'])){
          $stmt->bindValue(':id', $data['id']);
       }
 
-      $stmt->bindValue(':imagem_secaoHome', $data['imagem_secaoHome'] ?? null);
       $stmt->bindValue(':titulo_landing', $data['titulo_landing'] ?? null);
       $stmt->bindValue(':favicon', $data['favicon'] ?? null);
       $stmt->bindValue(':logo_cabecalho', $data['logo_cabecalho'] ?? null);
@@ -48,8 +46,9 @@ class Preferencias extends Modelbase {
       
 
       foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'] as $img) {
-         $stmt->bindValue(":$img", $data[$img] ?? null);
-         if (!empty($data[$img])) {
+         $value = $data[$img] ?? null;
+         if (!empty($value)) { 
+            $stmt->bindValue(":$img", $value);
             UploadImagem::deleteImage(self::class, $data['id'], $img);
          }
       }
@@ -59,7 +58,6 @@ class Preferencias extends Modelbase {
       $stmt->bindValue(':mensagem_rodape', $data['mensagem_rodape'] ?? null);
       $stmt->bindValue(':url_rodape', $data['url_rodape'] ?? null);
       $stmt->bindValue(':mensagem_powered', $data['mensagem_powered'] ?? null);
-
       $stmt->execute();
    }
    
@@ -76,7 +74,7 @@ class Preferencias extends Modelbase {
    }
    public static function delete($id) {
       $conn = self::getConnection();
-      foreach (['imagem_secaoHome', 'imagem_secaoLojaApp', 'imagem_AppStore', 'imagem_GooglePlay'] as $field) {
+      foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'] as $field) {
          UploadImagem::deleteImage(self::class, $id, $field);
       }
       return $conn->query("DELETE FROM Preferencias WHERE id='{$id}'");
