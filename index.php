@@ -14,6 +14,7 @@ $authorizedClass = ['View', 'LoginController'];
 
 $classe = $_GET['class'] ?? Null;
 
+
 if (empty($classe)) {
     header("Location: index.php?class=View");
     exit;

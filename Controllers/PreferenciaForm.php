@@ -29,12 +29,27 @@ class PreferenciaForm extends ApplicationController {
             'url_rodape' => null,
             'mensagem_powered' => null
         ];
+        $this->redirect_edit();
 
+    }
+
+    public function redirect_edit(){
         $pref = Preferencias::find();
-        if (!empty($pref)) {
-            header("location: /index.php?class=PreferenciaForm&method=edit&id={$pref['id']}");
+        $method = $_GET['method'] ?? null;
+        
+        if (empty($pref) && $method === 'edit') {
+            $head = "";
+        }
+
+        if (!empty($pref) && $method === null) {
+            $head = "&method=edit&id={$pref['id']}";
+        }
+
+        if (isset($head)){
+            header("location: /index.php?class=PreferenciaForm$head");
             exit;
         }
+
     }
 
     public function edit() {
@@ -80,6 +95,10 @@ class PreferenciaForm extends ApplicationController {
         $preferencia->save($data);
 
         echo "operação concluida";
+
+        header("location: /index.php?class=PreferenciaForm");
+        exit;
+
     }
 
 

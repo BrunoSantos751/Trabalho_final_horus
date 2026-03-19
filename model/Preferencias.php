@@ -11,22 +11,17 @@ class Preferencias extends Modelbase {
 
       $inputparams = [
          'titulo_landing',
-         'logo_cabecalho',
          'facebook',
          'twitter',
          'instagram',
          'titulo_secaoHome',
          'subtitulo_secaoHome',
-         'imagem_secaoHome',
          'titulo_caracticasHome',
          'titulo_testemunhos',
          'titulo_secaoLojaApp',
          'subtitulo_secaoLojaApp',
-         'imagem_secaoLojaApp',
          'link_AppStore',
-         'imagem_AppStore',
          'link_GooglePlay',
-         'imagem_GooglePlay',
          'telefone_contato',
          'logo_rodape',
          'mensagem_rodape',
@@ -89,7 +84,6 @@ class Preferencias extends Modelbase {
          }
       }
 
-
       $stmt->execute();
    }
    
@@ -107,7 +101,7 @@ class Preferencias extends Modelbase {
    
    public static function delete($id) {
       $conn = self::getConnection();
-      foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'] as $field) {
+      foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $field) {
          UploadImagem::deleteImage(self::class, $id, $field);
       }
       return $conn->query("DELETE FROM Preferencias WHERE id='{$id}'");
