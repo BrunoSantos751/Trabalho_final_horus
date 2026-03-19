@@ -32,18 +32,35 @@ class View extends ApplicationController {
 
         $preferencias = Preferencias::all();
 
-
-
         try {
             $caracteristicas = Caracteristicas::all();
-            $items = '';
+            $items_caracteristica = '';
             foreach ($caracteristicas as $caracteristica) {
-                $item = file_get_contents('Layout/item_caracteristicas.html');
-                $item = str_replace('{titulo}', $caracteristica['titulo'], $item);
-                $item = str_replace('{descricao}', $caracteristica['descricao'], $item);
-                $items.= $item;
+                $item_caracteristica = file_get_contents('Layout/item_caracteristicas.html');
+                $item_caracteristica = str_replace('{titulo}', $caracteristica['titulo'], $item_caracteristica);
+                $item_caracteristica = str_replace('{descricao}', $caracteristica['descricao'], $item_caracteristica);
+                $items_caracteristica.= $item_caracteristica;
             }
-            $this->html = str_replace('{caracteristicas_plataforma}', $items, $this->html);
+            $this->html = str_replace('{caracteristicas_plataforma}', $items_caracteristica, $this->html);
+        }
+        catch (Exception $e) {
+            print $e->getMessage();
+        }
+
+        try {
+            $testemunhos = Testemunhos::all();
+            $items_testemunhos = '';
+            foreach ($testemunhos as $testemunho) {
+                $item_testemunho = file_get_contents('Layout/item_testemunho.html');
+                $item_testemunho = str_replace('{imagem_usuario}', $testemunho['foto'], $item_testemunho);
+                $item_testemunho = str_replace('{nome}', $testemunho['nome'], $item_testemunho);
+                $item_testemunho = str_replace('{funcao}', $testemunho['funcao'], $item_testemunho);
+                $item_testemunho = str_replace('{titulo_testemunho}', $testemunho['titulo'], $item_testemunho);
+                $item_testemunho = str_replace('{descricao_testemunho}', $testemunho['descricao'], $item_testemunho);
+                $item_testemunho = str_replace('{imagem_fundo}', $testemunho['imagem_fundo'], $item_testemunho);
+                $items_testemunhos.= $item_testemunho;
+            }
+            $this->html = str_replace('{testemunhos}', $items_testemunhos, $this->html);
         }
         catch (Exception $e) {
             print $e->getMessage();
@@ -58,8 +75,9 @@ class View extends ApplicationController {
         $this->html = str_replace('{titulo_secaoHome}', $preferencias[0]['titulo_secaoHome'], $this->html);
         $this->html = str_replace('{subtitulo_secaoHome}', $preferencias[0]['subtitulo_secaoHome'], $this->html);
         $this->html = str_replace('{titulo_caracticasHome}', $preferencias[0]['titulo_caracticasHome'], $this->html);
+        $this->html = str_replace('{titulo_testemunhos}', $preferencias[0]['titulo_testemunhos'], $this->html);
         $this->html = str_replace('{titulo_secaoLojaApp}', $preferencias[0]['titulo_secaoLojaApp'], $this->html);
-        $this->html = str_replace('{subtitulo_secaoLojaAPP}', $preferencias[0]['subtitulo_secaoLojaAPP'], $this->html);
+        $this->html = str_replace('{subtitulo_secaoLojaAPP}', $preferencias[0]['subtitulo_secaoLojaApp'], $this->html);
         $this->html = str_replace('{link_AppStore}', $preferencias[0]['link_AppStore'], $this->html);
         $this->html = str_replace('{image_AppStore}', $preferencias[0]['image_AppStore'], $this->html);
         $this->html = str_replace('{link_GooglePlay}', $preferencias[0]['link_GooglePlay'], $this->html);

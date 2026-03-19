@@ -41,6 +41,7 @@ class PreferenciaList {
             $item = str_replace('{subtitulo_secaoHome}', $preferencia['subtitulo_secaoHome'], $item);
             $item = str_replace('{imagem_secaoHome}', $preferencia['imagem_secaoHome'], $item);
             $item = str_replace('{titulo_caracticasHome}', $preferencia['titulo_caracticasHome'], $item);
+            $item = str_replace('{titulo_testemunhos}', $preferencia['titulo_testemunhos'], $item);
             $item = str_replace('{titulo_secaoLojaApp}', $preferencia['titulo_secaoLojaApp'], $item);
             $item = str_replace('{subtitulo_secaoLojaApp}', $preferencia['subtitulo_secaoLojaApp'], $item);
             $item = str_replace('{imagem_secaoLojaApp}', $preferencia['imagem_secaoLojaApp'], $item);

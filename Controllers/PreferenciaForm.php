@@ -19,6 +19,7 @@ class PreferenciaForm extends ApplicationController {
             'subtitulo_secaoHome' => null,
             'imagem_secaoHome' => null,
             'titulo_caracticasHome' => null,
+            'titulo_testemunhos' => null,
             'titulo_secaoLojaApp' => null,
             'subtitulo_secaoLojaApp' => null,
             'link_AppStore' => null,
