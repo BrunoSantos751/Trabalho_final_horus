@@ -13,26 +13,20 @@ class TestemunhoForm extends ApplicationController {
     function cadastro($request) {
         $upload = new UploadImagem();
 
-        $foto = null;
-        $fundo = null;
-
-        if (!empty($_FILES['foto']['name'])) {
-            $foto = $upload->uploadImagem($_FILES['foto'], 'testemunhos');
-        }
-
-        if (!empty($_FILES['imagem_fundo']['name'])) {
-            $fundo = $upload->uploadImagem($_FILES['imagem_fundo'], 'testemunhos');
-        }
-
         $this->data = [
             'id' => $request['id'] ?? null,
             'nome' => $request['nome'] ?? null,
             'funcao' => $request['funcao'] ?? null,
             'titulo' => $request['titulo'] ?? null,
             'descricao' => $request['descricao'] ?? null,
-            'foto' => $foto,
-            'imagem_fundo' => $fundo
         ];
+        
+        foreach (['foto', 'imagem_fundo'] as $img) {
+            if (!empty($_FILES[$img]['name'])) {
+                $this->data[$img] = $upload->uploadImagem($_FILES[$img], 'testemunhos');
+            }
+        }
+       
 
         Testemunhos::save($this->data);
 

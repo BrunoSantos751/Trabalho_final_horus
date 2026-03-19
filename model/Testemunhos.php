@@ -1,5 +1,6 @@
 <?php
 require_once 'Modelbase.php';
+require_once './utils/UploadImagem.php';
 class Testemunhos extends ModelBase {
 
     /*
@@ -31,33 +32,23 @@ class Testemunhos extends ModelBase {
             (!empty($data['imagem_fundo']) ? ", imagem_fundo = :imagem_fundo" : "") .
              " WHERE id = :id";         
         }
+
+
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $data['id']);
         $stmt->bindParam(':nome', $data['nome']);
         $stmt->bindParam(':funcao', $data['funcao']);
         $stmt->bindParam(':titulo', $data['titulo']);
         $stmt->bindParam(':descricao', $data['descricao']);
-        if (!empty($data['foto'])) {
-            $stmt->bindParam(':foto', $data['foto']);
-            Testemunhos::deleteImage($data['id'], 'foto');
-        }
-        if (!empty($data['imagem_fundo'])) {
-            $stmt->bindParam(':imagem_fundo', $data['imagem_fundo']);
-            Testemunhos::deleteImage($data['id'], 'imagem_fundo');
-        }
-        $stmt->execute();
-    }
 
-    public static function deleteImage($id, $field) {
-        $testemunho = self::find($id);
-        if ($testemunho) {
-            if ($field === 'foto' && !empty($testemunho['foto']) && file_exists($testemunho['foto'])) {
-                unlink($testemunho['foto']);
-            }
-            if ($field === 'imagem_fundo' && !empty($testemunho['imagem_fundo']) && file_exists($testemunho['imagem_fundo'])) {
-                unlink($testemunho['imagem_fundo']);
+        foreach (['foto', 'imagem_fundo'] as $img) {
+            if (!empty($data[$img])) {
+                $stmt->bindParam(":$img", $data[$img]);
+                UploadImagem::deleteImage(self::class,$data['id'], $img);
             }
         }
+        
+        $stmt->execute();
     }
 
     public static function find($id) {
@@ -72,8 +63,8 @@ class Testemunhos extends ModelBase {
      public static function delete($id) {
         $conn = self::getConnection();
         $sql = "DELETE FROM testemunhos WHERE id = :id";
-        Testemunhos::deleteImage($id, 'foto');
-        Testemunhos::deleteImage($id, 'imagem_fundo');
+        UploadImagem::deleteImage(self::class, $id, 'foto');
+        UploadImagem::deleteImage(self::class, $id, 'imagem_fundo');
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
