@@ -29,6 +29,23 @@ class View extends ApplicationController {
     }
 
     public function show() {
+        
+        
+        if (isset($_GET['erro'])) {
+            $this->html = str_replace('{mensagem}', 
+                "<p class='alert alert-danger'><strong>Erro!</strong> Preencha todos os campos obrigatórios.</p>", 
+                $this->html
+            );
+        }
+        elseif (isset($_GET['sucesso'])) {
+            $this->html = str_replace('{mensagem}', 
+                "<p class='alert alert-success'><strong>Obrigado!</strong> Sua mensagem foi enviada.</p>", 
+                $this->html
+            );
+        } 
+        else {
+            $this->html = str_replace('{mensagem}', '', $this->html);
+        }
 
         $preferencias = Preferencias::all();
 

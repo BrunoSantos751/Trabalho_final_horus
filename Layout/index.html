@@ -336,11 +336,8 @@
                         </div>
 
                         <div class="custom-form mt-4 ">
-                            <form method="post" name="myForm" method="post" enctype="multipart/form-data">
-                                <p id="error-msg" style="opacity: 1;">
-									<p class='alert alert-success' id='msg_alert'> <strong>Obrigado !</strong> Sua Mensagem foi entregue.</p>									
-                                </p>
-
+                            <form method="post" action="index.php?class=ContatoController&method=salvar" name="myForm" method="post" enctype="multipart/form-data">
+                                {mensagem}
                                 <div id="simple-msg"></div>
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -368,8 +365,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group mt-2">
                                             <textarea name="mensagem" id="mensagem" rows="4" 
-                                                class="form-control contact-form h-auto"
-                                                placeholder="Mensagem"> </textarea>
+                                            class="form-control contact-form h-auto"
+                                            placeholder="Mensagem"></textarea>
                                         </div>
                                     </div>
                                 </div>
