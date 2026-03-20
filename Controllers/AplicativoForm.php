@@ -18,11 +18,23 @@ class AplicativoForm extends ApplicationController {
     public function show() {
         $html = $this->html;
 
+        $html = str_replace('{id}', $this->data['id'], $html);
         $html = str_replace('{titulo}', $this->data['titulo'], $html);
         $html = str_replace('{descricao}', $this->data['descricao'], $html);
         $html = str_replace('{icon}', $this->data['icon'], $html);
+        $html = str_replace('{icon_label}', 'Selecione', $html);
 
         print $html;
+    }
+
+    public function edit($request) {
+        $id = $request['id'] ?? ($_GET['id'] ?? null);
+        if ($id) {
+            $aplicativo = Aplicativo::find($id);
+            if ($aplicativo) {
+                $this->data = $aplicativo;
+            }
+        }
     }
 
     public function save($request) {

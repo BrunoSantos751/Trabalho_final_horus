@@ -6,17 +6,21 @@ require_once './model/Preferencias.php';
 require_once './model/Testemunhos.php';
 require_once './model/Aplicativo.php';
 
-class View extends ApplicationController {
-    
-    public function __construct()  {
+class View extends ApplicationController
+{
+
+    public function __construct()
+    {
         $this->setHtml('Layout/index.html');
-        }
-        
-        private function getValue($array, $key, $default) {
-        return isset($array[$key]) && trim($array[$key]) !== ''? $array[$key]: $default;
-        }
-        
-    public function loadCaracteristicas() {
+    }
+
+    private function getValue($array, $key, $default)
+    {
+        return isset($array[$key]) && trim($array[$key]) !== '' ? $array[$key] : $default;
+    }
+
+    public function loadCaracteristicas()
+    {
         try {
             $caracteristicas = Caracteristicas::all();
             $items_caracteristica = '';
@@ -38,17 +42,18 @@ class View extends ApplicationController {
             print $e->getMessage();
         }
     }
-                        
-    public function loadTestemunhos() {
+
+    public function loadTestemunhos()
+    {
         try {
             $testemunhos = Testemunhos::all();
             $items_testemunhos = '';
             foreach ($testemunhos as $testemunho) {
                 $item_testemunho = file_get_contents('Layout/item_testemunho.html');
                 $item_testemunho = str_replace('{imagem_usuario}', $this->getValue($testemunho, 'foto', 'images/user/img-1.jpg'), $item_testemunho);
-                $item_testemunho = str_replace('{nome}', $this->getValue($testemunho, 'nome', '👤 Nome do cliente'), $item_testemunho);        
-                $item_testemunho = str_replace('{funcao}', $this->getValue($testemunho, 'funcao', '💼 Cargo ou profissão'), $item_testemunho);            
-                $item_testemunho = str_replace('{titulo_testemunho}', $this->getValue($testemunho, 'titulo', '⭐ Título do depoimento'), $item_testemunho);                
+                $item_testemunho = str_replace('{nome}', $this->getValue($testemunho, 'nome', '👤 Nome do cliente'), $item_testemunho);
+                $item_testemunho = str_replace('{funcao}', $this->getValue($testemunho, 'funcao', '💼 Cargo ou profissão'), $item_testemunho);
+                $item_testemunho = str_replace('{titulo_testemunho}', $this->getValue($testemunho, 'titulo', '⭐ Título do depoimento'), $item_testemunho);
                 $item_testemunho = str_replace('{descricao_testemunho}', $this->getValue($testemunho, 'descricao', '📝 Escreva aqui a experiência do cliente com seu produto.'), $item_testemunho);
                 $item_testemunho = str_replace('{imagem_fundo}', $this->getValue($testemunho, 'imagem_fundo', 'images/img/img-1.png'), $item_testemunho);
                 $items_testemunhos .= $item_testemunho;
@@ -70,19 +75,25 @@ class View extends ApplicationController {
         }
     }
 
-    public function loadAplicativos() {
+    public function loadAplicativos()
+    {
         try {
             $aplicativos = Aplicativo::all();
             $esquerda = '';
             $direita = '';
             $i = 0;
-            
+
 
             foreach ($aplicativos as $app) {
-                $item = file_get_contents('Layout/item_app.html');
+                if ($i % 2 == 0) {
+                    $item = file_get_contents('Layout/item _app_esquerda.html');
+                } else {
+                    $item = file_get_contents('Layout/item_app_direita.html');
+                }
+
                 $item = str_replace('{icon}', $this->getValue($app, 'icon', 'mdi mdi-cellphone'), $item);
                 $item = str_replace('{titulo}', $this->getValue($app, 'titulo', '📱 Nome do recurso'), $item);
-                $item = str_replace('{descricao}', $this->getValue($app, 'descricao', 'Descreva a funcionalidade do aplicativo aqui.'), $item);
+                $item = str_replace('{descricao}', $this->getValue($app, 'descricao', 'Descrição aqui'), $item);
 
                 if ($i % 2 == 0) {
                     $esquerda .= $item;
@@ -110,7 +121,8 @@ class View extends ApplicationController {
         }
     }
 
-    public function loadPreferencias() {
+    public function loadPreferencias()
+    {
         $preferencias = Preferencias::all();
         $p = $preferencias[0] ?? [];
 
@@ -144,7 +156,8 @@ class View extends ApplicationController {
         $this->html = str_replace('{url_rodape}', $this->getValue($p, 'url_rodape', 'url_rodape'), $this->html);
         $this->html = str_replace('{mensagem_powered}', $this->getValue($p, 'mensagem_powered', '🚀 Desenvolvido com sua plataforma ( mensagem powered )'), $this->html);
     }
-    private function loadMensagem() {
+    private function loadMensagem()
+    {
         if (isset($_GET['erro']) && $_GET['erro'] == 1) {
             $mensagem = "<p class='alert alert-danger' id='msg_alert'> <strong>Ops !</strong> Por favor, preencha os campos obrigatórios.</p>";
         } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == 1) {
@@ -155,7 +168,8 @@ class View extends ApplicationController {
         $this->html = str_replace('{mensagem}', $mensagem, $this->html);
     }
 
-    public function show() {
+    public function show()
+    {
         $this->loadTestemunhos();
         $this->loadCaracteristicas();
         $this->loadAplicativos();

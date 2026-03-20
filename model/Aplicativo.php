@@ -36,4 +36,19 @@ class Aplicativo extends ModelBase {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function find($id) {
+        $conn = self::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM aplicativos WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function delete($id) {
+        $conn = self::getConnection();
+        $stmt = $conn->prepare("DELETE FROM aplicativos WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
 }
