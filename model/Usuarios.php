@@ -53,7 +53,7 @@ class Usuarios extends ModelBase{
             throw new Exception("Acesso negado. Apenas o administrador pode realizar esta operação.");
         }
         if ($id == 1) {
-            return "Não é permitido deletar o usuário admin.";
+            throw new Exception("Não é permitido deletar o usuário admin.");
         }
         $conn = self::getConnection();
         $sql = "DELETE FROM usuarios WHERE id = :id";
