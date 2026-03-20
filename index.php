@@ -1,17 +1,15 @@
 <?php
 require_once 'model/Usuarios.php';
-session_start();
 spl_autoload_register(function ($class) {
 
     $path = __DIR__ . "/Controllers/{$class}.php";
-
     if (file_exists($path)) {
         require_once $path;
     }
-
 });
 
-$authorizedClass = ['View', 'LoginController'];
+
+$authorizedClass = ['View', 'LoginController', 'ContatoController'];
 
 $classe = $_GET['class'] ?? Null;
 
