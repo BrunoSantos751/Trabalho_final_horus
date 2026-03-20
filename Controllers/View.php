@@ -142,7 +142,7 @@ class View extends ApplicationController
         $this->html = str_replace('{instagram}', $this->getValue($p, 'instagram', '#'), $this->html);
 
         $this->html = str_replace('{imagem_secaoHome}', $this->getValue($p, 'imagem_secaoHome', 'images/features/home-1.png'), $this->html);
-        $this->html = str_replace('{titulo_secaoHome}', $this->getValue($p, 'titulo_secaoHome', '💡 Título principal da sua seção Home'), $this->html);
+        $this->html = str_replace('{titulo_secaoHome}', $this->getValue($p, 'titulo_secaoHome', '💡 Título principal da sua seção Home! <br> clique <a href="index.php?class=LoginController">aqui</a> para acessar o painel admin '), $this->html);
         $this->html = str_replace('{subtitulo_secaoHome}', $this->getValue($p, 'subtitulo_secaoHome', '✏️ Descreva aqui o que sua plataforma faz (edite o subtitulo no painel)'), $this->html);
         $this->html = str_replace('{titulo_caracticasHome}', $this->getValue($p, 'titulo_caracticasHome', '⚙️ Título das Características do sistema'), $this->html);
 
