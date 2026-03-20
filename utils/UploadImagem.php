@@ -34,7 +34,8 @@ class UploadImagem {
     }
 
     public static function deleteImage($class,$id, $field) {
-        $file = ['foto', 'imagem_fundo', 'imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp'];
+        $file = ['foto', 'imagem_fundo', 'imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'];
+
         if (!in_array($field, $file)) {
             return;
         }

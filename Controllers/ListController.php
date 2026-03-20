@@ -7,7 +7,6 @@ class ListController extends ApplicationController {
     }
 
     public function show() {
-        ApplicationController::return_home();
         echo $this->html;
     }
 }

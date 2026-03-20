@@ -4,29 +4,29 @@ USE CMS;
 
 CREATE TABLE IF NOT EXISTS Preferencias (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo_landing VARCHAR(255) NOT NULL,
-    favicon VARCHAR(255) NOT NULL,
-    logo_cabecalho VARCHAR(255) NOT NULL,
-    facebook VARCHAR(255) NOT NULL,
-    twitter VARCHAR(255) NOT NULL,
-    instagram VARCHAR(255) NOT NULL,
-    titulo_secaoHome VARCHAR(255) NOT NULL,
-    subtitulo_secaoHome TEXT NOT NULL,
-    imagem_secaoHome VARCHAR(255) NOT NULL,
-    titulo_caracticasHome VARCHAR(255) NOT NULL,
-    titulo_testemunhos VARCHAR(255) NOT NULL,
-    titulo_secaoLojaApp VARCHAR(255) NOT NULL,
-    subtitulo_secaoLojaApp TEXT NOT NULL,
-    imagem_secaoLojaApp VARCHAR(255) NOT NULL,
-    link_AppStore VARCHAR(255) NOT NULL,
-    imagem_AppStore VARCHAR(255) NOT NULL,
-    link_GooglePlay VARCHAR(255) NOT NULL,
-    imagem_GooglePlay VARCHAR(255) NOT NULL,
-    telefone_contato VARCHAR(25) NOT NULL,
-    logo_rodape VARCHAR(255) NOT NULL,
-    mensagem_rodape TEXT NOT NULL,
-    url_rodape VARCHAR(255) NOT NULL,
-    mensagem_powered TEXT NOT NULL
+    titulo_landing VARCHAR(255),
+    favicon VARCHAR(255),
+    logo_cabecalho VARCHAR(255),
+    facebook VARCHAR(255),
+    twitter VARCHAR(255),
+    instagram VARCHAR(255),
+    titulo_secaoHome VARCHAR(255),
+    subtitulo_secaoHome TEXT,
+    imagem_secaoHome VARCHAR(255),
+    titulo_caracticasHome VARCHAR(255),
+    titulo_testemunhos VARCHAR(255),
+    titulo_secaoLojaApp VARCHAR(255),
+    subtitulo_secaoLojaApp TEXT,
+    imagem_secaoLojaApp VARCHAR(255),
+    link_AppStore VARCHAR(255),
+    imagem_AppStore VARCHAR(255),
+    link_GooglePlay VARCHAR(255),
+    imagem_GooglePlay VARCHAR(255),
+    telefone_contato VARCHAR(25),
+    logo_rodape VARCHAR(255),
+    mensagem_rodape TEXT,
+    url_rodape VARCHAR(255),
+    mensagem_powered TEXT
 ) ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS aplicativos (
     descricao TEXT NOT NULL,
     icon VARCHAR(255) NOT NULL
 
-) ENGINE=InnoDB 
+)ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;
 
