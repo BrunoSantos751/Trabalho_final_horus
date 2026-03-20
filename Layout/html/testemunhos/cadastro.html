@@ -1,6 +1,7 @@
 <div style="margin-bottom: 20px;">
   <a href="index.php?class=TestemunhoList"><img src="images/admin/voltar.png" style="width: 40px;" alt="Voltar"></a>
 </div>
+<script src="Layout/js/image_field.js"></script>
 <form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" id="formlogin" name="formlogin"
   enctype="multipart/form-data">
   <fieldset id="fie">
@@ -16,16 +17,23 @@
     <input type="text" name="titulo" id="titulo" value="{titulo}" /><br />
     <label>Descrição: </label>
     <input type="text" name="descricao" id="descricao" value="{descricao}" /><br />
-    <label> Foto:</label>
+
+    <label> Foto:</label><br />
     <input type="file" name="foto" id="foto" accept="image/png, image/jpeg, image/jpg" />
-    <input type="hidden" name="foto_salva" value="{foto}" />
-    <span style="font-size: 11px; color: #555;">{foto}</span><br />
-    
-    <label>Imagem de fundo: </label>
+    <input type="hidden" name="foto_salva" id="foto_salva" value="{foto}" />
+    <div id="foto_preview"></div>
+    <br />
+
+    <label>Imagem de fundo: </label><br />
     <input type="file" name="imagem_fundo" id="imagem_fundo" accept="image/png, image/jpeg, image/jpg" />
-    <input type="hidden" name="imagem_fundo_salva" value="{imagem_fundo}" />
-    <span style="font-size: 11px; color: #555;">{imagem_fundo}</span><br />
+    <input type="hidden" name="imagem_fundo_salva" id="imagem_fundo_salva" value="{imagem_fundo}" />
+    <div id="imagem_fundo_preview"></div>
+    <br />
 
     <input type="submit" value="CADASTRAR" />
   </fieldset>
 </form>
+<script>
+  initImageField('foto', 'foto_salva', 'foto_preview', '{foto}');
+  initImageField('imagem_fundo', 'imagem_fundo_salva', 'imagem_fundo_preview', '{imagem_fundo}');
+</script>

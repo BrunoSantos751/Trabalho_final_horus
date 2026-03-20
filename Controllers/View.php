@@ -19,6 +19,15 @@ class View extends ApplicationController
         return isset($array[$key]) && trim($array[$key]) !== '' ? $array[$key] : $default;
     }
 
+    private function getUrl($array, $key, $default)
+    {
+        $val = $this->getValue($array, $key, $default);
+        if ($val !== '#' && !empty($val) && !preg_match('#^https?://#i', $val)) {
+            $val = 'https://' . $val;
+        }
+        return $val;
+    }
+
     public function loadCaracteristicas()
     {
         try {
@@ -143,10 +152,10 @@ class View extends ApplicationController
         $this->html = str_replace('{subtitulo_secaoLojaAPP}', $this->getValue($p, 'subtitulo_secaoLojaApp', '🔗 Adicione os links da App Store e Google Play'), $this->html);
         $this->html = str_replace('{imagem_secaoLojaApp}', $this->getValue($p, 'imagem_secaoLojaApp', 'images/home-5.png'), $this->html);
 
-        $this->html = str_replace('{link_AppStore}', $this->getValue($p, 'link_AppStore', '#'), $this->html);
+        $this->html = str_replace('{link_AppStore}', $this->getUrl($p, 'link_AppStore', '#'), $this->html);
         $this->html = str_replace('{image_AppStore}', $this->getValue($p, 'imagem_AppStore', 'images/img-appstore.png'), $this->html);
 
-        $this->html = str_replace('{link_GooglePlay}', $this->getValue($p, 'link_GooglePlay', '#'), $this->html);
+        $this->html = str_replace('{link_GooglePlay}', $this->getUrl($p, 'link_GooglePlay', '#'), $this->html);
         $this->html = str_replace('{image_GooglePlay}', $this->getValue($p, 'imagem_GooglePlay', 'images/img-googleplay.png'), $this->html);
 
         $this->html = str_replace('{telefone_contato}', $this->getValue($p, 'telefone_contato', '📞 (00) 00000-0000 - edite nas Preferências'), $this->html);
