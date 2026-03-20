@@ -2,6 +2,8 @@
 require_once 'Modelbase.php';
 class Contatos extends ModelBase {
 
+    protected static $tableName = "contatos";
+
     /*
     CREATE TABLE IF NOT EXISTS contatos (CREATE TABLE IF NOT EXISTS contactos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,13 +54,4 @@ class Contatos extends ModelBase {
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
-
-    public static function all() {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM contatos";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
 }

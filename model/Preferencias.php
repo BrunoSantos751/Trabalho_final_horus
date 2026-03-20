@@ -5,6 +5,7 @@ require_once './utils/UploadImagem.php';
 
 class Preferencias extends Modelbase
 {
+   protected static $tableName = "preferencias";
 
    public static function save($data = null)
    {
@@ -55,7 +56,7 @@ class Preferencias extends Modelbase
             $fields[] = "$param = :$param";
          }
 
-         $sql = "UPDATE Preferencias SET " . implode(', ', $fields) . " WHERE id = :id";
+         $sql = "UPDATE preferencias SET " . implode(', ', $fields) . " WHERE id = :id";
 
       } else {
          $fieldsValue = [];
@@ -65,7 +66,7 @@ class Preferencias extends Modelbase
             $fieldsValue[] = " :$param";
          }
 
-         $sql = "INSERT INTO Preferencias (" . implode(', ', $fields) . ") VALUES (" . implode(',', $fieldsValue) . " )";
+         $sql = "INSERT INTO preferencias (" . implode(', ', $fields) . ") VALUES (" . implode(',', $fieldsValue) . " )";
       }
 
       $stmt = $conn->prepare($sql);
@@ -84,26 +85,35 @@ class Preferencias extends Modelbase
       $stmt->execute();
    }
 
-   public static function find()
-   {
+   public static function first() {
       $conn = self::getConnection();
-      $result = $conn->query("SELECT * FROM Preferencias Limit 1");
-      return $result->fetch();
+
+      $sql = "SELECT * FROM ". static::$tableName ." LIMIT 1";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+        
    }
 
-   public static function all()
-   {
-      $conn = self::getConnection();
-      $result = $conn->query("SELECT * FROM Preferencias");
-      return $result->fetchAll();
-   }
+   // protected static function find($id=null)
+   // {
+   //    $conn = self::getConnection();
+      
+   //    $sql = "SELECT * FROM " . static::$tableName;
+   //    if (empty($id)){
+   //       $sql .= " WHERE id = :id"; 
+   //       $stmt->bindParam(':id', $id);
+   //    }
+   //    $result = $conn->query($sql);
+   //    return $result->fetch();
+   // }
 
-   public static function delete($id)
-   {
-      $conn = self::getConnection();
-      foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $field) {
-         UploadImagem::deleteImage(self::class, $id, $field);
-      }
-      return $conn->query("DELETE FROM Preferencias WHERE id='{$id}'");
-   }
+   // public static function delete($id)
+   // {
+   //    $conn = self::getConnection();
+   //    foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $field) {
+   //       UploadImagem::deleteImage(self::class, $id, $field);
+   //    }
+   //    return $conn->query("DELETE FROM preferencias WHERE id='{$id}'");
+   // }
 }

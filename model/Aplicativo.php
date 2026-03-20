@@ -3,6 +3,8 @@ require_once 'Modelbase.php';
 
 class Aplicativo extends ModelBase {
 
+    protected static $tableName = "aplicativos";
+
     public static function save($data) {
         $conn = self::getConnection();
 
@@ -28,13 +30,6 @@ class Aplicativo extends ModelBase {
         $stmt->bindParam(':icon', $data['icon']);
 
         $stmt->execute();
-    }
-
-    public static function all() {
-        $conn = self::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM aplicativos");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function find($id) {

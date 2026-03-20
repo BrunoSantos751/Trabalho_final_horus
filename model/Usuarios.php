@@ -2,6 +2,8 @@
 require_once 'Modelbase.php';
 class Usuarios extends ModelBase{
 
+    protected static $tableName = "usuarios";
+
     /*
     CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,13 +63,6 @@ class Usuarios extends ModelBase{
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return "Usuário deletado com sucesso.";
-    }
-
-    public static function all() {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM usuarios";
-        $stmt = $conn->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

@@ -67,6 +67,7 @@ class View extends ApplicationController
                 $item_testemunho = str_replace('{imagem_fundo}', $this->getValue($testemunho, 'imagem_fundo', 'images/img/img-1.png'), $item_testemunho);
                 $items_testemunhos .= $item_testemunho;
             }
+
             // fallback se não tiver NENHUM testemunho
             if (empty($items_testemunhos)) {
                 $item_testemunho = file_get_contents('Layout/item_testemunho.html');
@@ -78,6 +79,7 @@ class View extends ApplicationController
                 $item_testemunho = str_replace('{imagem_fundo}', 'images/img/img-1.png', $item_testemunho);
                 $items_testemunhos .= $item_testemunho;
             }
+            
             $this->html = str_replace('{testemunhos}', $items_testemunhos, $this->html);
         } catch (Exception $e) {
             print $e->getMessage();
@@ -132,8 +134,8 @@ class View extends ApplicationController
 
     public function loadPreferencias()
     {
-        $preferencias = Preferencias::all();
-        $p = $preferencias[0] ?? [];
+        $preferencias = Preferencias::first();
+        $p = $preferencias ?? [];
 
         $this->html = str_replace('{titulo_landing}', $this->getValue($p, 'titulo_landing', '🚀 Nome da sua plataforma (edite em Preferências)'), $this->html);
         $this->html = str_replace('{favicon}', $this->getValue($p, 'favicon', 'images/favicon.png'), $this->html);

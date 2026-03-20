@@ -3,6 +3,7 @@ require_once 'Modelbase.php';
 require_once './utils/UploadImagem.php';
 class Testemunhos extends ModelBase
 {
+    protected static $tableName = "testemunhos";
 
     /*
     CREATE TABLE IF NOT EXISTS testemunhos (
@@ -73,15 +74,6 @@ class Testemunhos extends ModelBase
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-    }
-
-    public static function all()
-    {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM testemunhos";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

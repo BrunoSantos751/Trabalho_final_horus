@@ -2,6 +2,8 @@
 require_once 'Modelbase.php';
 class Caracteristicas extends ModelBase {
 
+    protected static $tableName = "caracteristicas" ;
+
     /*
     CREATE TABLE IF NOT EXISTS caracteristicas (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,14 +46,6 @@ class Caracteristicas extends ModelBase {
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-    }
-
-    public static function all() {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM caracteristicas";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

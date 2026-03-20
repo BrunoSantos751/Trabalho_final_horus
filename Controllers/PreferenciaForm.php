@@ -42,7 +42,7 @@ class PreferenciaForm extends ApplicationController
 
     public function redirect_edit()
     {
-        $pref = Preferencias::find();
+        $pref = Preferencias::first();
         $method = $_GET['method'] ?? null;
 
         if (empty($pref) && $method === 'edit') {
@@ -63,7 +63,7 @@ class PreferenciaForm extends ApplicationController
     public function edit()
     {
         try {
-            $preferencia = Preferencias::find();
+            $preferencia = Preferencias::first();
             $defaults = [
                 'id' => null,
                 'titulo_landing' => null,
