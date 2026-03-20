@@ -9,6 +9,7 @@ class ContatoList extends ApplicationController {
 
     }
 
+    /*
     public function delete($request) {
         $id = $request['id'] ?? null;
         if ($id) {
@@ -22,7 +23,8 @@ class ContatoList extends ApplicationController {
             exit;
         }
     }
-
+    */
+    
     public function load() {
         try {
             $contatos = Contatos::all();

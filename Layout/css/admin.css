@@ -279,6 +279,8 @@ body {
 .action-edit:hover   { background: #dbeafe; }
 .action-delete { background: #fef2f2; color: #b91c1c; }
 .action-delete:hover { background: #fee2e2; }
+.action-answer { background: #dcfce7; color: #15803d; }
+.action-answer:hover { background: #bbf7d0; }
 
 /* ── TABLE TOOLBAR ───────────────────────────────────── */
 .table-toolbar {

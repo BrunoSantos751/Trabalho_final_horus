@@ -40,8 +40,8 @@ class UsuarioList extends ApplicationController {
             $item = file_get_contents('Layout/html/usuarios/item.html');
             
             if ($isAdmin) {
-                $botao_editar = "<td><a href='index.php?class=UsuarioForm&method=edit&id={$usuario['id']}' class='action-btn action-edit'>✏ Editar</a></td>";
-                $botao_remover = "<td><a href='index.php?class=UsuarioList&method=delete&id={$usuario['id']}' class='action-btn action-delete' onclick=\"return confirm('Deseja remover este usuário?')\">🗑 Remover</a></td>";
+                $botao_editar = "<td><a href='index.php?class=UsuarioForm&method=edit&id={$usuario['id']}' class='action-btn action-edit'>✏ Editar</a>";
+                $botao_remover = "<a href='index.php?class=UsuarioList&method=delete&id={$usuario['id']}' class='action-btn action-delete' onclick=\"return confirm('Deseja remover este usuário?')\">🗑 Remover</a></td>";
             } else {
                 $botao_editar = "";
                 $botao_remover = "";
