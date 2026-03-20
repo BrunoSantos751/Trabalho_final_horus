@@ -138,8 +138,8 @@ class View extends ApplicationController
         $this->html = str_replace('{titulo_landing}', $this->getValue($p, 'titulo_landing', '🚀 Nome da sua plataforma (edite em Preferências)'), $this->html);
         $this->html = str_replace('{favicon}', $this->getValue($p, 'favicon', 'images/favicon.png'), $this->html);
         $this->html = str_replace('{logo_cabecalho}', $this->getValue($p, 'logo_cabecalho', 'images/logo.png'), $this->html);
-        $this->html = str_replace('{facebook}', $this->getValue($p, 'facebook', '#'), $this->html);
-        $this->html = str_replace('{instagram}', $this->getValue($p, 'instagram', '#'), $this->html);
+        $this->html = str_replace('{facebook}', $this->getUrl($p, 'facebook', '#'), $this->html);
+        $this->html = str_replace('{instagram}', $this->getUrl($p, 'instagram', '#'), $this->html);
 
         $this->html = str_replace('{imagem_secaoHome}', $this->getValue($p, 'imagem_secaoHome', 'images/features/home-1.png'), $this->html);
         $this->html = str_replace('{titulo_secaoHome}', $this->getValue($p, 'titulo_secaoHome', '💡 Título principal da sua seção Home! <br> clique <a href="index.php?class=LoginController">aqui</a> para acessar o painel admin '), $this->html);
