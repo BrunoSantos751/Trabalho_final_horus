@@ -15,6 +15,9 @@ class UsuarioForm extends ApplicationController {
     }
 
     public function cadastro($request) {
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
+            die("<script>alert('Acesso negado.'); window.location.href='index.php?class=UsuarioList';</script>");
+        }
         $usuario = new Usuarios($request);
         $usuario->save();
     }
@@ -31,6 +34,9 @@ class UsuarioForm extends ApplicationController {
     }
 
     public function show() {
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
+            die("<script>alert('Acesso negado. Apenas o administrador pode acessar o formulário de usuários.'); window.location.href='index.php?class=UsuarioList';</script>");
+        }
 
         $isEdit = !empty($this->data['id']);
 

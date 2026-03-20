@@ -1,5 +1,6 @@
 <?php
 require_once 'model/Usuarios.php';
+session_start();
 spl_autoload_register(function ($class) {
 
     $path = __DIR__ . "/Controllers/{$class}.php";
@@ -37,22 +38,22 @@ if ($classe) {
     }
 
 
-    if (!in_array($classe,$authorizedClass)) {
-        
+    if (!in_array($classe, $authorizedClass)) {
+
         $session = $_SESSION['user_id'] ?? null;
 
-            if (empty($session)) {
-                $msgError = "precisa esta logado";
-            } 
-            
-            if (empty(Usuarios::find($session))) {
-                unset($_SESSION['user_id']);
-                $msgError = "Falha na autenticação";
-            }
-            if (isset($msgError)){
-                header("location: /index.php?class=LoginController");
-                exit($msgError);
-            }
+        if (empty($session)) {
+            $msgError = "precisa esta logado";
+        }
+
+        if (empty(Usuarios::find($session))) {
+            unset($_SESSION['user_id']);
+            $msgError = "Falha na autenticação";
+        }
+        if (isset($msgError)) {
+            header("location: /index.php?class=LoginController");
+            exit($msgError);
+        }
     }
 
     $pagina = new $classe($_REQUEST);

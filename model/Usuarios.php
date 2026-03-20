@@ -11,6 +11,9 @@ class Usuarios extends ModelBase{
     */
 
     public static function save() {
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
+            throw new Exception("Acesso negado. Apenas o administrador pode realizar esta operação.");
+        }
         $conn = self::getConnection();
         if (isset($_POST['id']) && !empty($_POST['id'])) {
             if ( $_POST['password']) {
@@ -46,6 +49,9 @@ class Usuarios extends ModelBase{
     }
 
     public static function delete($id) {
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
+            throw new Exception("Acesso negado. Apenas o administrador pode realizar esta operação.");
+        }
         if ($id == 1) {
             return "Não é permitido deletar o usuário admin.";
         }
