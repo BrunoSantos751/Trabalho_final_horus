@@ -33,13 +33,13 @@ class Preferencias extends Modelbase
 
       $params = [];
 
+      $isUpdate = !empty($data['id']);
+
       foreach ($inputparams as $param) {
          if (!empty($data[$param])) {
             $params[] = $param;
          }
       }
-
-      $isUpdate = isset($data['id']) && !empty($data['id']);
 
       foreach ($imgParams as $param) {
          if ($isUpdate ? array_key_exists($param, $data) : !empty($data[$param])) {
@@ -69,27 +69,16 @@ class Preferencias extends Modelbase
       }
 
       $stmt = $conn->prepare($sql);
-      if (isset($data['id']) && !empty($data['id'])) {
+      if ($isUpdate) {
          $stmt->bindValue(':id', $data['id']);
+      }
 
-         foreach ($inputparams as $input) {
-            $value = $data[$input] ?? null;
-            if (!empty($value)) {
-               $stmt->bindValue(":$input", $value);
-            }
+      foreach ($params as $param) {
+         $val = $data[$param] ?? null;
+         if (in_array($param, $imgParams)) {
+            $val = $val ?: null;
          }
-
-         foreach ($imgParams as $img) {
-            if (array_key_exists($img, $data)) {
-               $val = $data[$img] ?: null;
-               $stmt->bindValue(":$img", $val);
-            }
-         }
-
-      } else {
-         foreach ($params as $input) {
-            $stmt->bindValue(":$input", $data[$input] ?? null);
-         }
+         $stmt->bindValue(":$param", $val);
       }
 
       $stmt->execute();
