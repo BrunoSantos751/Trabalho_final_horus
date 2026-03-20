@@ -12,7 +12,12 @@ class CaracteristicaList extends ApplicationController {
     public function delete($request) {
         $id = $request['id'] ?? null;
         if ($id) {
-            Caracteristicas::delete($id);
+            try {
+                Caracteristicas::delete($id);
+                $_SESSION['sucesso'] = "Característica removida com sucesso!";
+            } catch (Exception $e) {
+                $_SESSION['erro'] = "Erro ao remover característica: " . $e->getMessage();
+            }
             header("Location: index.php?class=CaracteristicaList");
             exit;
         }

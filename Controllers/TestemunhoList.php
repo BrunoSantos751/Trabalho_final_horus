@@ -12,7 +12,12 @@ class TestemunhoList extends ApplicationController {
     public function delete($request) {
         $id = $request['id'] ?? null;
         if ($id) {
-            Testemunhos::delete($id);
+            try {
+                Testemunhos::delete($id);
+                $_SESSION['sucesso'] = "Testemunho removido com sucesso!";
+            } catch (Exception $e) {
+                $_SESSION['erro'] = "Erro ao remover testemunho: " . $e->getMessage();
+            }
             header("Location: index.php?class=TestemunhoList");
             exit;
         }

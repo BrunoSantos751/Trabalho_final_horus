@@ -92,9 +92,12 @@ class PreferenciaForm extends ApplicationController {
 
         $preferencia = new Preferencias;
 
-        $preferencia->save($data);
-
-        echo "operação concluida";
+        try {
+            $preferencia->save($data);
+            $_SESSION['sucesso'] = "Preferências salvas com sucesso!";
+        } catch (Exception $e) {
+            $_SESSION['erro'] = "Erro ao salvar preferências: " . $e->getMessage();
+        }
 
         header("location: /index.php?class=PreferenciaForm");
         exit;

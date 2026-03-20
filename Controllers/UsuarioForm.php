@@ -19,7 +19,14 @@ class UsuarioForm extends ApplicationController {
             die("<script>alert('Acesso negado.'); window.location.href='index.php?class=UsuarioList';</script>");
         }
         $usuario = new Usuarios($request);
-        $usuario->save();
+        try {
+            $usuario->save();
+            $_SESSION['sucesso'] = "Usuário salvo com sucesso!";
+        } catch (Exception $e) {
+            $_SESSION['erro'] = "Erro ao salvar usuário: " . $e->getMessage();
+        }
+        header("Location: index.php?class=UsuarioList");
+        exit;
     }
 
     public function edit($param) {

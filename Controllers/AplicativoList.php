@@ -11,7 +11,12 @@ class AplicativoList extends ApplicationController {
     public function delete($request) {
         $id = $request['id'] ?? ($_GET['id'] ?? null);
         if ($id) {
-            Aplicativo::delete($id);
+            try {
+                Aplicativo::delete($id);
+                $_SESSION['sucesso'] = "Aplicativo removido com sucesso!";
+            } catch (Exception $e) {
+                $_SESSION['erro'] = "Erro ao remover aplicativo: " . $e->getMessage();
+            }
             header("Location: index.php?class=AplicativoList");
             exit;
         }

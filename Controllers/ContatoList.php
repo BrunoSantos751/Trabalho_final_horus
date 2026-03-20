@@ -12,7 +12,12 @@ class ContatoList extends ApplicationController {
     public function delete($request) {
         $id = $request['id'] ?? null;
         if ($id) {
-            Contatos::delete($id);
+            try {
+                Contatos::delete($id);
+                $_SESSION['sucesso'] = "Contato removido com sucesso!";
+            } catch (Exception $e) {
+                $_SESSION['erro'] = "Erro ao remover contato: " . $e->getMessage();
+            }
             header("Location: index.php?class=ContatoList");
             exit;
         }

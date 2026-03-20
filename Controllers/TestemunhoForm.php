@@ -28,7 +28,12 @@ class TestemunhoForm extends ApplicationController {
         }
        
 
-        Testemunhos::save($this->data);
+        try {
+            Testemunhos::save($this->data);
+            $_SESSION['sucesso'] = "Testemunho salvo com sucesso!";
+        } catch (Exception $e) {
+            $_SESSION['erro'] = "Erro ao salvar testemunho: " . $e->getMessage();
+        }
 
         header("Location: index.php?class=TestemunhoList");
         exit;

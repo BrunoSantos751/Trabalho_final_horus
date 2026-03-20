@@ -11,7 +11,12 @@ class UsuarioList extends ApplicationController {
     public function delete($request) {
         $id = $request['id'] ?? null;
         if ($id) {
-            $result = Usuarios::delete($id);
+            try {
+                $result = Usuarios::delete($id);
+                $_SESSION['sucesso'] = "Usuário removido com sucesso!";
+            } catch (Exception $e) {
+                $_SESSION['erro'] = "Erro ao remover usuário: " . $e->getMessage();
+            }
             header("Location: index.php?class=UsuarioList");
             exit;
         }

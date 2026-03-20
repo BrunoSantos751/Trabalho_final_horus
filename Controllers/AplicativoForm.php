@@ -42,7 +42,8 @@ class AplicativoForm extends ApplicationController {
         try {
 
             if (empty($request['titulo']) || empty($request['descricao'])) {
-                header("Location: index.php?class=AplicativoForm&erro=1");
+                $_SESSION['erro'] = "Por favor, preencha os campos obrigatórios.";
+                header("Location: index.php?class=AplicativoForm");
                 exit;
             }
 
@@ -52,13 +53,15 @@ class AplicativoForm extends ApplicationController {
                 'descricao' => $request['descricao'],
                 'icon' => $request['icon']
             ]);
-            var_dump($request['icon']);
 
-            header("Location: index.php?class=AplicativoForm&sucesso=1");
+            $_SESSION['sucesso'] = "Aplicativo salvo com sucesso!";
+            header("Location: index.php?class=AplicativoList");
             exit;
 
         } catch (Exception $e) {
-            echo $e->getMessage();
+            $_SESSION['erro'] = "Erro: " . $e->getMessage();
+            header("Location: index.php?class=AplicativoForm");
+            exit;
         }
     }
 }

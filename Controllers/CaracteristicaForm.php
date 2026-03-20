@@ -6,7 +6,7 @@ class CaracteristicaForm extends ApplicationController {
 
     public function __construct()
     {
-        $this->html = file_get_contents('Layout/html/caracteristicas/cadastro.html');
+        $this->setHtml('Layout/html/caracteristicas/cadastro.html');
     }
 
     function cadastro($request) {
@@ -15,7 +15,12 @@ class CaracteristicaForm extends ApplicationController {
             'titulo' => $request['titulo'] ?? null, 
             'descricao' => $request['descricao'] ?? null
             ];
-        Caracteristicas::save($this->data);
+        try {
+            Caracteristicas::save($this->data);
+            $_SESSION['sucesso'] = "Característica salva com sucesso!";
+        } catch (Exception $e) {
+            $_SESSION['erro'] = "Erro ao salvar característica: " . $e->getMessage();
+        }
         header("Location: index.php?class=CaracteristicaList");
         exit;
     }
