@@ -1,7 +1,8 @@
 <?php
 require_once 'Modelbase.php';
 require_once './utils/UploadImagem.php';
-class Testemunhos extends ModelBase {
+class Testemunhos extends ModelBase
+{
 
     /*
     CREATE TABLE IF NOT EXISTS testemunhos (
@@ -17,22 +18,24 @@ class Testemunhos extends ModelBase {
     COLLATE=utf8mb4_unicode_ci;
     */
 
-    public static function save($data) {
+    public static function save($data)
+    {
         $conn = self::getConnection();
         if (empty($data['id'])) {
             $result = $conn->query("SELECT max(id) as next FROM testemunhos");
             $row = $result->fetch();
             $data['id'] = (int) $row['next'] + 1;
-            $sql = "INSERT INTO testemunhos (id, nome, funcao, titulo, descricao, foto, imagem_fundo ) VALUES (:id, :nome, :funcao, :titulo, :descricao, :foto, :imagem_fundo)";
+            $sql = "INSERT INTO testemunhos (id, nome, funcao, titulo, descricao, foto, imagem_fundo) VALUES (:id, :nome, :funcao, :titulo, :descricao, :foto, :imagem_fundo)";
         } else {
-            $sql = "UPDATE testemunhos SET nome = :nome,
-            funcao = :funcao,
-            titulo = :titulo,
-            descricao = :descricao" . (!empty($data['foto']) ? ", foto = :foto" : "") .
-            (!empty($data['imagem_fundo']) ? ", imagem_fundo = :imagem_fundo" : "") .
-             " WHERE id = :id";         
+            $imgSets = [];
+            foreach (['foto', 'imagem_fundo'] as $img) {
+                if (array_key_exists($img, $data)) {
+                    $imgSets[] = "$img = :$img";
+                }
+            }
+            $imgClause = empty($imgSets) ? '' : ', ' . implode(', ', $imgSets);
+            $sql = "UPDATE testemunhos SET nome = :nome, funcao = :funcao, titulo = :titulo, descricao = :descricao$imgClause WHERE id = :id";
         }
-
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $data['id']);
@@ -42,16 +45,17 @@ class Testemunhos extends ModelBase {
         $stmt->bindParam(':descricao', $data['descricao']);
 
         foreach (['foto', 'imagem_fundo'] as $img) {
-            if (!empty($data[$img])) {
-                $stmt->bindParam(":$img", $data[$img]);
-                UploadImagem::deleteImage(self::class,$data['id'], $img);
+            if (array_key_exists($img, $data)) {
+                $val = $data[$img] ?: null;
+                $stmt->bindValue(":$img", $val);
             }
         }
-        
+
         $stmt->execute();
     }
 
-    public static function find($id) {
+    public static function find($id)
+    {
         $conn = self::getConnection();
         $sql = "SELECT * FROM testemunhos WHERE id = :id";
         $stmt = $conn->prepare($sql);
@@ -60,7 +64,8 @@ class Testemunhos extends ModelBase {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-     public static function delete($id) {
+    public static function delete($id)
+    {
         $conn = self::getConnection();
         $sql = "DELETE FROM testemunhos WHERE id = :id";
         UploadImagem::deleteImage(self::class, $id, 'foto');
@@ -70,7 +75,8 @@ class Testemunhos extends ModelBase {
         $stmt->execute();
     }
 
-    public static function all() {
+    public static function all()
+    {
         $conn = self::getConnection();
         $sql = "SELECT * FROM testemunhos";
         $stmt = $conn->prepare($sql);

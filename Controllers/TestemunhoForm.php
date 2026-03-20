@@ -12,25 +12,36 @@ class TestemunhoForm extends ApplicationController {
 
     function cadastro($request) {
         $this->data = [
-            'id' => $request['id'] ?? null,
-            'nome' => $request['nome'] ?? null,
-            'funcao' => $request['funcao'] ?? null,
-            'titulo' => $request['titulo'] ?? null,
+            'id'        => $request['id'] ?? null,
+            'nome'      => $request['nome'] ?? null,
+            'funcao'    => $request['funcao'] ?? null,
+            'titulo'    => $request['titulo'] ?? null,
             'descricao' => $request['descricao'] ?? null,
-            // Recupera imagens já enviadas em tentativas de validação ou do item atual (edit)
-            'foto' => $request['foto_salva'] ?? null,
-            'imagem_fundo' => $request['imagem_fundo_salva'] ?? null,
         ];
 
         $upload = new UploadImagem();
+        $isNew  = empty($this->data['id']);
+
         foreach (['foto', 'imagem_fundo'] as $img) {
+            $savedKey = $img . '_salva';
+            $savedVal = $request[$savedKey] ?? '';
+
             if (!empty($_FILES[$img]['name'])) {
+                if (!empty($savedVal) && $savedVal !== '__REMOVE__') {
+                    UploadImagem::deleteImage('Testemunhos', $this->data['id'], $img);
+                }
                 try {
-                    $this->data[$img] = $upload->uploadImagem($_FILES[$img], 'testemunhos');
+                    $this->data[$img] = $upload->uploadImagem($_FILES[$img], 'Testemunhos');
                 } catch (Exception $e) {
-                    $_SESSION['erro'] = "Erro no upload da imagem: " . $e->getMessage();
+                    $_SESSION['erro'] = "Erro no upload ($img): " . $e->getMessage();
+                    $this->data[$img] = ($savedVal !== '__REMOVE__') ? $savedVal : null;
                     return;
                 }
+            } elseif ($savedVal === '__REMOVE__') {
+                UploadImagem::deleteImage('Testemunhos', $this->data['id'], $img);
+                $this->data[$img] = null;
+            } else {
+                $this->data[$img] = $savedVal ?: null;
             }
         }
 
@@ -39,12 +50,10 @@ class TestemunhoForm extends ApplicationController {
             return;
         }
 
-        $isNew = empty($this->data['id']);
         if ($isNew && (empty($this->data['foto']) || empty($this->data['imagem_fundo']))) {
             $_SESSION['erro'] = "É obrigatório enviar as imagens de Foto e Imagem de fundo!";
             return;
         }
-       
 
         try {
             Testemunhos::save($this->data);

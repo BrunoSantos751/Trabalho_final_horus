@@ -3,114 +3,162 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Preferencia Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preferências</title>
+  <link rel="stylesheet" href="Layout/css/admin.css">
+  <link rel="stylesheet" href="Layout/css/image_field.js">
 </head>
 
 <body>
-  <header>
-    {{header}}
-  </header>
+  <header>{{header}}</header>
   <script src="Layout/js/image_field.js"></script>
-  <form method="post" action="/index.php?class=PreferenciaForm&method=save" id="formlogin" name="formlogin"
-    enctype="multipart/form-data">
-    <fieldset id="fie">
-      <legend> {titulo} </legend>
-      <br />
-      <input name="id" id="id" readonly="1" type="text" value="{id}" aria-readonly="true" hidden> <br />
-      <label>titulo_landing </label>
-      <input type="text" name="titulo_landing" id="titulo_landing" value="{titulo_landing}" /><br />
+  <div class="admin-main">
+    <div class="admin-card">
+      <h2>{titulo}</h2>
+      <form method="post" action="/index.php?class=PreferenciaForm&method=save" class="admin-form"
+        enctype="multipart/form-data">
+        <input name="id" id="id" type="text" value="{id}" hidden>
 
-      <label>favicon </label><br />
-      <input type="file" name="favicon" id="favicon" />
-      <input type="hidden" name="favicon_salva" id="favicon_salva" value="{favicon}" />
-      <div id="favicon_preview"></div>
-      <br />
+        <h3 style="font-size:.95rem; font-weight:600; color:#4f46e5; margin:20px 0 12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Geral</h3>
+        <div class="form-row">
+          <label>Título da landing page</label>
+          <input type="text" name="titulo_landing" id="titulo_landing" value="{titulo_landing}"
+            placeholder="Ex: Minha Plataforma" />
+        </div>
 
-      <label>logo_cabecalho </label><br />
-      <input type="file" name="logo_cabecalho" id="logo_cabecalho" />
-      <input type="hidden" name="logo_cabecalho_salva" id="logo_cabecalho_salva" value="{logo_cabecalho}" />
-      <div id="logo_cabecalho_preview"></div>
-      <br />
+        <div class="form-row">
+          <label>Favicon</label>
+          <input type="file" name="favicon" id="favicon" accept="image/*" />
+          <input type="hidden" name="favicon_salva" id="favicon_salva" value="{favicon}" />
+          <div id="favicon_preview"></div>
+        </div>
 
-      <label>facebook </label>
-      <input type="text" name="facebook" id="facebook" value="{facebook}" /><br />
-      <label>twitter </label>
-      <input type="text" name="twitter" id="twitter" value="{twitter}" /><br />
-      <label>instagram </label>
-      <input type="text" name="instagram" id="instagram" value="{instagram}" /><br />
-      <label>titulo_secaoHome </label>
-      <input type="text" name="titulo_secaoHome" id="titulo_secaoHome" value="{titulo_secaoHome}" /><br />
-      <label>subtitulo_secaoHome </label>
-      <input type="text" name="subtitulo_secaoHome" id="subtitulo_secaoHome" value="{subtitulo_secaoHome}" /><br />
+        <div class="form-row">
+          <label>Logo do cabeçalho</label>
+          <input type="file" name="logo_cabecalho" id="logo_cabecalho" accept="image/*" />
+          <input type="hidden" name="logo_cabecalho_salva" id="logo_cabecalho_salva" value="{logo_cabecalho}" />
+          <div id="logo_cabecalho_preview"></div>
+        </div>
 
-      <label>imagem_secaoHome </label><br />
-      <input type="file" name="imagem_secaoHome" id="imagem_secaoHome" />
-      <input type="hidden" name="imagem_secaoHome_salva" id="imagem_secaoHome_salva" value="{imagem_secaoHome}" />
-      <div id="imagem_secaoHome_preview"></div>
-      <br />
+        <h3 style="font-size:.95rem; font-weight:600; color:#4f46e5; margin:20px 0 12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Redes Sociais</h3>
+        <div class="form-row">
+          <label>Facebook</label>
+          <input type="text" name="facebook" id="facebook" value="{facebook}" placeholder="https://facebook.com/..." />
+        </div>
+        <div class="form-row">
+          <label>Instagram</label>
+          <input type="text" name="instagram" id="instagram" value="{instagram}"
+            placeholder="https://instagram.com/..." />
+        </div>
 
-      <label>titulo_caracticasHome </label>
-      <input type="text" name="titulo_caracticasHome" id="titulo_caracticasHome"
-        value="{titulo_caracticasHome}" /><br />
-      <label>titulo_testemunhos </label>
-      <input type="text" name="titulo_testemunhos" id="titulo_testemunhos" value="{titulo_testemunhos}" /><br />
-      <label>titulo_secaoLojaApp </label>
-      <input type="text" name="titulo_secaoLojaApp" id="titulo_secaoLojaApp" value="{titulo_secaoLojaApp}" /><br />
-      <label>subtitulo_secaoLojaApp </label>
-      <input type="text" name="subtitulo_secaoLojaApp" id="subtitulo_secaoLojaApp"
-        value="{subtitulo_secaoLojaApp}" /><br />
+        <h3 style="font-size:.95rem; font-weight:600; color:#4f46e5; margin:20px 0 12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Seção Home</h3>
+        <div class="form-row">
+          <label>Título</label>
+          <input type="text" name="titulo_secaoHome" id="titulo_secaoHome" value="{titulo_secaoHome}" />
+        </div>
+        <div class="form-row">
+          <label>Subtítulo</label>
+          <input type="text" name="subtitulo_secaoHome" id="subtitulo_secaoHome" value="{subtitulo_secaoHome}" />
+        </div>
+        <div class="form-row">
+          <label>Imagem da seção Home</label>
+          <input type="file" name="imagem_secaoHome" id="imagem_secaoHome" accept="image/*" />
+          <input type="hidden" name="imagem_secaoHome_salva" id="imagem_secaoHome_salva" value="{imagem_secaoHome}" />
+          <div id="imagem_secaoHome_preview"></div>
+        </div>
+        <div class="form-row">
+          <label>Título das Características</label>
+          <input type="text" name="titulo_caracticasHome" id="titulo_caracticasHome" value="{titulo_caracticasHome}" />
+        </div>
+        <div class="form-row">
+          <label>Título dos Testemunhos</label>
+          <input type="text" name="titulo_testemunhos" id="titulo_testemunhos" value="{titulo_testemunhos}" />
+        </div>
 
-      <label> imagem_secaoLojaApp </label><br />
-      <input type="file" name="imagem_secaoLojaApp" id="imagem_secaoLojaApp" />
-      <input type="hidden" name="imagem_secaoLojaApp_salva" id="imagem_secaoLojaApp_salva" value="{imagem_secaoLojaApp}" />
-      <div id="imagem_secaoLojaApp_preview"></div>
-      <br />
+        <h3 style="font-size:.95rem; font-weight:600; color:#4f46e5; margin:20px 0 12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Seção Loja App</h3>
+        <div class="form-row">
+          <label>Título</label>
+          <input type="text" name="titulo_secaoLojaApp" id="titulo_secaoLojaApp" value="{titulo_secaoLojaApp}" />
+        </div>
+        <div class="form-row">
+          <label>Subtítulo</label>
+          <input type="text" name="subtitulo_secaoLojaApp" id="subtitulo_secaoLojaApp"
+            value="{subtitulo_secaoLojaApp}" />
+        </div>
+        <div class="form-row">
+          <label>Imagem da seção</label>
+          <input type="file" name="imagem_secaoLojaApp" id="imagem_secaoLojaApp" accept="image/*" />
+          <input type="hidden" name="imagem_secaoLojaApp_salva" id="imagem_secaoLojaApp_salva"
+            value="{imagem_secaoLojaApp}" />
+          <div id="imagem_secaoLojaApp_preview"></div>
+        </div>
+        <div class="form-row">
+          <label>Link App Store</label>
+          <input type="text" name="link_AppStore" id="link_AppStore" value="{link_AppStore}"
+            placeholder="https://apps.apple.com/..." />
+        </div>
+        <div class="form-row">
+          <label>Imagem do botão App Store</label>
+          <input type="file" name="imagem_AppStore" id="imagem_AppStore" accept="image/*" />
+          <input type="hidden" name="imagem_AppStore_salva" id="imagem_AppStore_salva" value="{imagem_AppStore}" />
+          <div id="imagem_AppStore_preview"></div>
+        </div>
+        <div class="form-row">
+          <label>Link Google Play</label>
+          <input type="text" name="link_GooglePlay" id="link_GooglePlay" value="{link_GooglePlay}"
+            placeholder="https://play.google.com/..." />
+        </div>
+        <div class="form-row">
+          <label>Imagem do botão Google Play</label>
+          <input type="file" name="imagem_GooglePlay" id="imagem_GooglePlay" accept="image/*" />
+          <input type="hidden" name="imagem_GooglePlay_salva" id="imagem_GooglePlay_salva"
+            value="{imagem_GooglePlay}" />
+          <div id="imagem_GooglePlay_preview"></div>
+        </div>
 
-      <label> link_AppStore </label>
-      <input type="text" name="link_AppStore" id="link_AppStore" value="{link_AppStore}" /><br />
+        <h3 style="font-size:.95rem; font-weight:600; color:#4f46e5; margin:20px 0 12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Contato</h3>
+        <div class="form-row">
+          <label>Telefone</label>
+          <input type="text" name="telefone_contato" id="telefone_contato" value="{telefone_contato}"
+            placeholder="(00) 00000-0000" />
+        </div>
 
-      <label>imagem_AppStore </label><br />
-      <input type="file" name="imagem_AppStore" id="imagem_AppStore" />
-      <input type="hidden" name="imagem_AppStore_salva" id="imagem_AppStore_salva" value="{imagem_AppStore}" />
-      <div id="imagem_AppStore_preview"></div>
-      <br />
+        <h3 style="font-size:.95rem; font-weight:600; color:#4f46e5; margin:20px 0 12px; border-bottom:1px solid #e2e8f0; padding-bottom:8px;">Rodapé</h3>
+        <div class="form-row">
+          <label>Logo do rodapé</label>
+          <input type="file" name="logo_rodape" id="logo_rodape" accept="image/*" />
+          <input type="hidden" name="logo_rodape_salva" id="logo_rodape_salva" value="{logo_rodape}" />
+          <div id="logo_rodape_preview"></div>
+        </div>
+        <div class="form-row">
+          <label>Mensagem do rodapé</label>
+          <input type="text" name="mensagem_rodape" id="mensagem_rodape" value="{mensagem_rodape}"
+            placeholder="© Sua Empresa" />
+        </div>
+        <div class="form-row">
+          <label>URL do rodapé</label>
+          <input type="text" name="url_rodape" id="url_rodape" value="{url_rodape}"
+            placeholder="https://suaempresa.com" />
+        </div>
+        <div class="form-row">
+          <label>Mensagem "Powered by"</label>
+          <input type="text" name="mensagem_powered" id="mensagem_powered" value="{mensagem_powered}" />
+        </div>
 
-      <label>link_GooglePlay </label>
-      <input type="text" name="link_GooglePlay" id="link_GooglePlay" value="{link_GooglePlay}" /><br />
-
-      <label>imagem_GooglePlay </label><br />
-      <input type="file" name="imagem_GooglePlay" id="imagem_GooglePlay" />
-      <input type="hidden" name="imagem_GooglePlay_salva" id="imagem_GooglePlay_salva" value="{imagem_GooglePlay}" />
-      <div id="imagem_GooglePlay_preview"></div>
-      <br />
-
-      <label>telefone_contato </label>
-      <input type="text" name="telefone_contato" id="telefone_contato" value="{telefone_contato}" /><br />
-
-      <label>logo_rodape </label><br />
-      <input type="file" name="logo_rodape" id="logo_rodape" />
-      <input type="hidden" name="logo_rodape_salva" id="logo_rodape_salva" value="{logo_rodape}" />
-      <div id="logo_rodape_preview"></div>
-      <br />
-
-      <label>mensagem_rodape </label>
-      <input type="text" name="mensagem_rodape" id="mensagem_rodape" value="{mensagem_rodape}" /><br />
-      <label>url_rodape </label>
-      <input type="text" name="url_rodape" id="url_rodape" value="{url_rodape}" /><br />
-      <label>mensagem_powered </label>
-      <input type="text" name="mensagem_powered" id="mensagem_powered" value="{mensagem_powered}" /><br />
-
-      <input type="submit" value="Confirmar" />
-    </fieldset>
-  </form>
+        <div style="margin-top:28px; display:flex; gap:10px;">
+          <button type="submit" class="btn btn-primary">Salvar Preferências</button>
+        </div>
+      </form>
+    </div>
+  </div>
   <script>
-    initImageField('favicon',           'favicon_salva',            'favicon_preview',           '{favicon}');
-    initImageField('logo_cabecalho',    'logo_cabecalho_salva',     'logo_cabecalho_preview',    '{logo_cabecalho}');
-    initImageField('imagem_secaoHome',  'imagem_secaoHome_salva',   'imagem_secaoHome_preview',  '{imagem_secaoHome}');
-    initImageField('imagem_secaoLojaApp','imagem_secaoLojaApp_salva','imagem_secaoLojaApp_preview','{imagem_secaoLojaApp}');
-    initImageField('imagem_AppStore',   'imagem_AppStore_salva',    'imagem_AppStore_preview',   '{imagem_AppStore}');
-    initImageField('imagem_GooglePlay', 'imagem_GooglePlay_salva',  'imagem_GooglePlay_preview', '{imagem_GooglePlay}');
-    initImageField('logo_rodape',       'logo_rodape_salva',        'logo_rodape_preview',       '{logo_rodape}');
+    initImageField('favicon', 'favicon_salva', 'favicon_preview', '{favicon}');
+    initImageField('logo_cabecalho', 'logo_cabecalho_salva', 'logo_cabecalho_preview', '{logo_cabecalho}');
+    initImageField('imagem_secaoHome', 'imagem_secaoHome_salva', 'imagem_secaoHome_preview', '{imagem_secaoHome}');
+    initImageField('imagem_secaoLojaApp', 'imagem_secaoLojaApp_salva', 'imagem_secaoLojaApp_preview', '{imagem_secaoLojaApp}');
+    initImageField('imagem_AppStore', 'imagem_AppStore_salva', 'imagem_AppStore_preview', '{imagem_AppStore}');
+    initImageField('imagem_GooglePlay', 'imagem_GooglePlay_salva', 'imagem_GooglePlay_preview', '{imagem_GooglePlay}');
+    initImageField('logo_rodape', 'logo_rodape_salva', 'logo_rodape_preview', '{logo_rodape}');
   </script>
 </body>
 

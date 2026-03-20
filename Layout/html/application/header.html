@@ -1,12 +1,14 @@
-<nav>
-    <ul>
-        <li><a href="/index.php?class=PreferenciaForm">preferencias</a></li>
-        <li><a href="/index.php?class=UsuarioList">usuarios</a></li>
-        <li><a href="/index.php?class=CaracteristicaList">caracteristicas</a></li>
-        <li><a href="/index.php?class=TestemunhoList">testemunhos</a></li>
-        <li><a href="/index.php?class=ContatoList">contatos</a></li>
-        <li><a href="/index.php?class=AplicativoList">aplicativos</a></li>
-        <li><a href="/index.php?class=LoginController&method=logout">logout</a></li>
-    </ul>
-</nav>
+<div class="admin-navbar">
+    <a class="brand" href="/index.php?class=ListController">⚙ Admin</a>
+    <nav>
+        <a href="/index.php?class=PreferenciaForm">Preferências</a>
+        <a href="/index.php?class=UsuarioList">Usuários</a>
+        <a href="/index.php?class=CaracteristicaList">Características</a>
+        <a href="/index.php?class=TestemunhoList">Testemunhos</a>
+        <a href="/index.php?class=ContatoList">Contatos</a>
+        <a href="/index.php?class=AplicativoList">Aplicativos</a>
+        <a href="/index.php?class=View" target="_blank">Visualizar Site</a>
+        <a href="/index.php?class=LoginController&method=logout" class="logout">Sair</a>
+    </nav>
+</div>
 {{mensagem}}

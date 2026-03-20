@@ -1,31 +1,129 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <title> Listagem de pessoas </title>
-    <link href="css/list.css" rel="stylesheet" type="text/css" media="screen" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatos</title>
+    <link rel="stylesheet" href="Layout/css/admin.css">
+    <style>
+        .msg-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .msg-modal-overlay.open {
+            display: flex;
+        }
+
+        .msg-modal {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .18);
+            padding: 28px 28px 20px;
+            max-width: 520px;
+            width: 90%;
+            position: relative;
+            animation: fadeUp .18s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                transform: translateY(12px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .msg-modal h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 14px;
+        }
+
+        .msg-modal p {
+            font-size: .9rem;
+            color: #334155;
+            line-height: 1.65;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .msg-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #94a3b8;
+            line-height: 1;
+        }
+
+        .msg-modal-close:hover {
+            color: #1e293b;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        {{header}}
-    </header>
-    <table border=1>
-        <thead>
-            <tr>
-                <th> Remover </th>
-                <th> Id </th>
-                <th> Nome </th>
-                <th> Email</th>
-                <th> Telefone</th>
-                <th> Mensagem</th>
-                <th> Criado em</th>
-            </tr>
-        </thead>
-        <tbody>
-            {items}
-        </tbody>
-    </table>
+    <header>{{header}}</header>
+
+    <div class="msg-modal-overlay" id="msgOverlay" onclick="closeMsgModal(event)">
+        <div class="msg-modal">
+            <button class="msg-modal-close"
+                onclick="document.getElementById('msgOverlay').classList.remove('open')">✕</button>
+            <h3>📧 Mensagem</h3>
+            <p id="msgModalText"></p>
+        </div>
+    </div>
+
+    <div class="admin-main">
+        <div class="table-toolbar">
+            <h2>📧 Contatos</h2>
+        </div>
+        <div class="admin-card" style="padding:0;overflow:hidden;">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Ações</th>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Mensagem</th>
+                        <th>Criado em</th>
+                    </tr>
+                </thead>
+                <tbody>{items}</tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function openMsgModal(text) {
+            document.getElementById('msgModalText').textContent = text;
+            document.getElementById('msgOverlay').classList.add('open');
+        }
+        function closeMsgModal(event) {
+            if (event.target === document.getElementById('msgOverlay')) {
+                document.getElementById('msgOverlay').classList.remove('open');
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@ class LoginController extends ApplicationController {
 
     public function __construct()
     {
-        $this->html = file_get_contents('Layout/html/login/login.html');
+        $this->setHtml('Layout/html/login/login.html');
     }
 
     public function login($request){
@@ -17,7 +17,9 @@ class LoginController extends ApplicationController {
             header("Location: index.php?class=ListController");
             exit;
         } else {
-            echo "Falha no login. Verifique suas credenciais.";
+            $_SESSION['erro'] = "Email ou senha incorretos. Tente novamente.";
+            header("Location: index.php?class=LoginController");
+            exit;
         }
     }
 
@@ -33,6 +35,7 @@ class LoginController extends ApplicationController {
             header("Location: index.php?class=ListController");
             exit;
         }
+        $this->processMessages();
         echo $this->html;
     }
 }

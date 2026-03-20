@@ -40,8 +40,8 @@ class UsuarioList extends ApplicationController {
             $item = file_get_contents('Layout/html/usuarios/item.html');
             
             if ($isAdmin) {
-                $botao_editar = "<td align='center'><a href='index.php?class=UsuarioForm&method=edit&id={$usuario['id']}'><img src='images/admin/editar.png' style='width:24px'></a></td>";
-                $botao_remover = "<td align='center'><a href='index.php?class=UsuarioList&method=delete&id={$usuario['id']}'><img src='images/admin/excluir.png' style='width:24px'></a></td>";
+                $botao_editar = "<td><a href='index.php?class=UsuarioForm&method=edit&id={$usuario['id']}' class='action-btn action-edit'>✏ Editar</a></td>";
+                $botao_remover = "<td><a href='index.php?class=UsuarioList&method=delete&id={$usuario['id']}' class='action-btn action-delete' onclick=\"return confirm('Deseja remover este usuário?')\">🗑 Remover</a></td>";
             } else {
                 $botao_editar = "";
                 $botao_remover = "";
@@ -56,14 +56,14 @@ class UsuarioList extends ApplicationController {
         }
         $this->html = str_replace('{items}', $items, $this->html);
         
-        $th_editar = $isAdmin ? "<th> editar </th>" : "";
-        $th_remover = $isAdmin ? "<th> remover </th>" : "";
+        $th_editar = $isAdmin ? "<th>Ações</th>" : "";
+        $th_remover = $isAdmin ? "" : "";
         $this->html = str_replace('{th_editar}', $th_editar, $this->html);
         $this->html = str_replace('{th_remover}', $th_remover, $this->html);
         
         $botoes_inserir = "";
         if ($isAdmin) {
-            $botoes_inserir = "<button onclick=\"window.location='index.php?class=UsuarioForm'\"><img src='images/admin/sinal-de-mais.png' style='width:24px; vertical-align: middle;'> Inserir</button>";
+            $botoes_inserir = "<button class='btn btn-primary' onclick=\"window.location='index.php?class=UsuarioForm'\">+ Novo Usuário</button>";
         }
         $this->html = str_replace('{botoes_inserir}', $botoes_inserir, $this->html);
 

@@ -1,36 +1,35 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <title> Listagem de Testemunhos </title>
-    <link href="css/list.css" rel="stylesheet" type="text/css" media="screen" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testemunhos</title>
+<link rel="stylesheet" href="Layout/css/admin.css">
 </head>
-
 <body>
-    <header>
-        {{header}}
-    </header>
-    <table border=1>
-        <thead>
-            <tr>
-                <th> Editar </th>
-                <th> Remover </th>
-                <th> Id </th>
-                <th> Nome </th>
-                <th> Função</th>
-                <th> Titulo</th>
-                <th> Descrição</th>
-                <th> Foto </th>
-                <th> Imagem de fundo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {items}
-        </tbody>
+<header>{{header}}</header>
+<div class="admin-main">
+  <div class="table-toolbar">
+    <h2>Testemunhos</h2>
+    <button class="btn btn-primary" onclick="window.location='index.php?class=TestemunhoForm'">+ Novo Testemunho</button>
+  </div>
+  <div class="admin-card" style="padding:0;overflow:hidden;">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Ações</th>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Função</th>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Foto</th>
+          <th>Imagem de fundo</th>
+        </tr>
+      </thead>
+      <tbody>{items}</tbody>
     </table>
-    <button onclick="window.location='index.php?class=TestemunhoForm'">
-        <img src='images/admin/sinal-de-mais.png' style='width:24px; vertical-align: middle;'> Inserir
-    </button>
+  </div>
+</div>
 </body>
-
 </html>

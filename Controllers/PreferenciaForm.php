@@ -3,40 +3,48 @@
 require_once './model/Preferencias.php';
 require_once './utils/UploadImagem.php';
 
-class PreferenciaForm extends ApplicationController {
+class PreferenciaForm extends ApplicationController
+{
     protected $html;
 
-        public function __construct() {
+    public function __construct()
+    {
         $this->setHtml('Layout/html/preferencias/preferencias_form.html');
         $this->data = [
             'id' => null,
             'titulo_landing' => null,
+            'favicon' => null,
             'logo_cabecalho' => null,
             'facebook' => null,
             'twitter' => null,
             'instagram' => null,
             'titulo_secaoHome' => null,
             'subtitulo_secaoHome' => null,
+            'imagem_secaoHome' => null,
             'titulo_caracticasHome' => null,
             'titulo_testemunhos' => null,
             'titulo_secaoLojaApp' => null,
             'subtitulo_secaoLojaApp' => null,
+            'imagem_secaoLojaApp' => null,
             'link_AppStore' => null,
+            'imagem_AppStore' => null,
             'link_GooglePlay' => null,
+            'imagem_GooglePlay' => null,
             'telefone_contato' => null,
             'logo_rodape' => null,
             'mensagem_rodape' => null,
             'url_rodape' => null,
-            'mensagem_powered' => null
+            'mensagem_powered' => null,
         ];
         $this->redirect_edit();
 
     }
 
-    public function redirect_edit(){
+    public function redirect_edit()
+    {
         $pref = Preferencias::find();
         $method = $_GET['method'] ?? null;
-        
+
         if (empty($pref) && $method === 'edit') {
             $head = "";
         }
@@ -45,24 +53,50 @@ class PreferenciaForm extends ApplicationController {
             $head = "&method=edit&id={$pref['id']}";
         }
 
-        if (isset($head)){
+        if (isset($head)) {
             header("location: /index.php?class=PreferenciaForm$head");
             exit;
         }
 
     }
 
-    public function edit() {
+    public function edit()
+    {
         try {
             $preferencia = Preferencias::find();
-            $this->data = $preferencia;
-        }
-        catch (Exception $e) {
+            $defaults = [
+                'id' => null,
+                'titulo_landing' => null,
+                'favicon' => null,
+                'logo_cabecalho' => null,
+                'facebook' => null,
+                'instagram' => null,
+                'titulo_secaoHome' => null,
+                'subtitulo_secaoHome' => null,
+                'imagem_secaoHome' => null,
+                'titulo_caracticasHome' => null,
+                'titulo_testemunhos' => null,
+                'titulo_secaoLojaApp' => null,
+                'subtitulo_secaoLojaApp' => null,
+                'imagem_secaoLojaApp' => null,
+                'link_AppStore' => null,
+                'imagem_AppStore' => null,
+                'link_GooglePlay' => null,
+                'imagem_GooglePlay' => null,
+                'telefone_contato' => null,
+                'logo_rodape' => null,
+                'mensagem_rodape' => null,
+                'url_rodape' => null,
+                'mensagem_powered' => null,
+            ];
+            $this->data = array_merge($defaults, $preferencia ?? []);
+        } catch (Exception $e) {
             print $e->getMessage();
         }
     }
 
-    public function save($request) {
+    public function save($request)
+    {
         $this->data = [
             'id' => $request['id'] ?? null,
             'titulo_landing' => $request['titulo_landing'] ?? null,
@@ -81,26 +115,38 @@ class PreferenciaForm extends ApplicationController {
             'mensagem_rodape' => $request['mensagem_rodape'] ?? null,
             'url_rodape' => $request['url_rodape'] ?? null,
             'mensagem_powered' => $request['mensagem_powered'] ?? null,
-            // Imagens persistentes
-            'imagem_secaoHome' => $request['imagem_secaoHome_salva'] ?? null,
-            'imagem_AppStore' => $request['imagem_AppStore_salva'] ?? null,
-            'imagem_GooglePlay' => $request['imagem_GooglePlay_salva'] ?? null,
-            'imagem_secaoLojaApp' => $request['imagem_secaoLojaApp_salva'] ?? null,
-            'logo_rodape' => $request['logo_rodape_salva'] ?? null,
-            'favicon' => $request['favicon_salva'] ?? null,
-            'logo_cabecalho' => $request['logo_cabecalho_salva'] ?? null,
         ];
 
         $upload = new UploadImagem();
+        $imgFields = [
+            'imagem_secaoHome',
+            'imagem_AppStore',
+            'imagem_GooglePlay',
+            'imagem_secaoLojaApp',
+            'logo_rodape',
+            'favicon',
+            'logo_cabecalho'
+        ];
 
-        foreach(['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $img){
-            if (!empty($_FILES[$img]['name'])){
+        foreach ($imgFields as $img) {
+            $savedVal = $request[$img . '_salva'] ?? '';
+
+            if (!empty($_FILES[$img]['name'])) {
+                if (!empty($savedVal) && $savedVal !== '__REMOVE__') {
+                    UploadImagem::deleteImage('Preferencias', $this->data['id'], $img);
+                }
                 try {
-                    $this->data[$img] = $upload->uploadImagem($_FILES[$img],'Preferencias');
+                    $this->data[$img] = $upload->uploadImagem($_FILES[$img], 'Preferencias');
                 } catch (Exception $e) {
-                    $_SESSION['erro'] = "Erro no upload da imagem ($img): " . $e->getMessage();
+                    $_SESSION['erro'] = "Erro no upload ($img): " . $e->getMessage();
+                    $this->data[$img] = ($savedVal !== '__REMOVE__') ? $savedVal : null;
                     return;
                 }
+            } elseif ($savedVal === '__REMOVE__') {
+                UploadImagem::deleteImage('Preferencias', $this->data['id'], $img);
+                $this->data[$img] = null;
+            } else {
+                $this->data[$img] = $savedVal ?: null;
             }
         }
 
@@ -115,7 +161,8 @@ class PreferenciaForm extends ApplicationController {
     }
 
 
-    public function show() {
+    public function show()
+    {
         $isEdit = !empty($this->data['id']);
 
         $titulo = $isEdit ? 'Editar preferências' : 'Cadastro de preferências';

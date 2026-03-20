@@ -1,38 +1,52 @@
-<div style="margin-bottom: 20px;">
-  <a href="index.php?class=TestemunhoList"><img src="images/admin/voltar.png" style="width: 40px;" alt="Voltar"></a>
-</div>
 <script src="Layout/js/image_field.js"></script>
-<form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" id="formlogin" name="formlogin"
-  enctype="multipart/form-data">
-  <fieldset id="fie">
-    <legend>Cadastro de Testemunho</legend>
-    <br />
-    <label>Id: </label>
-    <input type="text" name="id" id="id" value="{id}" readonly /><br />
-    <label>Nome: </label>
-    <input type="text" name="nome" id="nome" value="{nome}" /><br />
-    <label>Função: </label>
-    <input type="text" name="funcao" id="funcao" value="{funcao}" /><br />
-    <label>Titulo: </label>
-    <input type="text" name="titulo" id="titulo" value="{titulo}" /><br />
-    <label>Descrição: </label>
-    <input type="text" name="descricao" id="descricao" value="{descricao}" /><br />
+<div class="admin-main">
+  <a href="index.php?class=TestemunhoList" class="btn-back">← Voltar para Testemunhos</a>
+  <div class="admin-card">
+    <h2>Cadastro de Testemunho</h2>
+    <form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" class="admin-form" enctype="multipart/form-data">
 
-    <label> Foto:</label><br />
-    <input type="file" name="foto" id="foto" accept="image/png, image/jpeg, image/jpg" />
-    <input type="hidden" name="foto_salva" id="foto_salva" value="{foto}" />
-    <div id="foto_preview"></div>
-    <br />
+      <div style="display:none;">
+        <input type="text" name="id" id="id" value="{id}" readonly />
+      </div>
 
-    <label>Imagem de fundo: </label><br />
-    <input type="file" name="imagem_fundo" id="imagem_fundo" accept="image/png, image/jpeg, image/jpg" />
-    <input type="hidden" name="imagem_fundo_salva" id="imagem_fundo_salva" value="{imagem_fundo}" />
-    <div id="imagem_fundo_preview"></div>
-    <br />
+      <div class="form-row">
+        <label>Nome</label>
+        <input type="text" name="nome" id="nome" value="{nome}" placeholder="Nome do cliente" />
+      </div>
+      <div class="form-row">
+        <label>Função / Cargo</label>
+        <input type="text" name="funcao" id="funcao" value="{funcao}" placeholder="Ex: CEO, Gerente..." />
+      </div>
+      <div class="form-row">
+        <label>Título do depoimento</label>
+        <input type="text" name="titulo" id="titulo" value="{titulo}" placeholder="Título curto" />
+      </div>
+      <div class="form-row">
+        <label>Descrição</label>
+        <input type="text" name="descricao" id="descricao" value="{descricao}" placeholder="Texto do depoimento" />
+      </div>
 
-    <input type="submit" value="CADASTRAR" />
-  </fieldset>
-</form>
+      <div class="form-row">
+        <label>Foto do cliente</label>
+        <input type="file" name="foto" id="foto" accept="image/png, image/jpeg, image/jpg" />
+        <input type="hidden" name="foto_salva" id="foto_salva" value="{foto}" />
+        <div id="foto_preview"></div>
+      </div>
+
+      <div class="form-row">
+        <label>Imagem de fundo</label>
+        <input type="file" name="imagem_fundo" id="imagem_fundo" accept="image/png, image/jpeg, image/jpg" />
+        <input type="hidden" name="imagem_fundo_salva" id="imagem_fundo_salva" value="{imagem_fundo}" />
+        <div id="imagem_fundo_preview"></div>
+      </div>
+
+      <div style="margin-top:22px; display:flex; gap:10px;">
+        <button type="submit" class="btn btn-primary">Salvar Testemunho</button>
+        <a href="index.php?class=TestemunhoList" class="btn btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
 <script>
   initImageField('foto', 'foto_salva', 'foto_preview', '{foto}');
   initImageField('imagem_fundo', 'imagem_fundo_salva', 'imagem_fundo_preview', '{imagem_fundo}');

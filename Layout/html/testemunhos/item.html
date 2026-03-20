@@ -1,20 +1,13 @@
 <tr>
-    <td align='center'>
-        <a href='index.php?class=TestemunhoForm&method=edit&id={id}'>
-            <img src='images/admin/editar.png' style='width:24px'>
-        </a>
-    </td>
-
-    <td align='center'>
-        <a href='index.php?class=TestemunhoList&method=delete&id={id}'>
-            <img src='images/admin/excluir.png' style='width:24px'>
-        </a>
-    </td>
-    <td> {id} </td>
-    <td> {nome} </td>
-    <td> {funcao} </td>
-    <td> {titulo} </td>
-    <td> {descricao} </td>
-    <td> <img src='{foto}' style='width: 100px;'> </td>
-    <td> <img src='{imagem_fundo}' style='width: 100px;'> </td>
+  <td>
+    <a href="index.php?class=TestemunhoForm&method=edit&id={id}" class="action-btn action-edit">Editar</a>
+    <a href="index.php?class=TestemunhoList&method=delete&id={id}" class="action-btn action-delete" onclick="return confirm('Deseja remover este testemunho?')">Remover</a>
+  </td>
+  <td><span class="id-badge">{id}</span></td>
+  <td>{nome}</td>
+  <td>{funcao}</td>
+  <td>{titulo}</td>
+  <td style="max-width:200px;">{descricao}</td>
+  <td><img src="{foto}" alt="foto"></td>
+  <td><img src="{imagem_fundo}" alt="fundo"></td>
 </tr>

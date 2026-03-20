@@ -7,19 +7,46 @@ abstract class ApplicationController {
 
 
     protected function setHtml($html){
-        $this->html = file_get_contents($html);   
+        $content = file_get_contents($html);
         $header = file_get_contents('Layout/html/application/header.html');
-        $this->html = str_replace("{{header}}", $header, $this->html);
+
+        if (stripos($content, '<!DOCTYPE') === false) {
+            $content = str_replace("{{header}}", $header, $content);
+            $this->html = $this->wrapInLayout($content);
+        } else {
+            if (strpos($content, 'admin.css') === false) {
+                $content = str_replace('</head>', '<link rel="stylesheet" href="Layout/css/admin.css">' . "\n</head>", $content);
+            }
+            $content = str_replace("{{header}}", $header, $content);
+            $this->html = $content;
+        }
     }
+
+    private function wrapInLayout($content) {
+        return '<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin</title>
+<link rel="stylesheet" href="Layout/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="Layout/css/admin.css">
+</head>
+<body>
+' . $content . '
+</body>
+</html>';
+    }
+
 
     public function processMessages() {
         $mensagem = '';
         if (isset($_SESSION['sucesso'])) {
-            $mensagem .= "<div style='background-color: #d4edda; color: #155724; padding: 10px; margin: 10px 0; border: 1px solid #c3e6cb; border-radius: 4px; text-align: center; font-weight: bold;'>" . $_SESSION['sucesso'] . "</div>";
+            $mensagem .= "<div class='flash-success'>" . $_SESSION['sucesso'] . "</div>";
             unset($_SESSION['sucesso']);
         }
         if (isset($_SESSION['erro'])) {
-            $mensagem .= "<div style='background-color: #f8d7da; color: #721c24; padding: 10px; margin: 10px 0; border: 1px solid #f5c6cb; border-radius: 4px; text-align: center; font-weight: bold;'>" . $_SESSION['erro'] . "</div>";
+            $mensagem .= "<div class='flash-error'>" . $_SESSION['erro'] . "</div>";
             unset($_SESSION['erro']);
         }
 

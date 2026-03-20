@@ -1,168 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Aplicativo</title>
-
-    <!-- Ícones -->
+    <title>Aplicativos</title>
     <link rel="stylesheet" href="Layout/css/materialdesignicons.min.css">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        input,
-        textarea {
-            width: 300px;
-            padding: 8px;
-        }
-
-        button {
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-
-        /* Fake select */
-        .select-container {
-            width: 300px;
-            position: relative;
-        }
-
-        .select-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            cursor: pointer;
-            background: #fff;
-        }
-
-        .options {
-            display: none;
-            position: absolute;
-            width: 100%;
-            border: 1px solid #ccc;
-            background: #fff;
-            max-height: 160px;
-            overflow-y: auto;
-            z-index: 1000;
-        }
-
-        .opt {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .opt:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
+    <link rel="stylesheet" href="Layout/css/admin.css">
 </head>
-
 <body>
+<header>{{header}}</header>
+<div class="admin-main">
+    <a href="index.php?class=AplicativoList" class="btn-back">← Voltar para Aplicativos</a>
+    <div class="admin-card">
+        <h2>📱 Cadastro de Funcionalidade do Aplicativo</h2>
+        <form method="post" action="index.php?class=AplicativoForm&method=save" class="admin-form">
+            <input type="hidden" name="id" value="{id}">
 
-    <a href="index.php?class=AplicativoList"><img src="images/admin/voltar.png" style="width: 40px; margin-bottom: 20px;" alt="Voltar"></a>
-    <h2>Cadastro de Funcionalidade do Aplicativo</h2>
-
-    <form method="post" action="index.php?class=AplicativoForm&method=save">
-
-        <input type="hidden" name="id" value="{id}">
-
-        <!-- TÍTULO -->
-        <div class="form-group">
-            <label>Título:</label><br>
-            <input type="text" name="titulo" value="{titulo}" placeholder="Ex: Gestão de Ativos">
-        </div>
-
-        <!-- DESCRIÇÃO -->
-        <div class="form-group">
-            <label>Descrição:</label><br>
-            <textarea name="descricao" placeholder="Descreva a funcionalidade...">{descricao}</textarea>
-        </div>
-
-        <!-- ÍCONE (FAKE SELECT) -->
-        <div class="form-group select-container">
-            <label>Ícone:</label>
-
-            <!-- selecionado -->
-            <div onclick="toggleOptions()" class="select-box" id="selectBox">
-                <span id="selectedIcon">
-                    <i class="{icon}" style="margin-right:8px;"></i>
-                    {icon_label}
-                </span>
+            <div class="form-row">
+                <label>Título</label>
+                <input type="text" name="titulo" value="{titulo}" placeholder="Ex: Gestão de Ativos">
             </div>
 
-            <!-- opções -->
-            <div id="options" class="options">
-
-                <div onclick="selectIcon('mdi mdi-tools', 'Gestão de Ativos')" class="opt">
-                    <i class="mdi mdi-tools"></i> Gestão de Ativos
-                </div>
-
-                <div onclick="selectIcon('mdi mdi-school', 'Treinamentos')" class="opt">
-                    <i class="mdi mdi-school"></i> Treinamentos
-                </div>
-
-                <div onclick="selectIcon('mdi mdi-cogs', 'Execução de Tarefas')" class="opt">
-                    <i class="mdi mdi-cogs"></i> Execução de Tarefas
-                </div>
-
-                <div onclick="selectIcon('mdi mdi-checkbox-marked', 'Checklists')" class="opt">
-                    <i class="mdi mdi-checkbox-marked"></i> Checklists
-                </div>
-
-                <div onclick="selectIcon('mdi mdi-alert-circle', 'Ações Corretivas')" class="opt">
-                    <i class="mdi mdi-alert-circle"></i> Ações Corretivas
-                </div>
-
-                <div onclick="selectIcon('mdi mdi-api', 'Integração via API')" class="opt">
-                    <i class="mdi mdi-api"></i> Integração via API
-                </div>
-
+            <div class="form-row">
+                <label>Descrição</label>
+                <textarea name="descricao" rows="3" placeholder="Descreva a funcionalidade...">{descricao}</textarea>
             </div>
 
-            <!-- valor real -->
-            <input type="hidden" name="icon" id="icon" value="{icon}">
-        </div>
+            <!-- ÍCONE (FAKE SELECT) -->
+            <div class="form-row">
+                <label>Ícone</label>
+                <div style="position:relative; max-width:480px;">
+                    <div onclick="toggleOptions()" class="select-box" id="selectBox" style="border:1px solid #e2e8f0; padding:9px 12px; border-radius:8px; cursor:pointer; background:#fff; font-size:.9rem;">
+                        <span id="selectedIcon"><i class="{icon}" style="margin-right:8px;"></i>{icon_label}</span>
+                    </div>
+                    <div id="options" style="display:none; position:absolute; width:100%; border:1px solid #e2e8f0; background:#fff; max-height:200px; overflow-y:auto; z-index:1000; border-radius:8px; margin-top:4px; box-shadow:0 4px 12px rgba(0,0,0,.1);">
+                        <div onclick="selectIcon('mdi mdi-tools', 'Gestão de Ativos')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-tools" style="margin-right:8px;"></i> Gestão de Ativos</div>
+                        <div onclick="selectIcon('mdi mdi-school', 'Treinamentos')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-school" style="margin-right:8px;"></i> Treinamentos</div>
+                        <div onclick="selectIcon('mdi mdi-cogs', 'Execução de Tarefas')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-cogs" style="margin-right:8px;"></i> Execução de Tarefas</div>
+                        <div onclick="selectIcon('mdi mdi-checkbox-marked', 'Checklists')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-checkbox-marked" style="margin-right:8px;"></i> Checklists</div>
+                        <div onclick="selectIcon('mdi mdi-alert-circle', 'Ações Corretivas')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-alert-circle" style="margin-right:8px;"></i> Ações Corretivas</div>
+                        <div onclick="selectIcon('mdi mdi-api', 'Integração via API')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-api" style="margin-right:8px;"></i> Integração via API</div>
+                        <div onclick="selectIcon('mdi mdi-cellphone', 'Aplicativo Móvel')" style="padding:10px 14px; cursor:pointer; font-size:.9rem;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'"><i class="mdi mdi-cellphone" style="margin-right:8px;"></i> Aplicativo Móvel</div>
+                    </div>
+                    <input type="hidden" name="icon" id="icon" value="{icon}">
+                </div>
+            </div>
 
-        <!-- BOTÃO -->
-        <div class="form-group">
-            <button type="submit">Salvar</button>
-        </div>
-
-    </form>
-
-    <script>
-        function toggleOptions() {
-            const opt = document.getElementById("options");
-            opt.style.display = opt.style.display === "block" ? "none" : "block";
+            <div style="margin-top:22px; display:flex; gap:10px;">
+                <button type="submit" class="btn btn-primary">Salvar Aplicativo</button>
+                <a href="index.php?class=AplicativoList" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function toggleOptions() {
+        const opt = document.getElementById("options");
+        opt.style.display = opt.style.display === "block" ? "none" : "block";
+    }
+    function selectIcon(value, label) {
+        document.getElementById("icon").value = value;
+        document.getElementById("selectedIcon").innerHTML = '<i class="' + value + '" style="margin-right:8px;"></i>' + label;
+        document.getElementById("options").style.display = "none";
+    }
+    document.addEventListener("click", function (event) {
+        const box = document.getElementById("selectBox");
+        const options = document.getElementById("options");
+        if (!box.contains(event.target) && !options.contains(event.target)) {
+            options.style.display = "none";
         }
-
-        function selectIcon(value, label) {
-            document.getElementById("icon").value = value;
-
-            document.getElementById("selectedIcon").innerHTML =
-                '<i class="' + value + '" style="margin-right:8px;"></i>' + label;
-
-            document.getElementById("options").style.display = "none";
-        }
-
-        // fechar ao clicar fora
-        document.addEventListener("click", function (event) {
-            const box = document.getElementById("selectBox");
-            const options = document.getElementById("options");
-
-            if (!box.contains(event.target) && !options.contains(event.target)) {
-                options.style.display = "none";
-            }
-        });
-    </script>
-
+    });
+</script>
 </body>
-
 </html>

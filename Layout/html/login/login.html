@@ -1,11 +1,22 @@
-<form method="post" action="/index.php?class=LoginController&method=login" id="formlogin" name="formlogin">
-  <fieldset id="fie">
-    <legend>LOGIN</legend>
-    <br />
-    <label>EMAIL : </label>
-    <input type="email" name="email" id="email" value="test@gmail" /><br />
-    <label>SENHA :</label>
-    <input type="password" name="password" id="password" value="123456789" /><br />
-    <input type="submit" value="LOGAR  " />
-  </fieldset>
-</form>
+<div class="admin-main" style="max-width:480px;">
+  <div class="admin-card">
+    <h2>🔐 Acesso ao Painel</h2>
+    <form method="post" action="/index.php?class=LoginController&method=login" class="admin-form" id="formlogin">
+
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" name="email" id="email" placeholder="seu@email.com" autocomplete="email" />
+      </div>
+
+      <div class="form-row">
+        <label>Senha</label>
+        <input type="password" name="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+
+      <div style="margin-top:22px;">
+        <button type="submit" class="btn btn-primary" style="width:100%;">Entrar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

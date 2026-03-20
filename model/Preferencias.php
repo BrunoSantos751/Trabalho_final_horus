@@ -3,16 +3,17 @@
 require_once 'model/Modelbase.php';
 require_once './utils/UploadImagem.php';
 
-class Preferencias extends Modelbase {
+class Preferencias extends Modelbase
+{
 
-   public static function save($data = null) {
+   public static function save($data = null)
+   {
       $conn = self::getConnection();
       $data = $data ?? $_POST;
 
       $inputparams = [
          'titulo_landing',
          'facebook',
-         'twitter',
          'instagram',
          'titulo_secaoHome',
          'subtitulo_secaoHome',
@@ -32,15 +33,23 @@ class Preferencias extends Modelbase {
 
       $params = [];
 
-      foreach (array_merge($inputparams, $imgParams) as $param) {
+      foreach ($inputparams as $param) {
          if (!empty($data[$param])) {
+            $params[] = $param;
+         }
+      }
+
+      $isUpdate = isset($data['id']) && !empty($data['id']);
+
+      foreach ($imgParams as $param) {
+         if ($isUpdate ? array_key_exists($param, $data) : !empty($data[$param])) {
             $params[] = $param;
          }
       }
 
       $fields = [];
 
-      if (isset($data['id']) && !empty($data['id'])){
+      if (isset($data['id']) && !empty($data['id'])) {
 
          foreach ($params as $param) {
             $fields[] = "$param = :$param";
@@ -48,37 +57,36 @@ class Preferencias extends Modelbase {
 
          $sql = "UPDATE Preferencias SET " . implode(', ', $fields) . " WHERE id = :id";
 
-      }else{
-         $fieldsValue = []; 
+      } else {
+         $fieldsValue = [];
 
          foreach ($params as $param) {
-               $fields[] = " $param";
-               $fieldsValue[] = " :$param";
+            $fields[] = " $param";
+            $fieldsValue[] = " :$param";
          }
 
-         $sql = "INSERT INTO Preferencias (" . implode(', ', $fields) . ") VALUES (" . implode(',',$fieldsValue) ." )";
+         $sql = "INSERT INTO Preferencias (" . implode(', ', $fields) . ") VALUES (" . implode(',', $fieldsValue) . " )";
       }
 
-
-
       $stmt = $conn->prepare($sql);
-      if (isset($data['id']) && !empty($data['id'])){
+      if (isset($data['id']) && !empty($data['id'])) {
          $stmt->bindValue(':id', $data['id']);
+
          foreach ($inputparams as $input) {
             $value = $data[$input] ?? null;
             if (!empty($value)) {
-                  $stmt->bindValue(":$input", $value);
+               $stmt->bindValue(":$input", $value);
             }
          }
 
          foreach ($imgParams as $img) {
-            $value = $data[$img] ?? null;
-            if (!empty($value)) { 
-                  $stmt->bindValue(":$img", $value);
-                  UploadImagem::deleteImage(self::class, $data['id'], $img);
+            if (array_key_exists($img, $data)) {
+               $val = $data[$img] ?: null;
+               $stmt->bindValue(":$img", $val);
             }
          }
-      }else{
+
+      } else {
          foreach ($params as $input) {
             $stmt->bindValue(":$input", $data[$input] ?? null);
          }
@@ -86,20 +94,23 @@ class Preferencias extends Modelbase {
 
       $stmt->execute();
    }
-   
-   public static function find() {
+
+   public static function find()
+   {
       $conn = self::getConnection();
       $result = $conn->query("SELECT * FROM Preferencias Limit 1");
       return $result->fetch();
    }
 
-   public static function all() {
+   public static function all()
+   {
       $conn = self::getConnection();
       $result = $conn->query("SELECT * FROM Preferencias");
       return $result->fetchAll();
    }
-   
-   public static function delete($id) {
+
+   public static function delete($id)
+   {
       $conn = self::getConnection();
       foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $field) {
          UploadImagem::deleteImage(self::class, $id, $field);

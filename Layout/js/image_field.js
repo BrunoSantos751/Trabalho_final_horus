@@ -1,15 +1,7 @@
-/**
- * initImageField
- * Adds live-preview and remove-button logic to an image input.
- *
- * @param {string} fileInputId  - id of the <input type="file">
- * @param {string} hiddenInputId - id of the <input type="hidden"> that stores saved path
- * @param {string} previewContainerId - id of the <div> where preview & remove btn render
- * @param {string} existingPath - server path already saved (populated by PHP via template)
- */
+
 function initImageField(fileInputId, hiddenInputId, previewContainerId, existingPath) {
-    var fileInput      = document.getElementById(fileInputId);
-    var hiddenInput    = document.getElementById(hiddenInputId);
+    var fileInput = document.getElementById(fileInputId);
+    var hiddenInput = document.getElementById(hiddenInputId);
     var previewWrapper = document.getElementById(previewContainerId);
 
     if (!fileInput || !previewWrapper) return;
@@ -44,8 +36,8 @@ function initImageField(fileInputId, hiddenInputId, previewContainerId, existing
         btn.addEventListener('click', function () {
             // Clear file input
             fileInput.value = '';
-            // Clear saved path
-            hiddenInput.value = '';
+            // Signal explicit removal to the server
+            hiddenInput.value = '__REMOVE__';
             // Remove preview
             previewWrapper.innerHTML = '';
         });

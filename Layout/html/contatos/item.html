@@ -1,12 +1,16 @@
 <tr>
-<td align='center'>
-    <a href='index.php?class=ContatoList&method=delete&id={id}'>
-    <img src='images/admin/excluir.png' style='width:24px'>
-    </a></td>
-<td> {id} </td>
-<td> {nome} </td>
-<td> {email} </td>
-<td> {telefone} </td>
-<td> {mensagem} </td>
-<td> {criado_em} </td>
+  <td>
+    <a href="index.php?class=ContatoList&method=delete&id={id}" class="action-btn action-delete" onclick="return confirm('Deseja remover este contato?')">Remover</a>
+  </td>
+  <td><span class="id-badge">{id}</span></td>
+  <td>{nome}</td>
+  <td>{email}</td>
+  <td>{telefone}</td>
+  <td style="max-width:200px;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px;">{mensagem}</span>
+      <button class="action-btn action-edit" style="flex-shrink:0; white-space:nowrap;" onclick="openMsgModal(this.dataset.msg)" data-msg="{mensagem}">Ver</button>
+    </div>
+  </td>
+  <td>{criado_em}</td>
 </tr>
