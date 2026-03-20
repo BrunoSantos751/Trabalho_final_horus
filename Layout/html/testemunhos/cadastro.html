@@ -1,9 +1,13 @@
-<form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" id="formlogin" name="formlogin" enctype="multipart/form-data">
+<div style="margin-bottom: 20px;">
+  <a href="index.php?class=TestemunhoList"><img src="images/admin/voltar.png" style="width: 40px;" alt="Voltar"></a>
+</div>
+<form method="post" action="/index.php?class=TestemunhoForm&method=cadastro" id="formlogin" name="formlogin"
+  enctype="multipart/form-data">
   <fieldset id="fie">
     <legend>Cadastro de Testemunho</legend>
     <br />
     <label>Id: </label>
-    <input type="text" name="id" id="id" value="{id}" readonly/><br />
+    <input type="text" name="id" id="id" value="{id}" readonly /><br />
     <label>Nome: </label>
     <input type="text" name="nome" id="nome" value="{nome}" /><br />
     <label>Função: </label>
@@ -15,7 +19,8 @@
     <label> Foto:</label>
     <input type="file" name="foto" id="foto" value="{foto}" accept="image/png, image/jpeg, image/jpg" /><br />
     <label>Imagem de fundo: </label>
-    <input type="file" name="imagem_fundo" id="imagem_fundo" value="{imagem_fundo}" accept="image/png, image/jpeg, image/jpg" /><br />
+    <input type="file" name="imagem_fundo" id="imagem_fundo" value="{imagem_fundo}"
+      accept="image/png, image/jpeg, image/jpg" /><br />
 
     <input type="submit" value="CADASTRAR" />
   </fieldset>

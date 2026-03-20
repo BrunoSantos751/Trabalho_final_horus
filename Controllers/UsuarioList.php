@@ -35,8 +35,8 @@ class UsuarioList extends ApplicationController {
             $item = file_get_contents('Layout/html/usuarios/item.html');
             
             if ($isAdmin) {
-                $botao_editar = "<td align='center'><a href='index.php?class=UsuarioForm&method=edit&id={$usuario['id']}'><img src='img/edit.png' style='width:24px'></a></td>";
-                $botao_remover = "<td align='center'><a href='index.php?class=UsuarioList&method=delete&id={$usuario['id']}'><img src='img/remove.png' style='width:24px'></a></td>";
+                $botao_editar = "<td align='center'><a href='index.php?class=UsuarioForm&method=edit&id={$usuario['id']}'><img src='images/admin/editar.png' style='width:24px'></a></td>";
+                $botao_remover = "<td align='center'><a href='index.php?class=UsuarioList&method=delete&id={$usuario['id']}'><img src='images/admin/excluir.png' style='width:24px'></a></td>";
             } else {
                 $botao_editar = "";
                 $botao_remover = "";
@@ -58,7 +58,7 @@ class UsuarioList extends ApplicationController {
         
         $botoes_inserir = "";
         if ($isAdmin) {
-            $botoes_inserir = "<button onclick=\"window.location='index.php?class=UsuarioForm'\"><img src='img/insert.png' style='width:24px; vertical-align: middle;'> Inserir</button>";
+            $botoes_inserir = "<button onclick=\"window.location='index.php?class=UsuarioForm'\"><img src='images/admin/sinal-de-mais.png' style='width:24px; vertical-align: middle;'> Inserir</button>";
         }
         $this->html = str_replace('{botoes_inserir}', $botoes_inserir, $this->html);
 
