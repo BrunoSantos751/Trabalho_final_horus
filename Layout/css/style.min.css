@@ -140,8 +140,7 @@ body[data-bs-theme=dark] .navbar .navbar-nav .nav-link.active {
 
 @media(min-width: 1200px) {
     .container {
-        #max-width: 1140px !important
-		max-width: 90% !important
+        #max-width: 1140px !important max-width: 90% !important
     }
 }
 
@@ -2840,3 +2839,7 @@ body[data-bs-theme=dark] .bottom-footer {
 }
 
 /*# sourceMappingURL=style.min.css.map */
+.cta .cta-phone-image {
+    top: auto !important;
+    bottom: -50px !important;
+}

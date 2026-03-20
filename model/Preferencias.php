@@ -23,7 +23,6 @@ class Preferencias extends Modelbase {
          'link_AppStore',
          'link_GooglePlay',
          'telefone_contato',
-         'logo_rodape',
          'mensagem_rodape',
          'url_rodape',
          'mensagem_powered',
@@ -64,6 +63,7 @@ class Preferencias extends Modelbase {
 
       $stmt = $conn->prepare($sql);
       if (isset($data['id']) && !empty($data['id'])){
+         $stmt->bindValue(':id', $data['id']);
          foreach ($inputparams as $input) {
             $value = $data[$input] ?? null;
             if (!empty($value)) {

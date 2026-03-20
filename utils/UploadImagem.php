@@ -1,8 +1,10 @@
 <?php
-class UploadImagem {
+class UploadImagem
+{
 
-    function uploadImagem($file, $pasta) {
-        $extensoesPermitidas = ['jpg', 'jpeg', 'png'];
+    function uploadImagem($file, $pasta)
+    {
+        $extensoesPermitidas = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
 
         $nomeOriginal = $file['name'];
         $tmp = $file['tmp_name'];
@@ -33,7 +35,8 @@ class UploadImagem {
         return $caminho;
     }
 
-    public static function deleteImage($class,$id, $field) {
+    public static function deleteImage($class, $id, $field)
+    {
         $file = ['foto', 'imagem_fundo', 'imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'];
 
         if (!in_array($field, $file)) {

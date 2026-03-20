@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <title>{titulo_landing}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<meta  http-equiv="Content-Security-Policy"  content="upgrade-insecure-requests" />	
-	
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
     <meta name="description" content="Landing Page Treinamento.">
     <meta name="keywords" content="">
     <meta name="author" content="Treinamento">
     <meta name="title" content="Landing Page Treinamento.">
-   
-    
+
+
 
     <link rel="shortcut icon" href="{favicon}">
 
@@ -70,19 +70,18 @@
                     </li>
                 </ul>
                 <div class=" d-flex align-items-center" style="margin-left: 20px!important;">
-                     <a href="{facebook}" target="_blank"
-							class="me-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
-							data-bs-title="Facebook" title="Facebook">
-							<i class="mdi mdi-facebook f-24 align-middle text-primary"></i>
-                     </a>
-                     <a href="{instagram}" target="_blank"
-							class="mx-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-title="Instagran" title="Instagram">
-                            <i class="mdi mdi-instagram f-24 align-middle text-primary"></i>
-					</a>
-                </div>				
+                    <a href="{facebook}" target="_blank" class="me-2 avatar-sm text-center" data-bs-toggle="tooltip"
+                        data-bs-placement="top" data-bs-title="Facebook" title="Facebook">
+                        <i class="mdi mdi-facebook f-24 align-middle text-primary"></i>
+                    </a>
+                    <a href="{instagram}" target="_blank" class="mx-2 avatar-sm text-center" data-bs-toggle="tooltip"
+                        data-bs-placement="top" data-bs-title="Instagran" title="Instagram">
+                        <i class="mdi mdi-instagram f-24 align-middle text-primary"></i>
+                    </a>
+                </div>
                 <div class="ms-auto">
-                    <a href="#" class="btn bg-gradiant" style="display: flex; align-items: center;"><i class="mdi mdi-account f-20 me-2"></i>Conecte-se</a>
+                    <a href="#" class="btn bg-gradiant" style="display: flex; align-items: center;"><i
+                            class="mdi mdi-account f-20 me-2"></i>Conecte-se</a>
                 </div>
             </div>
         </div>
@@ -147,7 +146,9 @@
                                             </div>
 
                                             <div class="col-lg-6">
-                                                <h2 class="mb-4"><i style="font-size: 40px;" class="mdi mdi-tablet-cellphone f-20 me-2"></i>{titulo_caracticasHome}</h2>
+                                                <h2 class="mb-4"><i style="font-size: 40px;"
+                                                        class="mdi mdi-tablet-cellphone f-20 me-2"></i>{titulo_caracticasHome}
+                                                </h2>
                                                 <div class="row">
                                                     {caracteristicas_plataforma}
                                                 </div>
@@ -164,7 +165,7 @@
 
                                             <div class="col-lg-4">
                                                 <img src="images/features/phone.png" alt="" class="img-fluid"
-                                                style="animation: ani-bg 3s infinite;">>
+                                                    style="animation: ani-bg 3s infinite;">
                                             </div>
 
                                             <div class="col-lg-4 order-last">
@@ -184,8 +185,8 @@
             </div>
         </div>
         <!-- end row -->
-		
-		
+
+
         </div>
         <!-- end container -->
 
@@ -240,17 +241,19 @@
                         <p class="text-white-50 mt-3 f-18">{subtitulo_secaoLojaAPP}<br><br><br><br></p>
                         <div class="d-flex mt-4 ">
                             <div class="app-store">
-                                <a target="_blank" href="{link_AppStore}"><img src="{image_AppStore}" alt="" class="img-fluid"></a>
+                                <a target="_blank" href="{link_AppStore}"><img src="{image_AppStore}" alt=""
+                                        class="img-fluid" style="max-height: 45px; width: auto;"></a>
                             </div>
                             <div class="googleplay">
-                                <a target="_blank" href="{link_GooglePlay}"><img src="{image_GooglePlay}" alt="" class="img-fluid ms-3"></a>
+                                <a target="_blank" href="{link_GooglePlay}"><img src="{image_GooglePlay}" alt=""
+                                        class="img-fluid ms-3" style="max-height: 45px; width: auto;"></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="cta-phone-image">
-                        <img src="{imagem_secaoLojaApp}" alt="" style="height:600px;" class=" img-fluid">
+                        <img src="{imagem_secaoLojaApp}" alt="" style="max-height:600px;" class=" img-fluid">
                     </div>
                 </div>
             </div>
@@ -282,7 +285,8 @@
                         </div>
 
                         <div class="custom-form mt-4 ">
-                            <form method="post" action="index.php?class=ContatoController&method=salvar" name="myForm" method="post" enctype="multipart/form-data">
+                            <form method="post" action="index.php?class=ContatoController&method=salvar" name="myForm"
+                                method="post" enctype="multipart/form-data">
                                 {mensagem}
                                 <div id="simple-msg"></div>
                                 <div class="row">
@@ -302,29 +306,29 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group mt-2">
-                                            <input name="telefone" type="text" class="form-control contact-form" id="telefone" value=""
-                                                placeholder="(82)99999-9999">
+                                            <input name="telefone" type="text" class="form-control contact-form"
+                                                id="telefone" value="" placeholder="(82)99999-9999">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group mt-2">
-                                            <textarea name="mensagem" id="mensagem" rows="4" 
-                                            class="form-control contact-form h-auto"
-                                            placeholder="Mensagem"></textarea>
+                                            <textarea name="mensagem" id="mensagem" rows="4"
+                                                class="form-control contact-form h-auto"
+                                                placeholder="Mensagem"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                               
-								<div class="row">
-                                <div class="row my-2">
-                                    <div class="col-lg-12 d-grid">
-                                        <input type="submit" id="submit" name="send"
-                                            class="submitBnt btn btn-rounded btn-primary" value="Enviar mensagem">
+
+                                <div class="row">
+                                    <div class="row my-2">
+                                        <div class="col-lg-12 d-grid">
+                                            <input type="submit" id="submit" name="send"
+                                                class="submitBnt btn btn-rounded btn-primary" value="Enviar mensagem">
+                                        </div>
                                     </div>
                                 </div>
-								</div>                                
                             </form>
                         </div>
                     </div>
@@ -375,14 +379,14 @@
                     </a>
                     <div class="footer-icon mt-4">
                         <div class=" d-flex align-items-center">
-                            <a href="{facebook}" target="_blank"
-                                class="me-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="Facebook" title="Facebook">
+                            <a href="{facebook}" target="_blank" class="me-2 avatar-sm text-center"
+                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Facebook"
+                                title="Facebook">
                                 <i class="mdi mdi-facebook f-24 align-middle text-primary"></i>
                             </a>
-                            <a href="{instagram}" target="_blank"
-                                class="mx-2 avatar-sm text-center" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="Instagran" title="Instagram">
+                            <a href="{instagram}" target="_blank" class="mx-2 avatar-sm text-center"
+                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Instagran"
+                                title="Instagram">
                                 <i class="mdi mdi-instagram f-24 align-middle text-primary"></i>
                             </a>
                         </div>
@@ -419,8 +423,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <p class="mb-0 text-center text-muted">Versão 1.0 ©
-                        <script>document.write(new Date().getFullYear())</script> Powered by <a
-                            href="#" target="_blank" class="text-muted">{mensagem_powered}</a>
+                        <script>document.write(new Date().getFullYear())</script> Powered by <a href="#" target="_blank"
+                            class="text-muted">{mensagem_powered}</a>
                     </p>
                 </div>
             </div>
@@ -434,12 +438,12 @@
     <!-- Slider Js -->
     <script src="/Layout/js/tiny-slider.js"></script>
     <script src="/Layout/js/swiper.min.js"></script>
-    
-	<!-- jQuery 1.8+ -->
-	<script src="plugin/components/jQuery/jquery-1.11.3.min.js"></script>
-	
+
+    <!-- jQuery 1.8+ -->
+    <script src="plugin/components/jQuery/jquery-1.11.3.min.js"></script>
+
     <!-- App Js -->
-    <script src="/Layout/js/app.js"></script> 
+    <script src="/Layout/js/app.js"></script>
 
 </body>
 
