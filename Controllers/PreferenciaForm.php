@@ -63,7 +63,7 @@ class PreferenciaForm extends ApplicationController {
     }
 
     public function save($request) {
-        $data = [
+        $this->data = [
             'id' => $request['id'] ?? null,
             'titulo_landing' => $request['titulo_landing'] ?? null,
             'facebook' => $request['facebook'] ?? null,
@@ -72,6 +72,7 @@ class PreferenciaForm extends ApplicationController {
             'titulo_secaoHome' => $request['titulo_secaoHome'] ?? null,
             'subtitulo_secaoHome' => $request['subtitulo_secaoHome'] ?? null,
             'titulo_caracticasHome' => $request['titulo_caracticasHome'] ?? null,
+            'titulo_testemunhos' => $request['titulo_testemunhos'] ?? null,
             'titulo_secaoLojaApp' => $request['titulo_secaoLojaApp'] ?? null,
             'subtitulo_secaoLojaApp' => $request['subtitulo_secaoLojaApp'] ?? null,
             'link_AppStore' => $request['link_AppStore'] ?? null,
@@ -79,29 +80,38 @@ class PreferenciaForm extends ApplicationController {
             'telefone_contato' => $request['telefone_contato'] ?? null,
             'mensagem_rodape' => $request['mensagem_rodape'] ?? null,
             'url_rodape' => $request['url_rodape'] ?? null,
-            'mensagem_powered' => $request['mensagem_powered'] ?? null
+            'mensagem_powered' => $request['mensagem_powered'] ?? null,
+            // Imagens persistentes
+            'imagem_secaoHome' => $request['imagem_secaoHome_salva'] ?? null,
+            'imagem_AppStore' => $request['imagem_AppStore_salva'] ?? null,
+            'imagem_GooglePlay' => $request['imagem_GooglePlay_salva'] ?? null,
+            'imagem_secaoLojaApp' => $request['imagem_secaoLojaApp_salva'] ?? null,
+            'logo_rodape' => $request['logo_rodape_salva'] ?? null,
+            'favicon' => $request['favicon_salva'] ?? null,
+            'logo_cabecalho' => $request['logo_cabecalho_salva'] ?? null,
         ];
 
         $upload = new UploadImagem();
 
         foreach(['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $img){
             if (!empty($_FILES[$img]['name'])){
-                $data[$img] = $upload->uploadImagem($_FILES[$img],'Preferencias');
+                try {
+                    $this->data[$img] = $upload->uploadImagem($_FILES[$img],'Preferencias');
+                } catch (Exception $e) {
+                    $_SESSION['erro'] = "Erro no upload da imagem ($img): " . $e->getMessage();
+                    return;
+                }
             }
         }
 
-        $preferencia = new Preferencias;
-
         try {
-            $preferencia->save($data);
+            Preferencias::save($this->data);
             $_SESSION['sucesso'] = "Preferências salvas com sucesso!";
+            header("location: /index.php?class=PreferenciaForm");
+            exit;
         } catch (Exception $e) {
             $_SESSION['erro'] = "Erro ao salvar preferências: " . $e->getMessage();
         }
-
-        header("location: /index.php?class=PreferenciaForm");
-        exit;
-
     }
 
 

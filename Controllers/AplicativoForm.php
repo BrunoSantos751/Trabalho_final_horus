@@ -38,21 +38,20 @@ class AplicativoForm extends ApplicationController {
     }
 
     public function save($request) {
-        var_dump($request['icon']);
-        try {
+        $this->data = [
+            'id' => $request['id'] ?? null,
+            'titulo' => $request['titulo'] ?? null,
+            'descricao' => $request['descricao'] ?? null,
+            'icon' => $request['icon'] ?? 'mdi mdi-cellphone'
+        ];
 
-            if (empty($request['titulo']) || empty($request['descricao'])) {
+        try {
+            if (empty($this->data['titulo']) || empty($this->data['descricao'])) {
                 $_SESSION['erro'] = "Por favor, preencha os campos obrigatórios.";
-                header("Location: index.php?class=AplicativoForm");
-                exit;
+                return;
             }
 
-            Aplicativo::save([
-                'id' => $request['id'] ?? null,
-                'titulo' => $request['titulo'],
-                'descricao' => $request['descricao'],
-                'icon' => $request['icon']
-            ]);
+            Aplicativo::save($this->data);
 
             $_SESSION['sucesso'] = "Aplicativo salvo com sucesso!";
             header("Location: index.php?class=AplicativoList");
@@ -60,8 +59,6 @@ class AplicativoForm extends ApplicationController {
 
         } catch (Exception $e) {
             $_SESSION['erro'] = "Erro: " . $e->getMessage();
-            header("Location: index.php?class=AplicativoForm");
-            exit;
         }
     }
 }

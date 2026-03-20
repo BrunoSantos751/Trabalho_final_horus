@@ -68,6 +68,10 @@ if ($classe) {
         $pagina->$method($_REQUEST);
     }
 
+    if (method_exists($pagina, 'processMessages')) {
+        $pagina->processMessages();
+    }
+
     if (method_exists($pagina, 'show')) {
         $pagina->show();
     }

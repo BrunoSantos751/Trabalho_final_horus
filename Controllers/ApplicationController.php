@@ -9,7 +9,10 @@ abstract class ApplicationController {
     protected function setHtml($html){
         $this->html = file_get_contents($html);   
         $header = file_get_contents('Layout/html/application/header.html');
-        
+        $this->html = str_replace("{{header}}", $header, $this->html);
+    }
+
+    public function processMessages() {
         $mensagem = '';
         if (isset($_SESSION['sucesso'])) {
             $mensagem .= "<div style='background-color: #d4edda; color: #155724; padding: 10px; margin: 10px 0; border: 1px solid #c3e6cb; border-radius: 4px; text-align: center; font-weight: bold;'>" . $_SESSION['sucesso'] . "</div>";
@@ -20,8 +23,15 @@ abstract class ApplicationController {
             unset($_SESSION['erro']);
         }
 
-        $header = str_replace('{{mensagem}}', $mensagem, $header);
-        $this->html = str_replace("{{header}}", $header, $this->html);
+        $this->html = str_replace("{{mensagem}}", $mensagem, $this->html);
+
+        if (!empty($mensagem) && strpos($this->html, $mensagem) === false) {
+            if (strpos($this->html, '<body>') !== false) {
+                $this->html = str_replace('<body>', "<body>\n" . $mensagem, $this->html);
+            } else {
+                $this->html = $mensagem . "\n" . $this->html;
+            }
+        }
     }
 
     abstract function show();

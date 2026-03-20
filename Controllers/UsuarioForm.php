@@ -18,15 +18,26 @@ class UsuarioForm extends ApplicationController {
         if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
             die("<script>alert('Acesso negado.'); window.location.href='index.php?class=UsuarioList';</script>");
         }
-        $usuario = new Usuarios($request);
+
+        $this->data = [
+            'id' => $request['id'] ?? null,
+            'email' => $request['email'] ?? null,
+            'senha' => $request['password'] ?? null // password input name is 'password' in HTML
+        ];
+
+        if (empty($this->data['email']) || (empty($this->data['id']) && empty($this->data['senha']))) {
+            $_SESSION['erro'] = "Por favor, preencha todos os campos obrigatórios.";
+            return;
+        }
+
         try {
-            $usuario->save();
+            Usuarios::save(); // Uses $_POST directly in model
             $_SESSION['sucesso'] = "Usuário salvo com sucesso!";
+            header("Location: index.php?class=UsuarioList");
+            exit;
         } catch (Exception $e) {
             $_SESSION['erro'] = "Erro ao salvar usuário: " . $e->getMessage();
         }
-        header("Location: index.php?class=UsuarioList");
-        exit;
     }
 
     public function edit($param) {

@@ -11,20 +11,38 @@ class TestemunhoForm extends ApplicationController {
     }
 
     function cadastro($request) {
-        $upload = new UploadImagem();
-
         $this->data = [
             'id' => $request['id'] ?? null,
             'nome' => $request['nome'] ?? null,
             'funcao' => $request['funcao'] ?? null,
             'titulo' => $request['titulo'] ?? null,
             'descricao' => $request['descricao'] ?? null,
+            // Recupera imagens já enviadas em tentativas de validação ou do item atual (edit)
+            'foto' => $request['foto_salva'] ?? null,
+            'imagem_fundo' => $request['imagem_fundo_salva'] ?? null,
         ];
-        
+
+        $upload = new UploadImagem();
         foreach (['foto', 'imagem_fundo'] as $img) {
             if (!empty($_FILES[$img]['name'])) {
-                $this->data[$img] = $upload->uploadImagem($_FILES[$img], 'testemunhos');
+                try {
+                    $this->data[$img] = $upload->uploadImagem($_FILES[$img], 'testemunhos');
+                } catch (Exception $e) {
+                    $_SESSION['erro'] = "Erro no upload da imagem: " . $e->getMessage();
+                    return;
+                }
             }
+        }
+
+        if (empty($this->data['nome']) || empty($this->data['funcao']) || empty($this->data['titulo']) || empty($this->data['descricao'])) {
+            $_SESSION['erro'] = "Por favor, preencha todos os campos obrigatórios em texto.";
+            return;
+        }
+
+        $isNew = empty($this->data['id']);
+        if ($isNew && (empty($this->data['foto']) || empty($this->data['imagem_fundo']))) {
+            $_SESSION['erro'] = "É obrigatório enviar as imagens de Foto e Imagem de fundo!";
+            return;
         }
        
 

@@ -14,15 +14,21 @@ class CaracteristicaForm extends ApplicationController {
             'id' => $request['id'] ?? null,
             'titulo' => $request['titulo'] ?? null, 
             'descricao' => $request['descricao'] ?? null
-            ];
+        ];
+
+        if (empty($this->data['titulo']) || empty($this->data['descricao'])) {
+            $_SESSION['erro'] = "Por favor, preencha todos os campos obrigatórios.";
+            return;
+        }
+
         try {
             Caracteristicas::save($this->data);
             $_SESSION['sucesso'] = "Característica salva com sucesso!";
+            header("Location: index.php?class=CaracteristicaList");
+            exit;
         } catch (Exception $e) {
             $_SESSION['erro'] = "Erro ao salvar característica: " . $e->getMessage();
         }
-        header("Location: index.php?class=CaracteristicaList");
-        exit;
     }
 
     public function edit() {
