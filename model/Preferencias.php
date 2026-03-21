@@ -1,9 +1,9 @@
 <?php
 
-require_once 'model/Modelbase.php';
+require_once 'model/DataBase.php';
 require_once './utils/UploadImagem.php';
 
-class Preferencias extends Modelbase
+class Preferencias extends DataBase
 {
    protected static $tableName = "preferencias";
 
@@ -94,26 +94,4 @@ class Preferencias extends Modelbase
       return $stmt->fetch(PDO::FETCH_ASSOC);
         
    }
-
-   // protected static function find($id=null)
-   // {
-   //    $conn = self::getConnection();
-      
-   //    $sql = "SELECT * FROM " . static::$tableName;
-   //    if (empty($id)){
-   //       $sql .= " WHERE id = :id"; 
-   //       $stmt->bindParam(':id', $id);
-   //    }
-   //    $result = $conn->query($sql);
-   //    return $result->fetch();
-   // }
-
-   // public static function delete($id)
-   // {
-   //    $conn = self::getConnection();
-   //    foreach (['imagem_secaoHome', 'imagem_AppStore', 'imagem_GooglePlay', 'imagem_secaoLojaApp', 'logo_rodape', 'favicon', 'logo_cabecalho'] as $field) {
-   //       UploadImagem::deleteImage(self::class, $id, $field);
-   //    }
-   //    return $conn->query("DELETE FROM preferencias WHERE id='{$id}'");
-   // }
 }

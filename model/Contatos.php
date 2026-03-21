@@ -38,15 +38,6 @@ class Contatos extends ModelBase {
         $stmt->execute();
     }
 
-    public static function find($id) {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM contatos WHERE id = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
      public static function delete($id) {
         $conn = self::getConnection();
         $sql = "DELETE FROM contatos WHERE id = :id";

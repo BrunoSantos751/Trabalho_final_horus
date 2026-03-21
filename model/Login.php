@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'Modelbase.php';
-class Login extends ModelBase {
+require_once 'model/DataBase.php';
+class Login extends DataBase {
     private $request;
 
     public function __construct($request)

@@ -54,16 +54,7 @@ class Usuarios extends ModelBase{
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hash);
             $stmt->execute();
-        }
-
-    public static function find($id) {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM usuarios WHERE id = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+        }   
 
     public static function delete($id) {
         if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {

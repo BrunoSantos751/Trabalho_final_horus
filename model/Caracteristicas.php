@@ -31,15 +31,6 @@ class Caracteristicas extends ModelBase {
         $stmt->execute();
     }
 
-    public static function find($id) {
-        $conn = self::getConnection();
-        $sql = "SELECT * FROM caracteristicas WHERE id = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
      public static function delete($id) {
         $conn = self::getConnection();
         $sql = "DELETE FROM caracteristicas WHERE id = :id";
