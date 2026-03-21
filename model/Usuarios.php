@@ -12,34 +12,52 @@ class Usuarios extends ModelBase{
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     */
 
-    public static function save() {
-        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
-            throw new Exception("Acesso negado. Apenas o administrador pode realizar esta operação.");
-        }
-        $conn = self::getConnection();
-        if (isset($_POST['id']) && !empty($_POST['id'])) {
-            if ( $_POST['password']) {
-                $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
+        public static function save() {
+            if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
+                throw new Exception("Acesso negado. Apenas o administrador pode realizar esta operação.");
+            }
+
+            $conn = self::getConnection();
+
+            $email = $_POST['email'];
+            $password = $_POST['password'] ?? null;
+
+            $hash = null;
+            if (!empty($password)) {
+                $hash = password_hash($password, PASSWORD_BCRYPT);
+            }
+
+            if (isset($_POST['id']) && !empty($_POST['id'])) {
+
+
+                if ($hash !== null) {
+                    $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':password', $hash);
+                    $stmt->bindParam(':id', $_POST['id']);
+                    $stmt->execute();
+                    return;
+                }
+
+                $sql = "UPDATE usuarios SET email = :email WHERE id = :id";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':email', $_POST['email']);
-                $stmt->bindParam(':password', $_POST['password']);
+                $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':id', $_POST['id']);
                 $stmt->execute();
                 return;
             }
-            $sql = "UPDATE usuarios SET email = :email WHERE id = :id";
+
+            if ($hash === null) {
+                throw new Exception("Senha obrigatória para novo usuário.");
+            }
+
+            $sql = "INSERT INTO usuarios (email, password) VALUES (:email, :password)";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':email', $_POST['email']);
-            $stmt->bindParam(':id', $_POST['id']);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hash);
             $stmt->execute();
-            return;
-        }   
-        $sql = "INSERT INTO usuarios (email, password) VALUES (:email, :password)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':email', $_POST['email']);
-        $stmt->bindParam(':password', $_POST['password']);
-        $stmt->execute();
-    }
+        }
 
     public static function find($id) {
         $conn = self::getConnection();

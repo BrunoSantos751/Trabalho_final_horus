@@ -13,6 +13,7 @@ class LoginController extends ApplicationController {
 
     public function login($request){
         $login = new Login($request);
+        
         if ($login->login()) {
             header("Location: index.php?class=ListController");
             exit;
