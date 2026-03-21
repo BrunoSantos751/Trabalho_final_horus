@@ -12,7 +12,7 @@
       </div>
       <div class="form-row">
         <label>{SENHA}</label>
-        <input type="password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" minlength="8"  value="{senha}" placeholder="••••••••" title="A senha precisa ter no minimo: 8 digitos, 1 número, 1 letra Maiúscula, 1 letra Minúscula e 1 caracter especial."/>
+        <input type="password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$" minlength="8"  value="{senha}" placeholder="••••••••" title="A senha precisa ter no minimo: 8 digitos, 1 número, 1 letra Maiúscula, 1 letra Minúscula e 1 caracter especial."/>
       </div>
       <div style="margin-top:22px; display:flex; gap:10px;">
         <button type="submit" class="btn btn-primary">{acao}</button>

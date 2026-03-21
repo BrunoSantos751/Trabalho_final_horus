@@ -81,4 +81,4 @@ CREATE TABLE IF NOT EXISTS contatos (
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;
 -- senha: Horus#forever1
-INSERT INTO usuarios (email, password) VALUES ('test@gmail','$2y$12$iXGebxjcO0irm49hcAI84uzjbH8gzZ8jcfuA6PS5ir9ViS/SoPYTW');
+INSERT INTO usuarios (email, password) VALUES ('test@gmail.com','$2y$12$cX8.YcvW3MUJlKUPDV0.OuzVpRBpdatl8OGGyoZswDfW4F7wkTUDm');

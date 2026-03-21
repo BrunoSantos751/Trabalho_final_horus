@@ -12,24 +12,54 @@ class Usuarios extends ModelBase{
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     */
 
-        public static function save() {
+        public static function save($data = null) {
+            $data = $data ?? $_POST;
             if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {
                 throw new Exception("Acesso negado. Apenas o administrador pode realizar esta operação.");
+            }
+            
+
+            $email = $data['email'] ?? null;
+            $password = $data['password'] ?? null;
+            
+            self::validation_format($email, $password);
+
+            $hash = null;
+            if ($password !== null && $password !== '') {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
             }
 
             $conn = self::getConnection();
 
-            $email = $_POST['email'];
-            $password = $_POST['password'] ?? null;
+            $id = $data['id'] ?? null;
 
-            $hash = null;
-            if (!empty($password)) {
-                $hash = password_hash($password, PASSWORD_BCRYPT);
+
+            if ($id) {
+                $stmt = $conn->prepare("
+                    SELECT id FROM usuarios 
+                    WHERE email = :email AND id != :id 
+                    LIMIT 1
+                ");
+                $stmt->execute([
+                    'email' => $email,
+                    'id' => $id
+                ]);
+            } else {
+                $stmt = $conn->prepare("
+                    SELECT id FROM usuarios 
+                    WHERE email = :email 
+                    LIMIT 1
+                ");
+                $stmt->execute([
+                    'email' => $email
+                ]);
             }
 
-            if (isset($_POST['id']) && !empty($_POST['id'])) {
+            if ($stmt->fetch()) {
+                throw new Exception("Email já está em uso");
+            }
 
-
+            if ($id) {
                 if ($hash !== null) {
                     $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
                     $stmt = $conn->prepare($sql);
@@ -40,7 +70,7 @@ class Usuarios extends ModelBase{
                 }
                 
                 $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':id', $_POST['id']);
+                $stmt->bindParam(':id', $id);
                 $stmt->execute();
                 return;
             }
@@ -55,6 +85,25 @@ class Usuarios extends ModelBase{
             $stmt->bindParam(':password', $hash);
             $stmt->execute();
         }   
+
+    private static function validation_format($email, $password = null)
+    {
+        if ($email === null || $email === '') {
+            throw new Exception("Email obrigatório");
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception("Email inválido");
+        }
+
+        if ($password !== null && $password !== '') {
+            $validPassword = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/';
+
+            if (!preg_match($validPassword, $password)) {
+                throw new Exception("Senha fraca");
+            }
+        }
+    }
 
     public static function delete($id) {
         if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1) {

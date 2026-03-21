@@ -31,7 +31,6 @@ public function login() {
         return false;
     }
 
-
     if (password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         return true;
@@ -40,6 +39,7 @@ public function login() {
     echo "Email ou senha incorretos.";
     return false;
 }
+
     function logout() {
         session_destroy();
     }
