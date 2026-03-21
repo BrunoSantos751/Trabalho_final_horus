@@ -33,15 +33,12 @@ class Usuarios extends ModelBase{
                 if ($hash !== null) {
                     $sql = "UPDATE usuarios SET email = :email, password = :password WHERE id = :id";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':password', $hash);
-                    $stmt->bindParam(':id', $_POST['id']);
-                    $stmt->execute();
-                    return;
+                } else {
+                    $sql = "UPDATE usuarios SET email = :email WHERE id = :id";
+                    $stmt = $conn->prepare($sql);
                 }
-
-                $sql = "UPDATE usuarios SET email = :email WHERE id = :id";
-                $stmt = $conn->prepare($sql);
+                
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':id', $_POST['id']);
                 $stmt->execute();

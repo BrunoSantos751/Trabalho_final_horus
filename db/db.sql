@@ -80,5 +80,5 @@ CREATE TABLE IF NOT EXISTS contatos (
 ) ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
 COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO usuarios (email, password) VALUES ('test@gmail','123456789');
+-- senha: Horus#forever1
+INSERT INTO usuarios (email, password) VALUES ('test@gmail','$2y$12$iXGebxjcO0irm49hcAI84uzjbH8gzZ8jcfuA6PS5ir9ViS/SoPYTW');
