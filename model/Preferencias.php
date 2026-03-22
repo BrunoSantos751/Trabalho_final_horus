@@ -1,10 +1,11 @@
 <?php
 
-require_once 'model/DataBase.php';
+require_once 'ModelBase.php';
 require_once './utils/UploadImagem.php';
 
-class Preferencias extends DataBase
+class Preferencias extends ModelBase
 {
+
    protected static $tableName = "preferencias";
 
    public static function save($data = null)
@@ -85,13 +86,14 @@ class Preferencias extends DataBase
       $stmt->execute();
    }
 
-   public static function first() {
+   public static function first()
+   {
       $conn = self::getConnection();
 
-      $sql = "SELECT * FROM ". static::$tableName ." LIMIT 1";
+      $sql = "SELECT * FROM " . static::$tableName . " LIMIT 1";
       $stmt = $conn->prepare($sql);
       $stmt->execute();
       return $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
    }
 }
