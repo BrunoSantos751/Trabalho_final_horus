@@ -4,7 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia do Painel</title>
+    <title>Guia do Painel Administrativo</title>
+    <link rel="stylesheet" href="Layout/css/admin.css">
+    <style>
+        .guide-section {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .guide-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .guide-section h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .guide-image-container {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #f8fafc;
+            display: block;
+            margin-top: 15px;
+            box-shadow: var(--shadow);
+            max-width: 100%;
+        }
+
+        .guide-image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .guide-description {
+            margin-bottom: 15px;
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -12,19 +57,84 @@
         {{header}}
     </header>
 
-    <main>
-        <h1>Guia do Painel</h1>
-        <p>Aqui você pode aprender a configurar suas preferências e opções de conta.</p>
-        
-        <img src="/images/admin/Barra_de_navegacao.png" style="max-width: 833px;"> <br>
-        <img src="/images/admin/sessaoHome.png" style="max-width: 833px;"> <br>
-        <img src="/images/admin/sessao_aplicativos.png" style="max-width: 833px;"> <br>
-        <img src="/images/admin/sessao_testemunhos.png" style="max-width: 833px;"> <br>
-        <img src="/images/admin/sessaoLojaApp.png" style="max-width: 833px;"> <br>
-        <img src="/images/admin/sessao_contato.png" style="max-width: 833px;"> <br>
-        <img src="/images/admin/sessao_Rodape.png" style="max-width: 833px;">
-    </main>
+    <main class="admin-main">
+        <div class="table-toolbar">
+            <h2>📖 Guia de Utilização do Painel</h2>
+            <a href="/index.php?class=ListController" class="btn btn-outline">Voltar ao Dashboard</a>
+        </div>
 
+        <div class="admin-card">
+            <p class="guide-description" style="font-size: 1.1rem; margin-bottom: 40px; color: var(--text);">
+                Este guia ilustrado ajudará você a entender as diferentes seções do seu site e como gerenciá-las através
+                deste painel administrativo.
+                Cada imagem abaixo destaca uma parte específica da interface pública e como ela se relaciona com os
+                menus de gerenciamento.
+            </p>
+
+            <div class="guide-section">
+                <h3>1. Menu de Navegação do Site</h3>
+                <p class="guide-description">Esta é a barra que o usuário final utiliza para navegar entre as diferentes
+                    seções da sua landing page.</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/Barra_de_navegacao.png" alt="Barra de Navegação">
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>2. Seção Home (Destaque Principal)</h3>
+                <p class="guide-description">A primeira coisa que seus clientes veem. Você pode configurar o título
+                    principal e as chamadas de destaque no menu "Preferências".</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/sessaoHome.png" alt="Sessão Home">
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>3. Recursos e Funcionalidades</h3>
+                <p class="guide-description">Nesta seção, você gerencia as principais funcionalidades do seu aplicativo
+                    que serão listadas no site, destacando o que ele faz de melhor.</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/sessao_aplicativos.png" alt="Sessão Aplicativos">
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>4. Testemunhos de Clientes</h3>
+                <p class="guide-description">Use o menu "Testemunhos" para adicionar depoimentos reais de clientes e
+                    aumentar a confiança do seu público.</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/sessao_testemunhos.png" alt="Sessão Testemunhos">
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>5. Disponibilidade nas Lojas</h3>
+                <p class="guide-description">Exibe os links diretos para as lojas onde seu aplicativo está disponível
+                    (ex: Google Play, App Store). Estes links são alterados em "Preferências".</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/sessaoLojaApp.png" alt="Sessão Loja App">
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>6. Formulário de Contato</h3>
+                <p class="guide-description">As mensagens enviadas por aqui chegam instantaneamente no seu menu
+                    "Contatos", prontas para serem respondidas.</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/sessao_contato.png" alt="Sessão Contato">
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>7. Rodapé (Footer)</h3>
+                <p class="guide-description">Informações de contato finais e links sociais, configurados também através
+                    da seção de "Preferências".</p>
+                <div class="guide-image-container">
+                    <img src="/images/admin/sessao_Rodape.png" alt="Rodapé">
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
