@@ -1,5 +1,6 @@
 <?php
 require_once './Controllers/ApplicationController.php';
+require_once './model/Usuarios.php';
 
 class GuiaController extends ApplicationController
 {
@@ -10,6 +11,11 @@ class GuiaController extends ApplicationController
 
     public function show()
     {
+        $userId = $_SESSION['user_id'] ?? null;
+        if ($userId) {
+            Usuarios::markFirstLoginAsSeen($userId);
+            $_SESSION['first_login'] = false;
+        }
         echo $this->html;
     }
 }

@@ -120,4 +120,12 @@ class Usuarios extends ModelBase{
         return "Usuário deletado com sucesso.";
     }
 
+    public static function markFirstLoginAsSeen($id) {
+        $conn = self::getConnection();
+        $sql = "UPDATE usuarios SET first_login = 0 WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
+
 }

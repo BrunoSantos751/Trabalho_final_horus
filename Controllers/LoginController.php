@@ -16,7 +16,11 @@ class LoginController extends ApplicationController {
         $login = new Login($request);
         
         if ($login->login()) {
-            header("Location: index.php?class=ListController");
+            if ($_SESSION['first_login'] ?? false) {
+                header("Location: index.php?class=GuiaController");
+            } else {
+                header("Location: index.php?class=ListController");
+            }
             exit;
         } else {
             $_SESSION['erro'] = "Email ou senha incorretos. Tente novamente.";

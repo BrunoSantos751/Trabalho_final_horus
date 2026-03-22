@@ -33,6 +33,7 @@ public function login() {
 
     if (password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['first_login'] = (bool) $user['first_login'];
         return true;
     }
 
