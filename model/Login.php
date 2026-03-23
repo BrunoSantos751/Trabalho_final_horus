@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'Modelbase.php';
+require_once 'DataBase.php';
 class Login extends DataBase {
     private $request;
 
@@ -9,10 +9,11 @@ class Login extends DataBase {
         $this->request = $request;
     }
 
-public function login() {
+public static function login($data = null) {
+    $data = $data ?? $_POST;
 
-    $email = $this->request['email'] ?? null;
-    $password = $this->request['password'] ?? null;
+    $email = $data['email'] ?? null;
+    $password = $data['password'] ?? null;
 
     if (empty($email) || empty($password)) {
         exit("Email e senha são obrigatórios");
@@ -41,7 +42,7 @@ public function login() {
     return false;
 }
 
-    function logout() {
+    public static function logout() {
         session_destroy();
     }
 

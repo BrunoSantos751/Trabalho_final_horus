@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../model/Login.php';
-require_once __DIR__ . '/ApplicationController.php';
+require_once './model/Login.php';
+require_once './Controllers/ApplicationController.php';
 
 class LoginController extends ApplicationController {
 
@@ -12,10 +12,8 @@ class LoginController extends ApplicationController {
     }
 
     public function login($request){
-
-        $login = new Login($request);
         
-        if ($login->login()) {
+        if (Login::login($request)) {
             if ($_SESSION['first_login'] ?? false) {
                 header("Location: index.php?class=GuiaController");
             } else {
@@ -30,8 +28,7 @@ class LoginController extends ApplicationController {
     }
 
     public function logout() {
-        $login = new Login([]);
-        $login->logout();
+        Login::logout();
         header('location: /index.php?class=LoginController');
         exit;
     }
