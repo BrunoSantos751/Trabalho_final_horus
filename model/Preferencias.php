@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ModelBase.php';
+require_once 'Modelbase.php';
 require_once './utils/UploadImagem.php';
 
 class Preferencias extends ModelBase
